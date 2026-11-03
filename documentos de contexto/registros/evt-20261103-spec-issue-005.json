@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-005",
+  "recordedAt": "2026-11-03T23:55:50.751Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #5 em pseudocódigo",
+  "summary": "Modelo de inferência MediaPipe, landmarks, calibração, motor de gestos, suavização, estados e testes.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Pseudocódigo de tracking/pose do PC, operações de frame scheduler e máquina de estados de gestos.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Detalha RF-12 a RF-16 e RNF de processamento."
+        },
+        {
+          "to": "docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Usa geometria única e stream de vídeo projetado."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Documentação de pseudocódigo; implementação ainda não executada."
+    }
+  ]
+}
