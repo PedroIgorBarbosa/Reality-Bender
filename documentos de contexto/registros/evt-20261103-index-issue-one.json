@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-index-issue-one",
+  "recordedAt": "2026-11-03T23:45:00.000Z",
+  "agent": "GPT-6",
+  "intent": "Integrar ao índice a especificação adicionada durante a edição do grafo",
+  "summary": "Preservada e indexada a especificação da issue #1 adicionada na main por outra alteração concorrente",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "change": "reviewed",
+      "summary": "Verificados o objetivo, o contrato superior e as invariantes do início da especificação; arquivo preservado sem alteração",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "O documento declara a ERS como contrato superior"
+        },
+        {
+          "to": "AGENTS.md",
+          "type": "relates_to",
+          "reason": "A consulta ao grafo passa a apontar para a especificação técnica da issue #1"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "Inspeção de docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md no GitHub",
+      "status": "passed",
+      "notes": "Arquivo encontrado na main e trecho inicial inspecionado; não é teste de execução da aplicação"
+    }
+  ]
+}

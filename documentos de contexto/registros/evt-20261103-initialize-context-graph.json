@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-initialize-context-graph",
+  "recordedAt": "2026-11-03T23:38:14.822Z",
+  "agent": "GPT-6",
+  "intent": "Memória de execução e rastreabilidade entre arquivos",
+  "summary": "Adicionados registros JSON imutáveis, grafo de arquivos e ações, consultas relacionais, validação, testes e protocolo AGENTS.md",
+  "status": "done",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "change": "modified",
+      "summary": "Estabelecido protocolo obrigatório de consulta ao grafo antes de codificar e registro por arquivo antes do commit",
+      "links": [
+        {
+          "to": "scripts/context-graph.mjs",
+          "type": "invokes",
+          "reason": "As instruções mandam consultar, registrar e validar pelo utilitário"
+        },
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "Mantida a precedência da especificação de requisitos"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "summary": "Documentado o grafo JSON e comandos de consulta, histórico e teste",
+      "links": [
+        {
+          "to": "scripts/context-graph.mjs",
+          "type": "documents",
+          "reason": "Publica a interface de comandos do grafo"
+        }
+      ]
+    },
+    {
+      "path": "scripts/context-graph.mjs",
+      "change": "created",
+      "summary": "Implementados registro auditável, derivação do grafo, busca em profundidade, histórico e validação",
+      "links": [
+        {
+          "to": "documentos de contexto/graph-record.schema.json",
+          "type": "relates_to",
+          "reason": "O contrato formal descreve os JSONs interpretados e validados pela CLI"
+        },
+        {
+          "to": "AGENTS.md",
+          "type": "references",
+          "reason": "O protocolo operacional define quando usar a CLI"
+        }
+      ]
+    },
+    {
+      "path": "tests/context-graph.test.mjs",
+      "change": "created",
+      "summary": "Incluídos testes automatizados de gravação, consulta, direções de relação, histórico e falhas",
+      "links": [
+        {
+          "to": "scripts/context-graph.mjs",
+          "type": "tests",
+          "reason": "Exercita a ferramenta em diretórios isolados"
+        }
+      ]
+    },
+    {
+      "path": "documentos de contexto/graph-record.schema.json",
+      "change": "created",
+      "summary": "Definido esquema JSON Schema versionado para eventos, arquivos, relações e verificações",
+      "links": [
+        {
+          "to": "scripts/context-graph.mjs",
+          "type": "documents",
+          "reason": "Formaliza o formato de persistência aceito pela CLI"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "node --test tests/context-graph.test.mjs",
+      "status": "passed",
+      "notes": "5 testes automatizados passaram localmente em Node.js 22"
+    },
+    {
+      "command": "Teste WebRTC em celular e PC",
+      "status": "not_run",
+      "notes": "Infraestrutura de contexto não implementa nem testa vídeo da aplicação"
+    }
+  ]
+}
