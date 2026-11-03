@@ -3,8 +3,11 @@
 ## Objetivo
 
 Implementar o produto final descrito em `docs/REALITY_BENDER_ERS_v1.0.md`. Leia esse documento por inteiro antes de alterar código. A especificação prevalece sobre suposições.
-
 ## Regras obrigatórias
+não ler o projeto inteiro antes de executar cada projeto.
+consultar no indice de conhecimento. 
+
+## Regras obrigatórias do escopo
 
 - O vídeo deve sair da câmera real do celular, via WebRTC, até o navegador do PC.
 - MediaPipe executa reconhecimento de mãos e corpo sobre os quadros ao vivo; Three.js/WebGL compõe esfera de energia, portal dimensional e aura elétrica sobre a imagem.
