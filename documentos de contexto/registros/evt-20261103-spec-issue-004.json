@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-004",
+  "recordedAt": "2026-11-03T23:54:02.207Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #4 em pseudocódigo",
+  "summary": "Transformação espacial de vídeo, DPR, espelhamento, cena WebGL e controles de projeção.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Pseudocódigo para renderização de vídeo, mapeamento geométrico, fullscreen, modos e testes.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Regras e aceite de RF-10/11/21/22/23."
+        },
+        {
+          "to": "docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Transforma e apresenta o fluxo recebido por WebRTC."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Documentação sem execução do software."
+    }
+  ]
+}
