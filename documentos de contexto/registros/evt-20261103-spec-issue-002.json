@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-002",
+  "recordedAt": "2026-11-03T23:49:59.126Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #2 em pseudocódigo",
+  "summary": "Publicação do contrato técnico de sessões efêmeras, convites seguros e sinalização RTC para o Reality Bender.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Detalha contratos de sessão, QR, autenticação por papel, relay RTC, temporizadores e testes.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Descreve a implementação prevista de RF-01, RF-02, RF-03 e sinalização."
+        },
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Reusa infraestrutura React, Express e Socket.IO da issue #1."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "GitHub create tree/commit",
+      "status": "not_run",
+      "notes": "O commit será verificado após escrita; testes da aplicação ainda não executados."
+    },
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Documentação de projeto; não implementa código de aplicação."
+    }
+  ]
+}
