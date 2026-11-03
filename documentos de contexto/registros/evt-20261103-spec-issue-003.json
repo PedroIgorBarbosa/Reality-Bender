@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-003",
+  "recordedAt": "2026-11-03T23:52:06.251Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #3 em pseudocódigo",
+  "summary": "Contrato técnico de captura da câmera física, WebRTC, ICE, renegociação, vida de vídeo, falhas e testes.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Especificação detalhada de captura móvel e vídeo remoto com protocolos e testes.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Implementação planejada de RF-04 a RF-10 e RNF de vídeo."
+        },
+        {
+          "to": "docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Reutiliza autorização por sessão e relay tipado de eventos RTC."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Especificação documental; validação da aplicação ocorrerá durante implementação."
+    },
+    {
+      "command": "GitHub fetch_file após commit",
+      "status": "not_run",
+      "notes": "Verificação de publicação pendente."
+    }
+  ]
+}
