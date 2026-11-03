@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-006",
+  "recordedAt": "2026-11-03T23:57:36.513Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #6 em pseudocódigo",
+  "summary": "Esfera de energia com parâmetros ligados à distância entre palmas, recursos GPU e testes.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Algoritmos de energia 3D, partículas, shaders, transformação geométrica e ciclo de vida.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Implementação prevista de RF-17/RF-18 e perfis."
+        },
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Usa duas palmas, snapshots e estados de gestos reais."
+        },
+        {
+          "to": "docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Usa conversão de coordenadas e renderer compartilhado."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Somente especificação documental; sem execução de shader."
+    }
+  ]
+}
