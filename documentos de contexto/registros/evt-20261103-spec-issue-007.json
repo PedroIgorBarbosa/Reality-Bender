@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-007",
+  "recordedAt": "2026-11-03T23:59:11.954Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #7 em pseudocódigo",
+  "summary": "Portal 2.5D com mão dominante estável, ângulo corrigido por espelhamento, shaders, fade e testes.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Contrato técnico do portal com geometria, animação e máquina de estados.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Detalha RF-17/RF-19, modos e qualidade."
+        },
+        {
+          "to": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Usa Plugin/ResourceRegistry e renderer visual compartilhado."
+        },
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Usa gestos de mão aberta e âncoras reais."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Documento técnico; teste de código ainda não executado."
+    }
+  ]
+}
