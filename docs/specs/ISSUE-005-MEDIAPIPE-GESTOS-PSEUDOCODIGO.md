@@ -1,18 +1,18 @@
 # REALITY BENDER — Issue #5: MediaPipe, calibração e motor de gestos
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/5  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependências:** #3 e #4.  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependências:** #3 e #4.  
 **RF:** RF-12, RF-13, RF-14, RF-15, RF-16 · **RNF:** RNF-04, RNF-05, RNF-16.
 
 ## 1. Resultado e invariantes
 
 Quadros **reais** do vídeo remoto serão analisados no PC pelo MediaPipe Hand Landmarker (até duas mãos) e Pose Landmarker (uma pessoa). Pontos anatomicos serão normalizados e convertidos em gestos e âncoras de efeitos. O motor aplicará histerese e suavização temporal e permitirá calibração visual verificável. Nenhum ponto será fabricado se a detecção falhar.
 
-**Invariantes:** inferência apenas após vídeo recebido; nunca crescer fila; só frame mais recente; nenhum \`requestAnimationFrame\` executa múltiplas inferências simultâneas; timestamp monotônico; mão ausente = estado de perda, não coordenada (0,0); vídeo continua enquanto tracking falha; medição de desempenho não inventada.
+**Invariantes:** inferência apenas após vídeo recebido; nunca crescer fila; só frame mais recente; nenhum `requestAnimationFrame` executa múltiplas inferências simultâneas; timestamp monotônico; mão ausente = estado de perda, não coordenada (0,0); vídeo continua enquanto tracking falha; medição de desempenho não inventada.
 
 ## 2. Estrutura de módulos
 
-\`\`\`text
+```text
 src/client/tracking/model-loader.ts
 src/client/tracking/frame-scheduler.ts
 src/client/tracking/mediapipe-runner.ts
@@ -31,13 +31,13 @@ tests/unit/gesture-classifier.test.ts
 tests/unit/tracking-state-machine.test.ts
 tests/unit/calibration.test.ts
 tests/integration/tracking-scheduler.test.ts
-\`\`\`
+```
 
 Modelos/arquivos WASM deverão estar hospedados localmente quando permitido por suas licenças; documentar versões, origem e integridade. Não buscar API externa de inferência.
 
 ## 3. Tipos, relógios e configurações
 
-\`\`\`pseudocode
+```pseudocode
 TIPO NormalizedLandmark:
     x: numero finito
     y: numero finito
@@ -89,13 +89,13 @@ CONFIG:
     minimumPoseVisibility = 0.5
     maxVelocityNormalizedPerSecond = valor calibrável e testado
 FIM_CONFIG
-\`\`\`
+```
 
-**Cuidado com o modelo:** nem todo resultado do Hand Landmarker possui score de visibilidade por landmark. Nunca inventar confiança; usar campos efetivamente retornados (\`handedness\` e scores de classificação quando presentes), consistência espacial/temporal e visibilidade da pose.
+**Cuidado com o modelo:** nem todo resultado do Hand Landmarker possui score de visibilidade por landmark. Nunca inventar confiança; usar campos efetivamente retornados (`handedness` e scores de classificação quando presentes), consistência espacial/temporal e visibilidade da pose.
 
 ## 4. Algoritmo T-01 — carregar modelos de forma verificável
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO carregarModelosTracking():
     VALIDAR navigator/WebGL/WASM suportados conforme runtime
     SE vídeo remoto não está pronto:
@@ -126,13 +126,13 @@ FUNÇÃO carregarModelosTracking():
     FIM_TENTATIVA
     RETORNAR objetos inicializados e função dispose
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Delegates CPU/GPU dependem das versões reais da biblioteca; documentar qual foi testado. Não bloquear por Worker sem API suportada.
 
 ## 5. Algoritmo T-02 — agendar quadros novos sem backlog
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO iniciarFrameScheduler(video,runner):
     PRECONDICAO: stream RTC em estado de frames saudáveis
     generation <- contador.incrementar()
@@ -177,13 +177,13 @@ FUNÇÃO iniciarFrameScheduler(video,runner):
     NÃO usar setInterval que acumula trabalho
     PARAR e cancelar callbacks ao mudar stream, negociar novo epoch ou unmount
 FIM_FUNÇÃO
-\`\`\`
+```
 
-\`detectForVideo\` pode bloquear a thread; começar com orçamento ~10–20/s e ajustar por medição. Worker com \`OffscreenCanvas\` é opcional se testado; não inventar transferências de vídeo incompatíveis.
+`detectForVideo` pode bloquear a thread; começar com orçamento ~10–20/s e ajustar por medição. Worker com `OffscreenCanvas` é opcional se testado; não inventar transferências de vídeo incompatíveis.
 
 ## 6. Algoritmo T-03 — validar e normalizar landmarks
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO normalizarResultado(resultado, videoInfo, timestamp):
     REJEITAR resultado sem timestamp monotônico
     PARA cada mão retornada, máximo 2:
@@ -207,11 +207,11 @@ FUNÇÃO normalizarResultado(resultado, videoInfo, timestamp):
     ASSOCIAR os pontos ao videoWidth/Height da mesma versão de geometria
     RETORNAR snapshot bruto tipado
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 7. Algoritmo T-04 — âncoras, medidas e relações espaciais
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO palmCenter(hand):
     p0 <- hand.landmarks[0]    // punho
     p5 <- hand.landmarks[5]    // base do indicador
@@ -260,13 +260,13 @@ FUNÇÃO armSpread(pose):
     SE shoulderWidth < epsilon: INVALID
     RETORNAR clamp(dist(wristL,wristR)/shoulderWidth,0,LIMIT)
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Essas fórmulas são base determinística; escalas e limiares de abertura dependem de calibração e devem ter testes de direção e robustez a diferentes tamanhos de mão.
 
 ## 8. Algoritmo T-05 — rastrear identidade de mãos sem saltos
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO associarMaos(detecçõesAtuais, tracksAnteriores, timestamp):
     REMOVER tracks com timestamp antigo > maxLandmarkAgeMs
     PARA cada detecção:
@@ -285,13 +285,13 @@ FUNÇÃO associarMaos(detecçõesAtuais, tracksAnteriores, timestamp):
     FIM_SE
     RETORNAR tracks estáveis, sem armazenar identidade biométrica
 FIM_FUNÇÃO
-\`\`\`
+```
 
 A associação serve apenas para continuidade visual temporária, não identificação da pessoa.
 
 ## 9. Algoritmo T-06 — classificação e histerese dos gestos
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO classificarGestos(snapshot, thresholds):
     mãosValidas <- filtrar mãos com landmarks/score aceitáveis
     SE comprimento(mãosValidas)=0 E pose inválida:
@@ -330,11 +330,11 @@ FUNÇÃO atualizarGestosEstaveis(candidato,clock):
     PARA abandonar gesto usar limiar de saída distinto do de entrada
     NÃO disparar múltiplos eventos por oscilação em poucos frames
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 10. Algoritmo T-07 — suavização, limites e timestamps
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO smoothPoint(raw,previous,now):
     SE raw inválido: RETORNAR previous com marcador STALE, nunca ACTIVE
     dt <- (now-previous.timestamp)/1000
@@ -352,13 +352,13 @@ FUNÇÃO smoothAngle(angle,previous,dt):
     delta <- atan2(sin(angle-prev),cos(angle-prev))
     RETORNAR normalizeAngle(prev + alpha(delta,dt)*delta)
 FIM_FUNÇÃO
-\`\`\`
+```
 
-A suavização deve reduzir tremor sem retardar excessivamente movimentos rápidos. O \`requestAnimationFrame\` da cena interpola entre snapshots válidos; não exige uma inferência por frame de renderização.
+A suavização deve reduzir tremor sem retardar excessivamente movimentos rápidos. O `requestAnimationFrame` da cena interpola entre snapshots válidos; não exige uma inferência por frame de renderização.
 
 ## 11. Algoritmo T-08 — máquina de estados de efeito rastreado
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO atualizarEstadoTracking(state, validGesture, now):
     SE state=OFF:
         SE validGesture: return ACQUIRING(since=now)
@@ -388,13 +388,13 @@ FUNÇÃO atualizarEstadoTracking(state, validGesture, now):
         RETORNAR FADING com opacity=1-(now-since)/450
     FIM_SE
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Perda superior a 400ms precisa **iniciar** desaparecimento, não preservar efeito permanente.
 
 ## 12. Algoritmo T-09 — calibração observável e reexecutável
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO iniciarCalibracao():
     VALIDAR RTC com vídeo fresco, modelos carregados
     reset janela de observações para 0
@@ -424,9 +424,9 @@ FUNÇÃO recalibrar():
     invalidar calibração anterior, preservar RTC e permissões de câmera
     iniciarCalibracao()
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Não afirmar luz ruim somente por suposição; se não medir luminância, informar \`rastreamento insuficiente (possível iluminação/enquadramento)\`.
+Não afirmar luz ruim somente por suposição; se não medir luminância, informar `rastreamento insuficiente (possível iluminação/enquadramento)`.
 
 ## 13. Fluxos alternativos e concorrência
 
@@ -434,11 +434,11 @@ Não afirmar luz ruim somente por suposição; se não medir luminância, inform
 | --- | --- |
 | Quadro repetido ou mais antigo | descartar sem atualizar timestamp |
 | Inferência lenta | descartar quadros intermediários, manter fila no máximo 1 |
-| Modelo faltando/arquivo 404 | \`MODEL_LOAD_FAILED\`, vídeo preservado, caminho de recuperação |
+| Modelo faltando/arquivo 404 | `MODEL_LOAD_FAILED`, vídeo preservado, caminho de recuperação |
 | Landmark inválido/NaN | excluir ponto/gesto, nunca marcar mão em (0,0) |
 | Duas mãos cruzadas | associação temporal; evitar teleporte de efeitos |
-| Mão desaparece por 100 ms | \`LOST_GRACE\`, âncora congelada mas marcada obsoleta |
-| Mão desaparece por >400 ms | \`FADING\`, emissão diminuindo |
+| Mão desaparece por 100 ms | `LOST_GRACE`, âncora congelada mas marcada obsoleta |
+| Mão desaparece por >400 ms | `FADING`, emissão diminuindo |
 | Pausa aba/dispositivo | invalidar timestamps velhos e aguardar novos frames |
 | Retrato/paisagem | usar geometria da #4 com versão correspondente |
 | Ausência de corpo, mãos presentes | permitir efeitos de mão, aura indisponível |
@@ -447,7 +447,7 @@ Não afirmar luz ruim somente por suposição; se não medir luminância, inform
 
 ## 14. Pseudocódigo de testes
 
-\`\`\`pseudocode
+```pseudocode
 SUITE Geometria:
     palmCenter([punho,base indicador,base medio,base minimo]) esperado
     distancias iguais em vídeos com relações de aspecto diferentes
@@ -489,7 +489,7 @@ SUITE Física (somente quando executada):
     verificar que vídeo segue mesmo sem pose
     registrar dispositivo, navegador e sucesso/falha reais
 FIM_SUITE
-\`\`\`
+```
 
 ## 15. Aceite e negative prompt
 

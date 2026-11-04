@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-fix-markdown-005-007",
+  "recordedAt": "2026-11-04T00:08:22.411Z",
+  "agent": "ChatGPT",
+  "intent": "Corrigir formatação Markdown das issues #5 a #7",
+  "summary": "Remove barras de escape em delimitadores Markdown dos blocos de pseudocódigo, sem mudar a lógica.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+      "change": "modified",
+      "summary": "Repara formatação Markdown do pseudocódigo e das referências inline.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "Preserva contrato técnico superior."
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+      "change": "modified",
+      "summary": "Repara formatação Markdown do pseudocódigo e das referências inline.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "Preserva contrato técnico superior."
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+      "change": "modified",
+      "summary": "Repara formatação Markdown do pseudocódigo e das referências inline.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "Preserva contrato técnico superior."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "inspeção estática de code fences",
+      "status": "passed",
+      "notes": "Verificado mínimo de cinco blocos de pseudocódigo restaurados por arquivo."
+    },
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Sem mudança de código executável."
+    }
+  ]
+}

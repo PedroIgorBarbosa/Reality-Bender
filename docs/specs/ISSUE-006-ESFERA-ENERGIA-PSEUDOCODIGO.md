@@ -1,18 +1,18 @@
 # REALITY BENDER — Issue #6: esfera de energia guiada pelas mãos
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/6  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependências:** #4 e #5 (além de #3 para vídeo).  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependências:** #4 e #5 (além de #3 para vídeo).  
 **RF:** RF-17, RF-18, RF-21, RF-22 · **RNF:** RNF-02, RNF-05, RNF-15.
 
 ## 1. Entrega e invariantes
 
-Criar o modo \`ENERGY\` como efeito cinematográfico computado no PC sobre a imagem de vídeo real. Duas palmas rastreadas controlam continuamente centro, escala e intensidade. Aproximar as mãos **aumenta** raio e brilho, afastar diminui. Efeito deve incluir núcleo luminoso, casca energética, partículas orbitais, arcos curtos e halo, respeitando perfis gráficos.
+Criar o modo `ENERGY` como efeito cinematográfico computado no PC sobre a imagem de vídeo real. Duas palmas rastreadas controlam continuamente centro, escala e intensidade. Aproximar as mãos **aumenta** raio e brilho, afastar diminui. Efeito deve incluir núcleo luminoso, casca energética, partículas orbitais, arcos curtos e halo, respeitando perfis gráficos.
 
-**Invariantes:** transformação espacial somente por \`videoNormalizedToStage\` (#4); snapshots somente do MediaPipe real (#5); um loop de render compartilhado, sem nova conexão WebRTC; parâmetros temporais com \`dt\`; criação/descarte de GPU controlados; sem esfera fixa desconectada da pessoa; efeito some após perda das mãos.
+**Invariantes:** transformação espacial somente por `videoNormalizedToStage` (#4); snapshots somente do MediaPipe real (#5); um loop de render compartilhado, sem nova conexão WebRTC; parâmetros temporais com `dt`; criação/descarte de GPU controlados; sem esfera fixa desconectada da pessoa; efeito some após perda das mãos.
 
 ## 2. Arquivos e interfaces
 
-\`\`\`text
+```text
 src/client/render/effects/EffectPlugin.ts
 src/client/render/effects/EnergyEffect.ts
 src/client/render/effects/energy-parameters.ts
@@ -24,13 +24,13 @@ src/client/render/ResourceRegistry.ts
 tests/unit/energy-parameters.test.ts
 tests/unit/energy-state.test.ts
 tests/integration/energy-stage.test.ts
-\`\`\`
+```
 
-Reusar \`RendererLifecycle\` da #4, seus presets e os filtros/estados da #5. Não criar outra instância de Three.js WebGLRenderer.
+Reusar `RendererLifecycle` da #4, seus presets e os filtros/estados da #5. Não criar outra instância de Three.js WebGLRenderer.
 
 ## 3. Contrato de plugin visual
 
-\`\`\`pseudocode
+```pseudocode
 TIPO EffectPlugin:
     id: ENERGY|PORTAL|AURA
     initialize(context: {scene,camera,renderer,resourceRegistry,quality})
@@ -66,13 +66,13 @@ TIPO ParticleBudget:
     MEDIUM = 2048
     COMPAT = 512
 FIM_TIPO
-\`\`\`
+```
 
 A conversão para pixels CSS utiliza o menor lado do palco, não uma constante dependente de 1920×1080.
 
 ## 4. Algoritmo E-01 — ativar modo sem alterar mídia
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO ativarEnergy(modeState,renderer,tracking):
     SE modeState != ENERGY:
         manter plugin desativado, NÃO conectar câmera
@@ -94,11 +94,11 @@ FUNÇÃO ativarEnergy(modeState,renderer,tracking):
     AGUARDAR snapshot real contendo duas mãos válidas
     NÃO inventar posições para exibir animação
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 5. Algoritmo E-02 — calcular posição, distância, raio e intensidade
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO calcularParametrosEnergia(snapshot, geometry, state):
     SE snapshot stale OU não há exatamente >=2 mãos válidas:
         RETORNAR {valid:false, phase:state.trackingPhase}
@@ -136,13 +136,13 @@ PROPRIEDADES QUE DEVEM SER TESTADAS:
     midpoint permanece exatamente entre as palmas
     radius e intensity permanecem limitados mesmo em extremos
 FIM
-\`\`\`
+```
 
-Ajustar \`dNear/dFar\` depois de observar a câmera real e registrar o ajuste; não inverter comportamento para priorizar aparência.
+Ajustar `dNear/dFar` depois de observar a câmera real e registrar o ajuste; não inverter comportamento para priorizar aparência.
 
 ## 6. Algoritmo E-03 — estado, suavização e interpolação por frame
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO atualizarEnergy(now,dt,trackingSnapshot):
     dados <- calcularParametrosEnergia(trackingSnapshot,geometry,phase)
     phase <- trackingStateMachine.update(
@@ -183,13 +183,13 @@ FUNÇÃO atualizarEnergy(now,dt,trackingSnapshot):
     ATUALIZAR uniformes e transformações do grupo da esfera
     NÃO criar objetos THREE por frame
 FIM_FUNÇÃO
-\`\`\`
+```
 
-\`smoothTowardsTarget\` deve usar \`alpha = 1-exp(-k*dt)\` ou filtro equivalente estável entre 30/60/120Hz; nenhum valor especial deve depender de frames absolutos.
+`smoothTowardsTarget` deve usar `alpha = 1-exp(-k*dt)` ou filtro equivalente estável entre 30/60/120Hz; nenhum valor especial deve depender de frames absolutos.
 
 ## 7. Algoritmo E-04 — construir núcleo e casca com shader
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO construirNucleo(scene,registry):
     sphereGeometry <- SphereGeometry(segmentos por qualidade)
     coreMaterial <- ShaderMaterial({
@@ -214,13 +214,13 @@ FUNÇÃO construirNucleo(scene,registry):
     anexar core+shell ao scene.group de ENERGY
     RETORNAR {core,shell}
 FIM_FUNÇÃO
-\`\`\`
+```
 
 O shader é procedural e reage a parâmetros reais; ruído/pulso por tempo pode existir, mas não substitui o controle contínuo das mãos.
 
 ## 8. Algoritmo E-05 — partículas orbitais com buffers limitados
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO construirParticulas(quality,registry):
     capacity <- particleBudget(quality)
     ALOCAR Float32Array positions[capacity*3]
@@ -245,13 +245,13 @@ FUNÇÃO atualizarParticulas(time,dt,energyParams):
     FAZER upload apenas do buffer sujo quando CPU mode
     NÃO recriar BufferGeometry/Float32Array a cada frame
 FIM_FUNÇÃO
-\`\`\`
+```
 
 O preset Compatibilidade deve reduzir instâncias reais, não apenas mudar texto do botão.
 
 ## 9. Algoritmo E-06 — arcos elétricos e halo
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO prepararArcos():
     FIXAR numeroMaxArcos por qualidade
     ALOCAR pool de segmentos/curvas curtas
@@ -276,13 +276,13 @@ FUNÇÃO comporHaloComVideo():
     NÃO pintar quadra preta opaca sobre vídeo
     EVITAR saturação capaz de ocultar rosto/mãos continuamente
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Se o \`EffectComposer\` escolhido produzir fundo opaco no alpha, usar passe próprio ou brilho em shader sobre canvas transparente. Não aceitar tela preta sobre a câmera como “correção”.
+Se o `EffectComposer` escolhido produzir fundo opaco no alpha, usar passe próprio ou brilho em shader sobre canvas transparente. Não aceitar tela preta sobre a câmera como “correção”.
 
 ## 10. Algoritmo E-07 — qualidade, troca de efeito e descarte
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO aplicarQualidadeEnergy(profile):
     VALIDAR profile
     novoBudget <- profile.particleBudget
@@ -309,11 +309,11 @@ FUNÇÃO disposeEnergy():
     registry.disposeOwnedBy("ENERGY")
     limpar referências e timers
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 11. Fluxo de sequência e concorrência
 
-\`\`\`text
+```text
 Celular getUserMedia -> WebRTC (#3) -> video remoto no PC
                                   -> MediaPipe (#5) -> TrackingSnapshot
                                                      |
@@ -328,12 +328,12 @@ StageMode ENERGY (#4) -------------------------------+
                      Núcleo + casca + partículas + arcos transparentes
                                                      |
                                       data-show sobre vídeo real
-\`\`\`
+```
 
 - O motor deve consumir o snapshot mais recente do tracking e descartar snapshots com timestamp antigo.
-- Trocar \`ENERGY\`→\`NONE\` nunca interrompe o vídeo.
+- Trocar `ENERGY`→`NONE` nunca interrompe o vídeo.
 - Novo snapshot chegando durante fade deve reativar segundo transição válida, não duplicar grupos da esfera.
-- \`update\` respeita \`deltaSec\` limitado e não aloca novos recursos caros por frame.
+- `update` respeita `deltaSec` limitado e não aloca novos recursos caros por frame.
 
 ## 12. Falhas e fluxos alternativos
 
@@ -353,7 +353,7 @@ StageMode ENERGY (#4) -------------------------------+
 
 ## 13. Pseudocódigo dos testes
 
-\`\`\`pseudocode
+```pseudocode
 SUITE EnergyMath:
     duas palmas (0.2,0.5) e (0.8,0.5):
         center=(0.5,0.5) em coords normalizadas
@@ -396,12 +396,12 @@ SUITE Física (somente aprovação após execução):
     operar dois minutos, medir FPS real na máquina
     registrar equipamento, resolução, perfil e teste executado/pendente
 FIM_SUITE
-\`\`\`
+```
 
 ## 14. Critérios de aceite e negative prompt
 
-**Pronto quando:** esfera possui núcleo, casca, partículas, arcos e halo; duas mãos reais controlam centro/escala/brilho; perda provoca fade; \`NONE\` preserva stream; perfis realmente reduzem custo; recursos GPU são liberados; testes matemáticos e de ciclo de vida executados. Registrar no grafo JSON as alterações e relações entre arquivos.
+**Pronto quando:** esfera possui núcleo, casca, partículas, arcos e halo; duas mãos reais controlam centro/escala/brilho; perda provoca fade; `NONE` preserva stream; perfis realmente reduzem custo; recursos GPU são liberados; testes matemáticos e de ciclo de vida executados. Registrar no grafo JSON as alterações e relações entre arquivos.
 
 **Não entregar:** esferas fixas, vídeos/gifs, simulação com mouse apresentada como produção, código GPU que aloca a cada frame, renderer duplicado, pós-processamento opaco que cobre vídeo, raio crescente ao afastar as mãos, sucesso de FPS inventado ou dependência de serviço pago.
 
-**Handoff para #7 e #8:** mesmo contrato \`EffectPlugin\`, \`ResourceRegistry\`, geometria e ciclo RAF; cada novo efeito deve apenas acrescentar cálculo de parâmetros e geometria específica.
+**Handoff para #7 e #8:** mesmo contrato `EffectPlugin`, `ResourceRegistry`, geometria e ciclo RAF; cada novo efeito deve apenas acrescentar cálculo de parâmetros e geometria específica.

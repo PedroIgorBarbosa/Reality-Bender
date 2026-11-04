@@ -1,18 +1,18 @@
 # REALITY BENDER — Issue #7: portal dimensional por gesto de mão aberta
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/7  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependências:** #4, #5 e contrato \`EffectPlugin\` da #6.  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependências:** #4, #5 e contrato `EffectPlugin` da #6.  
 **RF:** RF-17, RF-19, RF-21, RF-22 · **RNF:** RNF-02, RNF-05.
 
 ## 1. Resultado e condições imutáveis
 
-Em \`PORTAL\`, uma palma aberta estável convoca um anel/vórtice luminoso sobre a câmera ao vivo. A posição acompanha o centro da palma; a orientação acompanha o vetor punho→base do dedo médio; o raio responde ao grau de abertura da mão, com limiares e suavização. O portal possui borda energética, faíscas, partículas orbitais e ilusão de profundidade sem prometer oclusão 3D real.
+Em `PORTAL`, uma palma aberta estável convoca um anel/vórtice luminoso sobre a câmera ao vivo. A posição acompanha o centro da palma; a orientação acompanha o vetor punho→base do dedo médio; o raio responde ao grau de abertura da mão, com limiares e suavização. O portal possui borda energética, faíscas, partículas orbitais e ilusão de profundidade sem prometer oclusão 3D real.
 
 **Invariantes:** mão ausente não gera portal em (0,0); abertura real é a fonte da escala; tremor não liga/desliga continuamente; giro atravessando −π/+π não causa salto; toda cena permanece transparente sobre vídeo; nenhuma renegociação de câmera ao selecionar modo; recursos GPU são propriedade do plugin.
 
 ## 2. Arquivos e módulos
 
-\`\`\`text
+```text
 src/client/render/effects/PortalEffect.ts
 src/client/render/effects/portal-parameters.ts
 src/client/render/effects/portal-shaders.ts
@@ -24,13 +24,13 @@ tests/unit/portal-parameters.test.ts
 tests/unit/portal-angle.test.ts
 tests/unit/portal-hand-selection.test.ts
 tests/integration/portal-stage.test.ts
-\`\`\`
+```
 
-Reusar \`EffectPlugin\`, renderer e registry da #6. Se arquivo compartilhado precisar mudar, manter interface compatível com ENERGY.
+Reusar `EffectPlugin`, renderer e registry da #6. Se arquivo compartilhado precisar mudar, manter interface compatível com ENERGY.
 
 ## 3. Contrato de parâmetros e regras geométricas
 
-\`\`\`pseudocode
+```pseudocode
 TIPO PortalInput:
     handTrackId: temporário
     palm: NormalizedPoint
@@ -63,13 +63,13 @@ CONSTANTES DE CALIBRAÇÃO:
     minRadiusFactor = 0.09 * min(stageWidth,stageHeight)
     maxRadiusFactor = 0.26 * min(stageWidth,stageHeight)
 FIM
-\`\`\`
+```
 
 Esses números são parâmetros iniciais de engenharia, não reconhecimento universal de mãos. Devem ser ajustáveis e testados com câmera real; a invariável de direção permanece: mão mais aberta não deve produzir portal menor.
 
 ## 4. Algoritmo P-01 — selecionar mão principal com estabilidade
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO selecionarMaoPrincipal(snapshot,selectedId,clock):
     mãos <- snapshot.hands com geometria válida e timestamp fresco
     SE selectedId corresponde a uma mão presente:
@@ -91,13 +91,13 @@ FUNÇÃO selecionarMaoPrincipal(snapshot,selectedId,clock):
     FIM_SE
     RETORNAR {valid:false,phase:ACQUIRING}
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Trocar de mão após perder a anterior deve passar por fade/reacquisition; não teleportar o portal imediatamente para o outro lado da tela.
 
 ## 5. Algoritmo P-02 — confirmar mão aberta com histerese
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO portalPodeAtivar(hand,gestureState):
     SE mão inválida OU frame stale: RETORNAR false
     openness <- hand.opennessRatio
@@ -113,13 +113,13 @@ FUNÇÃO portalPodeAtivar(hand,gestureState):
     FIM_SE
     RETORNAR true
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Se a mão fecha deliberadamente, o portal deve contrair e entrar em \`FADING\` quando ultrapassar o limiar de saída; não congelar escala em valor alto.
+Se a mão fecha deliberadamente, o portal deve contrair e entrar em `FADING` quando ultrapassar o limiar de saída; não congelar escala em valor alto.
 
 ## 6. Algoritmo P-03 — calcular posição, abertura e orientação
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO calcularPortalParams(hand,geometry,previous):
     SE hand inválida OU geometryVersion incorreta: RETORNAR INVALID
     centerCss <- videoNormalizedToStage(hand.palm,geometry)
@@ -148,13 +148,13 @@ FUNÇÃO calcularPortalParams(hand,geometry,previous):
               angleRad:angle,tiltVisual:tilt,radiusCssPx:radiusCss,
               openness:openNormalized,rimIntensity}
 FIM_FUNÇÃO
-\`\`\`
+```
 
 **Atenção:** ângulo calculado antes do espelhamento não pode ser reaplicado diretamente após espelhar a imagem. Calcular o vetor entre os dois pontos já transformados resolve o problema.
 
 ## 7. Algoritmo P-04 — rotação e dimensão sem saltos
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO smoothPortal(target,visual,dt):
     alphaPos <- 1-exp(-gainPos*dt)
     alphaRadius <- 1-exp(-gainRadius*dt)
@@ -175,11 +175,11 @@ TESTE_ANGULO:
     entrada nova = -179°
     deslocamento esperado ≈ +2° e não -358°
 FIM
-\`\`\`
+```
 
 ## 8. Algoritmo P-05 — criar anel energético e vórtice
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO initializePortal(context):
     USAR scene, camera e renderer existentes do EffectPlugin
     CRIAR grupo PortalRoot no plano visual da câmera ortográfica
@@ -199,13 +199,13 @@ FUNÇÃO initializePortal(context):
     REGISTRAR todos geometry,material,buffer no ResourceRegistry
     NÃO instanciar um segundo WebGLRenderer
 FIM_FUNÇÃO
-\`\`\`
+```
 
 O centro do portal deve ficar preferencialmente na região da palma; limitar brilho total para não ocultar rosto/corpo permanentemente.
 
 ## 9. Algoritmo P-06 — partículas, faíscas e distorção
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO updatePortalParticles(dt,time,params,budget):
     PARA cada partícula ativa pré-alocada:
         phase <- seed.phase+time*seed.speed
@@ -233,11 +233,11 @@ FUNÇÃO comporDistorcaoVisual():
     NUNCA distorcer stream real com leitura CPU de todos os pixels
     GARANTIR transparência nas regiões exteriores ao anel
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 10. Algoritmo P-07 — máquina de estados e atualização RAF
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO PortalEffect.update(now,dt,snapshot):
     SE plugin desativado OU modo != PORTAL:
         ocultar grupo, RETORNAR
@@ -264,13 +264,13 @@ FUNÇÃO PortalEffect.update(now,dt,snapshot):
     updatePortalSparks(now,visual)
     atualizar uTime,uGlow,uOpacity,uOpening nos shaders
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Um estado de perda por >400ms precisa levar a desaparecimento, mesmo quando a animação de vórtice é visualmente atraente.
 
 ## 11. Algoritmo P-08 — qualidade, descarte e isolamento de efeitos
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO PortalEffect.applyQuality(profile):
     profile = HIGH|MEDIUM|COMPAT
     REDUZIR segmentos, partículas, faíscas e custo de glow
@@ -286,17 +286,17 @@ FUNÇÃO PortalEffect.dispose():
     não liberar renderer nem recursos ENERGY/AURA
     resetar selectedHandId e eventos locais do plugin
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 12. Concorrência, eventos e fluxos alternativos
 
-\`\`\`text
+```text
 Select PORTAL pelo PC/CONTROL -> evento stage:set-mode autenticado
     -> habilita plugin -> espera mão aberta estável -> ACQUIRING
     -> ACTIVE (palma/ângulo/raio) -> rAF compartilha video+shader
     -> desaparecimento de mão/fechamento -> LOST_GRACE -> FADING -> OFF
     -> reentrada estável -> ACQUIRING -> ACTIVE
-\`\`\`
+```
 
 | Situação | Comportamento |
 | --- | --- |
@@ -315,7 +315,7 @@ Select PORTAL pelo PC/CONTROL -> evento stage:set-mode autenticado
 
 ## 13. Pseudocódigo dos testes
 
-\`\`\`pseudocode
+```pseudocode
 SUITE PortalGeometry:
     mão aberta no centro -> portal no centro
     deslocamento palma em x +0.1 -> deslocamento correspondente na stage
@@ -353,7 +353,7 @@ SUITE Física:
     registrar vídeo, FPS e reação realmente observados
     SE equipamentos não disponíveis -> status PENDENTE
 FIM_SUITE
-\`\`\`
+```
 
 ## 14. Aceite e negative prompt
 
@@ -361,4 +361,4 @@ FIM_SUITE
 
 **Não entregar:** portal decorativo fixo, trigger de clique no lugar de gesto, orientação calculada sem espelhar coordenadas, rotação descontinua em ±π, IA generativa remota, animação pré-gravada, raymarch de custo sem fallback, oclusão 3D declarada como real, FPS inventado.
 
-**Handoff para #8:** \`EffectPlugin\` agora possui dois modos implementados; a aura deve usar a mesma pilha, agora lendo landmarks de pose em vez de palmas.
+**Handoff para #8:** `EffectPlugin` agora possui dois modos implementados; a aura deve usar a mesma pilha, agora lendo landmarks de pose em vez de palmas.
