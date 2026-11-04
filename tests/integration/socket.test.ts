@@ -32,10 +32,10 @@ async function setup() {
 describe('Socket.IO técnico', () => {
   it('envia ready, valida ping/ack e rejeita payload inválido', async () => {
     const url = await setup();
-    client = io<ServerToClientEvents, ClientToServerEvents>(url, {
+    client = io(url, {
       path: '/socket.io', transports: ['websocket'], autoConnect: false, reconnection: false,
       extraHeaders: { Origin: 'http://localhost:5173' },
-    });
+    }) as Socket<ServerToClientEvents, ClientToServerEvents>;
     const ready = new Promise<SystemReadyPayload>((resolve, reject) => {
       client?.once('system:ready', resolve);
       client?.once('connect_error', reject);
@@ -58,10 +58,10 @@ describe('Socket.IO técnico', () => {
 
   it('recusa origem não autorizada no handshake', async () => {
     const url = await setup();
-    client = io<ServerToClientEvents, ClientToServerEvents>(url, {
+    client = io(url, {
       path: '/socket.io', transports: ['websocket'], autoConnect: false, reconnection: false,
       extraHeaders: { Origin: 'https://unauthorized.example.com' },
-    });
+    }) as Socket<ServerToClientEvents, ClientToServerEvents>;
     const connectionError = new Promise<Error>((resolve, reject) => {
       client?.once('connect_error', resolve);
       client?.once('connect', () => reject(new Error('Origem não autorizada foi aceita')));

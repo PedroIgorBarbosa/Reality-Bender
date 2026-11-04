@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-001-socket-types-fix",
+  "recordedAt": "2026-11-04T00:02:52.415Z",
+  "agent": "GPT-6",
+  "intent": "Corrigir falhas reais de typecheck Socket.IO identificadas no CI",
+  "summary": "Removidos parâmetros genéricos inválidos da fábrica io() e aplicada tipagem ao Socket retornado nos arquivos cliente e teste; nova validação pendente",
+  "status": "partial",
+  "files": [
+    {
+      "path": "src/client/realtime/create-system-client.ts",
+      "change": "modified",
+      "summary": "Corrigida criação de cliente Socket.IO para tipagem compatível com a função io() da versão instalada",
+      "links": [
+        {
+          "to": "src/shared/contracts/system-events.ts",
+          "type": "uses",
+          "reason": "Contrato de eventos informa o tipo SystemSocket do resultado"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/socket.test.ts",
+      "change": "modified",
+      "summary": "Atualizados testes de Socket.IO para tipar o retorno do cliente sem generics em io()",
+      "links": [
+        {
+          "to": "src/server/realtime/system-socket.ts",
+          "type": "tests",
+          "reason": "Testa ready, ping e recusa de origens"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "GitHub Actions: npm ci",
+      "status": "passed",
+      "notes": "Job 126290919730 passou instalação limpa"
+    },
+    {
+      "command": "GitHub Actions: npm run lint",
+      "status": "passed",
+      "notes": "Job 126290919730 passou lint"
+    },
+    {
+      "command": "GitHub Actions: npm run typecheck",
+      "status": "failed",
+      "notes": "TS2558 em 3 chamadas da função io() nos arquivos corrigidos; nova execução pendente"
+    },
+    {
+      "command": "GitHub Actions: npm run test && npm run build",
+      "status": "not_run",
+      "notes": "Etapas não executadas após falha de typecheck"
+    }
+  ]
+}
