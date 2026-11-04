@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-001-ci-smoke-isolation",
+  "recordedAt": "2026-11-04T00:09:39.465Z",
+  "agent": "GPT-6",
+  "intent": "Corrigir interferência de processos no smoke e incluir auditoria de dependências",
+  "summary": "Isolado smoke de produção na porta 3100, adotado grupo de processo para encerramento correto e logs de desenvolvimento em falha; audit de produção adicionado para detectar vulnerabilidades relevantes",
+  "status": "partial",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "modified",
+      "summary": "Ajustado isolamento/encerramento de processos no CI e inserida auditoria de dependências de produção",
+      "links": [
+        {
+          "to": "package-lock.json",
+          "type": "uses",
+          "reason": "npm audit analisa as versões travadas"
+        },
+        {
+          "to": "vite.config.ts",
+          "type": "tests",
+          "reason": "Smoke WebSocket exercita o proxy de desenvolvimento"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "GitHub Actions #41744472894: npm ci, lint, typecheck, tests, build e smoke produção",
+      "status": "passed",
+      "notes": "Aprovados; 20 testes automatizados concluídos"
+    },
+    {
+      "command": "GitHub Actions #41744472894: smoke npm run dev pelo Vite",
+      "status": "failed",
+      "notes": "Socket.IO indisponível via proxy; suspeita de processo de produção remanescente na porta 3000; teste agora isolado"
+    },
+    {
+      "command": "GitHub Actions: auditoria de dependências de produção",
+      "status": "not_run",
+      "notes": "Nova etapa adicionada; aguardando execução"
+    }
+  ]
+}

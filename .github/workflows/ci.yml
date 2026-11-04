@@ -21,6 +21,8 @@ jobs:
         run: test -f package-lock.json
       - name: Instalação limpa
         run: npm ci
+      - name: Auditoria de vulnerabilidades de produção
+        run: npm audit --omit=dev --audit-level=high
       - name: Lint
         run: npm run lint
       - name: Typecheck
@@ -33,20 +35,20 @@ jobs:
         env:
           NODE_ENV: production
           HOST: 127.0.0.1
-          PORT: 3000
+          PORT: 3100
           CLIENT_ORIGINS: https://reality.example.com
         run: |
-          npm run start > /tmp/reality-server.log 2>&1 &
+          setsid npm run start > /tmp/reality-server.log 2>&1 &
           server_pid=$!
-          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          trap 'kill -TERM -- -"$server_pid" 2>/dev/null || true' EXIT
           for i in $(seq 1 30); do
-            if curl --fail --silent http://127.0.0.1:3000/api/health > /tmp/reality-health.json; then break; fi
+            if curl --fail --silent http://127.0.0.1:3100/api/health > /tmp/reality-health.json; then break; fi
             sleep 1
           done
           grep -q '"protocolVersion":1' /tmp/reality-health.json
-          curl --fail --silent -H 'Accept: text/html' http://127.0.0.1:3000/stage | grep -q '<div id="root"></div>'
-          curl --fail --silent -H 'Accept: text/html' http://127.0.0.1:3000/control | grep -q '<div id="root"></div>'
-          if curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:3000/api/does-not-exist | grep -q '^404$'; then
+          curl --fail --silent -H 'Accept: text/html' http://127.0.0.1:3100/stage | grep -q '<div id="root"></div>'
+          curl --fail --silent -H 'Accept: text/html' http://127.0.0.1:3100/control | grep -q '<div id="root"></div>'
+          if curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:3100/api/does-not-exist | grep -q '^404$'; then
             echo 'Smoke de API desconhecida OK'
           else
             exit 1
@@ -58,9 +60,9 @@ jobs:
           PORT: 3000
           CLIENT_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
         run: |
-          npm run dev > /tmp/reality-dev.log 2>&1 &
+          setsid npm run dev > /tmp/reality-dev.log 2>&1 &
           dev_pid=$!
-          trap 'kill "$dev_pid" 2>/dev/null || true; pkill -P "$dev_pid" 2>/dev/null || true' EXIT
+          trap 'status=$?; if [ "$status" -ne 0 ]; then echo "--- DEV LOG ---"; cat /tmp/reality-dev.log; fi; kill -TERM -- -"$dev_pid" 2>/dev/null || true' EXIT
           ready=0
           for i in $(seq 1 30); do
             if curl --fail --silent http://127.0.0.1:5173/api/health > /tmp/reality-dev-health.json; then ready=1; break; fi
