@@ -4,7 +4,7 @@
   "recordedAt": "2026-11-04T17:11:21.854Z",
   "agent": "ChatGPT",
   "intent": "Integrar pacote de implementação do Google Drive ao Reality-Bender preservando documentos existentes e abrindo PR para main",
-  "summary": "Pacote ZIP original preservado e código, testes, documentação e grafo consolidado importados; arquivos de especificação anteriores foram mantidos; testes físicos e CI ainda não verificados. O registro de importação não indexa arquivos do próprio diretório de eventos, conforme contrato da ferramenta.",
+  "summary": "Pacote ZIP e bundle Git originais preservados e código, testes, documentação e grafo consolidado importados; arquivos de especificação anteriores foram mantidos; testes físicos e CI ainda não verificados. O registro de importação não indexa arquivos do próprio diretório de eventos, conforme contrato da ferramenta.",
   "status": "partial",
   "files": [
     {
@@ -844,6 +844,18 @@
           "to": "README.md",
           "type": "documents",
           "reason": "Mantém a versão original do pacote que fundamentou a importação"
+        }
+      ]
+    },
+    {
+      "path": "artifacts/drive-2026-11-04/reality-bender-complete.bundle",
+      "change": "created",
+      "summary": "Importado bundle Git original do Drive, com bytes preservados",
+      "links": [
+        {
+          "to": "artifacts/drive-2026-11-04/reality-bender-complete-repo.zip",
+          "type": "relates_to",
+          "reason": "Ambos representam a versão-fonte do projeto entregue no Drive"
         }
       ]
     }
