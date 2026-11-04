@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-008",
+  "recordedAt": "2026-11-04T00:00:53.118Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #8 em pseudocódigo",
+  "summary": "Aura elétrica por juntas corporais, braços independentes, intensidade e geometria procedural.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Algoritmos completos de esqueleto, braços, ramificações, glow e testes.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Especifica RF-13/RF-20 e efeitos contínuos."
+        },
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Consome landmarks PoseLandmarker reais."
+        },
+        {
+          "to": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Reusa EffectPlugin e render compartilhado."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Especificação; suíte da aplicação não executada."
+    }
+  ]
+}
