@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261104-pr11-coverage-ci",
+  "recordedAt": "2026-11-04T18:14:55.463Z",
+  "agent": "ChatGPT",
+  "intent": "Consolidar verificações de desenvolvimento do PR #11 no PR #12 para evitar perda de cobertura na integração",
+  "summary": "Incluída auditoria de vulnerabilidades de produção e smoke de desenvolvimento Vite+Express+Socket.IO do PR #11 no pipeline da implementação completa. Testes existentes preservados.",
+  "status": "partial",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "modified",
+      "summary": "Adiciona audit de produção e smoke real do ambiente de desenvolvimento, cobrindo proxy Vite, rotas e handshake WebSocket",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "invokes",
+          "reason": "Executa comandos da aplicação e valida o modo de desenvolvimento além do build de produção"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "GitHub Actions CI com audit e smoke dev",
+      "status": "not_run",
+      "notes": "Verificação do novo pipeline ocorrerá no commit publicado"
+    }
+  ]
+}
