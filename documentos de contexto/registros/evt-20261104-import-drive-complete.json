@@ -4,7 +4,7 @@
   "recordedAt": "2026-11-04T17:11:21.854Z",
   "agent": "ChatGPT",
   "intent": "Integrar pacote de implementação do Google Drive ao Reality-Bender preservando documentos existentes e abrindo PR para main",
-  "summary": "Pacote ZIP original preservado e código, testes, documentação e grafo consolidado importados; arquivos de especificação anteriores foram mantidos; testes físicos e CI ainda não verificados",
+  "summary": "Pacote ZIP original preservado e código, testes, documentação e grafo consolidado importados; arquivos de especificação anteriores foram mantidos; testes físicos e CI ainda não verificados. O registro de importação não indexa arquivos do próprio diretório de eventos, conforme contrato da ferramenta.",
   "status": "partial",
   "files": [
     {
@@ -74,90 +74,6 @@
       "links": [
         {
           "to": "docs/REALITY_BENDER_ERS_v1.0.md",
-          "type": "references",
-          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261103-issue-001-foundation.json",
-      "change": "created",
-      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
-      "links": [
-        {
-          "to": "documentos de contexto/graph-record.schema.json",
-          "type": "references",
-          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261103-issue-002-sessions-pairing.json",
-      "change": "created",
-      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
-      "links": [
-        {
-          "to": "documentos de contexto/graph-record.schema.json",
-          "type": "references",
-          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261103-issue-003-camera-webrtc.json",
-      "change": "created",
-      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
-      "links": [
-        {
-          "to": "documentos de contexto/graph-record.schema.json",
-          "type": "references",
-          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261103-issue-004-projection-geometry.json",
-      "change": "created",
-      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
-      "links": [
-        {
-          "to": "documentos de contexto/graph-record.schema.json",
-          "type": "references",
-          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261103-issue-005-mediapipe-gestures.json",
-      "change": "created",
-      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
-      "links": [
-        {
-          "to": "documentos de contexto/graph-record.schema.json",
-          "type": "references",
-          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261103-issue-006-007-008-effects-3d.json",
-      "change": "created",
-      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
-      "links": [
-        {
-          "to": "documentos de contexto/graph-record.schema.json",
-          "type": "references",
-          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261103-issue-009-010-resilience-homologation.json",
-      "change": "created",
-      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
-      "links": [
-        {
-          "to": "documentos de contexto/graph-record.schema.json",
           "type": "references",
           "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
         }
@@ -928,18 +844,6 @@
           "to": "README.md",
           "type": "documents",
           "reason": "Mantém a versão original do pacote que fundamentou a importação"
-        }
-      ]
-    },
-    {
-      "path": "documentos de contexto/registros/evt-20261104-import-drive-complete.json",
-      "change": "created",
-      "summary": "Registro auditável da importação dos arquivos",
-      "links": [
-        {
-          "to": "AGENTS.md",
-          "type": "governed_by",
-          "reason": "Cumpre a política de memória de mudanças do projeto"
         }
       ]
     }
