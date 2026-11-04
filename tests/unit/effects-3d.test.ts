@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   INITIAL_PORTAL_STATE,
   abrirPortal,
@@ -101,7 +101,11 @@ describe('3D Interactive Effects: Energy Sphere, Dimensional Portal & Electric A
   });
 
   it('StageEffectsOrchestrator alterna plugins e libera recursos de GPU no dispose (CT-010-7)', () => {
-    const orchestrator = new StageEffectsOrchestrator();
+    const renderer = { render: vi.fn(), dispose: vi.fn() };
+    const orchestrator = new StageEffectsOrchestrator(
+      undefined,
+      renderer as unknown as ConstructorParameters<typeof StageEffectsOrchestrator>[1],
+    );
     orchestrator.registerPlugin(createEnergySpherePlugin());
     orchestrator.registerPlugin(createDimensionalPortalPlugin());
     orchestrator.registerPlugin(createElectricAuraPlugin());
@@ -151,6 +155,8 @@ describe('3D Interactive Effects: Energy Sphere, Dimensional Portal & Electric A
     expect(orchestrator.getActiveMode()).toBe('AURA');
     orchestrator.step(dummyFrame, stage, video, geo, 16);
 
+    expect(renderer.render).toHaveBeenCalledTimes(3);
     orchestrator.dispose();
+    expect(renderer.dispose).toHaveBeenCalledTimes(1);
   });
 });

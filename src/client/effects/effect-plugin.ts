@@ -57,9 +57,9 @@ export class StageEffectsOrchestrator {
   private renderer: THREE.WebGLRenderer | null = null;
   private disposed = false;
 
-  constructor(canvas?: unknown) {
+  constructor(canvas?: HTMLCanvasElement, renderer?: THREE.WebGLRenderer) {
     this.camera.position.set(0, 0, 2.2);
-    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    this.renderer = renderer ?? new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   }
 
   public registerPlugin(plugin: EffectPlugin): void {
