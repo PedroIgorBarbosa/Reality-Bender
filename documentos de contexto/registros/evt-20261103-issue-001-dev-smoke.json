@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-001-dev-smoke",
+  "recordedAt": "2026-11-04T00:07:22.459Z",
+  "agent": "GPT-6",
+  "intent": "Verificar ambiente de desenvolvimento completo por HTTP e proxy WebSocket",
+  "summary": "Incluído teste real de npm run dev que consulta health e rotas Vite e faz ready/ping/disconnect via WebSocket; execução pendente no novo CI",
+  "status": "partial",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "modified",
+      "summary": "Incluído smoke de dev com Vite, Express, proxy Socket.IO e liberação de socket",
+      "links": [
+        {
+          "to": "vite.config.ts",
+          "type": "tests",
+          "reason": "Verifica o proxy /api e /socket.io definido no Vite"
+        },
+        {
+          "to": "src/server/realtime/system-socket.ts",
+          "type": "tests",
+          "reason": "Confere handshake técnico real via WebSocket pelo Vite"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "CI anterior #41744189421: npm ci, lint, typecheck, test, build, prod smoke e grafo",
+      "status": "passed",
+      "notes": "Todas as etapas anteriores passaram no GitHub Actions"
+    },
+    {
+      "command": "Smoke npm run dev /stage /control /api/health /socket.io",
+      "status": "not_run",
+      "notes": "Passo recém-adicionado; aguardando nova execução do GitHub Actions"
+    }
+  ]
+}

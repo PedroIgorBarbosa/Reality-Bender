@@ -51,6 +51,47 @@ jobs:
           else
             exit 1
           fi
+      - name: Smoke de modo desenvolvimento (Vite + Express + WebSocket)
+        env:
+          NODE_ENV: development
+          HOST: 127.0.0.1
+          PORT: 3000
+          CLIENT_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
+        run: |
+          npm run dev > /tmp/reality-dev.log 2>&1 &
+          dev_pid=$!
+          trap 'kill "$dev_pid" 2>/dev/null || true; pkill -P "$dev_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:5173/api/health > /tmp/reality-dev-health.json; then ready=1; break; fi
+            sleep 1
+          done
+          test "$ready" = "1"
+          grep -q '"protocolVersion":1' /tmp/reality-dev-health.json
+          curl --fail --silent http://127.0.0.1:5173/stage | grep -q '<div id="root"></div>'
+          curl --fail --silent http://127.0.0.1:5173/control | grep -q '<div id="root"></div>'
+          node --input-type=module <<'NODE'
+          import { io } from 'socket.io-client';
+          const socket = io('http://127.0.0.1:5173', {
+            path: '/socket.io',
+            transports: ['websocket'],
+            autoConnect: false,
+            reconnection: false,
+            extraHeaders: { Origin: 'http://127.0.0.1:5173' },
+          });
+          const timer = setTimeout(() => { console.error('TIMEOUT: handshake via proxy Vite'); process.exit(1); }, 6000);
+          socket.on('connect_error', () => { clearTimeout(timer); console.error('Socket.IO indisponível pelo proxy Vite'); process.exit(1); });
+          socket.on('system:ready', (message) => {
+            if (message.protocolVersion !== 1 || message.service !== 'reality-bender-signaling') process.exit(1);
+            socket.emit('system:ping', { requestId: 'dev-smoke' }, (ack) => {
+              if (!ack.ok || ack.requestId !== 'dev-smoke' || ack.protocolVersion !== 1) process.exit(1);
+              clearTimeout(timer);
+              socket.disconnect();
+              console.info('Vite -> Socket.IO ready/ping/disconnect OK');
+            });
+          });
+          socket.connect();
+          NODE
       - name: Validar memória em grafo
         run: |
           node scripts/context-graph.mjs validate
