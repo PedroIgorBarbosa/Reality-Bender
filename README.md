@@ -1,61 +1,87 @@
 # REALITY BENDER
 
-Experiência audiovisual interativa **em tempo real**: a câmera do celular transmite vídeo via WebRTC para o navegador do computador conectado a um data-show. O PC executa rastreamento de mãos e corpo com MediaPipe e renderiza, sobre o vídeo ao vivo, três efeitos em Three.js/WebGL:
+O REALITY BENDER é uma aplicação web planejada para apresentações audiovisuais interativas em tempo real. O objetivo final é receber vídeo real do celular por WebRTC, rastrear mãos e corpo com MediaPipe e compor três efeitos com Three.js/WebGL no PC: esfera de energia, portal dimensional e aura elétrica.
 
-- **Esfera de energia:** acompanha duas mãos e reage à distância entre elas.
-- **Portal dimensional:** acompanha a posição e orientação da mão.
-- **Aura elétrica:** acompanha a silhueta e os movimentos corporais.
+## Estado de implementação
 
-## Estado atual
+A **issue #1** implementa a fundação: duas interfaces React (/stage para o PC e /control para o celular), API HTTP de saúde, servidor Socket.IO, teste tipado de handshake (system:ready + system:ping), reconexão, testes automatizados e build de produção.
 
-Este repositório contém a **especificação de requisitos** e a infraestrutura de memória em grafo para agentes. **Ainda não contém a aplicação executável.** Não confundir documentação com produto implementado.
+**Ainda não implementado:** criação de sessão, QR Code/convites, autorização de câmera, prévia de vídeo, WebRTC, rastreamento, tela cheia de vídeo e os efeitos. Os botões correspondentes ficam desabilitados por design. O status "Servidor conectado" indica apenas que a sinalização foi testada, não que uma câmera está transmitindo.
 
-## Documento de referência
+## Instalação e desenvolvimento
 
-- [`docs/REALITY_BENDER_ERS_v1.0.md`](docs/REALITY_BENDER_ERS_v1.0.md) — requisitos funcionais, não funcionais, contratos, estados, cenários de teste, plano de dois dias e condições de aceite.
-- [`AGENTS.md`](AGENTS.md) — instruções para agentes de desenvolvimento e protocolo obrigatório de memória.
-- [`docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md`](docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md) — contrato de implementação da fundação do projeto (issue #1).
-- [`documentos de contexto/graph-record.schema.json`](documentos%20de%20contexto/graph-record.schema.json) — contrato JSON dos eventos de conhecimento.
+Requisitos: Node.js **22.12 ou superior** e npm compatível.
 
-## Arquitetura alvo
+~~~bash
+npm ci
+cp .env.example .env
+npm run dev
+~~~
 
-1. `/stage` no PC: cria sessão, exibe QR Code, recebe vídeo WebRTC e renderiza o resultado em tela cheia.
-2. `/control` no celular: recebe convite, solicita permissão para a câmera, exibe prévia e envia o vídeo.
-3. Servidor de sinalização: sessões efêmeras, WebSocket e negociação SDP/ICE. Não processa mídia.
-4. Processamento local no PC: MediaPipe Hand/Pose Landmarker, Three.js, shaders, partículas e efeitos.
+O comando npm run dev inicia Vite em http://127.0.0.1:5173 e Express/Socket.IO em http://127.0.0.1:3000. No computador, abra http://localhost:5173/stage. Para testar o layout de controle pelo desktop, abra http://localhost:5173/control. A mesma origem aparente do Vite faz proxy de /api e /socket.io para o backend.
 
-**Restrições:** sem vídeo pré-gravado simulando transmissão; não exigir microfone nem APIs pagas; câmera do celular somente sob HTTPS; priorizar o fluxo completo antes de refinamentos visuais.
+O arquivo .env é obrigatório para configurar CLIENT_ORIGINS. Nenhuma credencial é necessária. Os valores de .env.example são apropriados somente para desenvolvimento local.
 
-## Memória de contexto em grafo
+Variáveis:
 
-O diretório `documentos de contexto/registros/` guarda arquivos JSON **imutáveis**, um por ação. Cada registro indica quais arquivos foram alterados e como se relacionam com outros arquivos. A consulta reconstrói nós de ações (`action:<id>`), nós de arquivos (`file:<caminho>`) e relações direcionadas, sem dependências ou banco de dados externo.
+| Nome | Uso |
+|---|---|
+| NODE_ENV | development, test ou production |
+| HOST | Interface de rede à qual o backend se vincula; padrão 127.0.0.1 |
+| PORT | Porta do backend; padrão 3000 |
+| CLIENT_ORIGINS | Lista explícita, separada por vírgulas, de origens permitidas para Socket.IO |
+| PUBLIC_BASE_URL | URL pública opcional nesta etapa, reservada ao convite da issue #2 |
 
-Requer Node.js 20 ou superior. Exemplos:
+Se o servidor não iniciar, confira se PORT está livre e se todas as origens foram incluídas na allowlist. Origens HTTP remotas são rejeitadas; em produção, use origens HTTPS.
 
-```bash
-# Consulta por tema ou arquivo; retorna só a vizinhança do grafo
-node scripts/context-graph.mjs query --text "WebRTC" --depth 2 --limit 30
+## Compilação de produção
+
+~~~bash
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+npm run start
+~~~
+
+Em produção, configure antes NODE_ENV=production, HOST, PORT e CLIENT_ORIGINS com **origem HTTPS real**. O Express serve dist/client e fornece fallback de navegação para /stage e /control. O endpoint GET /api/health responde com status ok, serviço reality-bender-signaling e protocolVersion 1, sem variáveis internas.
+
+O CI em .github/workflows/ci.yml executa instalação limpa, lint, typecheck, testes, build e smoke HTTP. No primeiro push da branch da fundação, há uma etapa única de geração de package-lock.json pelo npm, com registro de contexto em grafo. Depois, o lockfile versionado é obrigatório em todos os builds.
+
+## HTTPS no celular
+
+O uso **futuro da câmera** em Chrome Android depende de origem segura, normalmente HTTPS com certificado confiável. Um endereço http://192.168.x.x não deve ser considerado seguro para getUserMedia. Ao publicar, configure domínio HTTPS ou túnel/reverse proxy confiável com upgrade WebSocket e inclua essa origem em CLIENT_ORIGINS. Não desative proteções do navegador nem instale certificados inseguros manualmente.
+
+Nesta issue, o celular pode ser usado apenas para visualizar o layout. Permissão de câmera não é solicitada.
+
+## Estrutura de projeto
+
+- src/shared/: contratos de eventos e estados discriminados.
+- src/server/: configuração de ambiente, HTTP, Socket.IO e ciclo de vida.
+- src/client/: páginas, componentes de status, hook de conexão e estilos.
+- tests/: verificações de ambiente, máquina de estados, HTTP, Socket.IO e interface.
+- docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md: contrato técnico da issue #1.
+- docs/REALITY_BENDER_ERS_v1.0.md: requisitos superiores do produto final.
+- AGENTS.md: instruções obrigatórias e protocolo do grafo.
+
+## Memória em grafo
+
+Todos os arquivos de documentos de contexto/registros/ são eventos JSON imutáveis. Cada registro descreve alterações de arquivos, relações entre arquivos e evidências de verificações, sem guardar vídeo ou credenciais.
+
+~~~bash
+node scripts/context-graph.mjs query --text "Socket.IO" --depth 2 --limit 30
 node scripts/context-graph.mjs query --file "AGENTS.md" --depth 2 --format compact
-
-# Histórico auditável de um arquivo
 node scripts/context-graph.mjs history --file "AGENTS.md"
-
-# Verificação estrutural dos registros
 node scripts/context-graph.mjs validate
-
-# Testes da ferramenta de memória
 node --test tests/context-graph.test.mjs
+~~~
 
-# Ajuda para registrar uma alteração
-node scripts/context-graph.mjs help
-```
+A memória é auxiliar; o estado do código e os resultados de teste são a fonte de verdade.
 
-Os comandos, as regras de preenchimento e o fluxo obrigatório antes/depois de cada tarefa estão no `AGENTS.md`. A ausência de um item no grafo não prova ausência de código; confira os arquivos reais e o Git. Os registros documentam trabalho, mas não substituem os testes da aplicação.
+## Próximas entregas
 
-## Como desenvolver
-
-Leia a especificação integralmente e siga os requisitos P0. A implementação será considerada pronta somente após teste real com celular, Wi-Fi, PC e data-show. FPS e latência são metas de medição, não resultados presumidos.
+A issue #2 adiciona sessões efêmeras, convites seguros e QR Code. A issue #3 conecta câmera real e WebRTC. As demais implementam o vídeo projetado, MediaPipe, os três efeitos e a operação completa. Validações com celular, PC e data-show permanecem pendentes até a implementação desses recursos.
 
 ## Licença
 
-Não definida. A ausência de arquivo LICENSE não concede automaticamente permissão para reutilização do código.
+Não definida.

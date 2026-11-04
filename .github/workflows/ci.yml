@@ -1,0 +1,94 @@
+name: Reality Bender CI
+
+on:
+  push:
+    branches: [main, feat/issue-001-foundation]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap-lockfile:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feat/issue-001-foundation'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Gerar e versionar lockfile inicial uma única vez
+        run: |
+          if [ ! -f package-lock.json ]; then
+            npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+            node scripts/context-graph.mjs record \
+              --agent "GitHub Actions" \
+              --intent "Issue #1: lockfile reproduzível" \
+              --summary "Gerado package-lock.json via npm install --package-lock-only em Node.js 22" \
+              --status done \
+              --file "package-lock.json|created|Dependências transitivas resolvidas pelo npm" \
+              --link "package-lock.json|configures|package.json|Versões travadas para o manifesto de dependências" \
+              --check "npm install --package-lock-only|passed|Executado no GitHub Actions com Node.js 22"
+            node scripts/context-graph.mjs validate
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add package-lock.json "documentos de contexto/registros/"
+            git commit -m "build: gerar lockfile reproduzível da fundação"
+            git push origin HEAD:feat/issue-001-foundation
+          fi
+
+  validation:
+    needs: bootstrap-lockfile
+    if: always() && (needs.bootstrap-lockfile.result == 'success' || needs.bootstrap-lockfile.result == 'skipped')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar lockfile
+        run: test -f package-lock.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Instalação limpa
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Testes
+        run: npm run test
+      - name: Build
+        run: npm run build
+      - name: Smoke de rotas compiladas
+        env:
+          NODE_ENV: production
+          HOST: 127.0.0.1
+          PORT: 3000
+          CLIENT_ORIGINS: https://reality.example.com
+        run: |
+          npm run start > /tmp/reality-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:3000/api/health > /tmp/reality-health.json; then break; fi
+            sleep 1
+          done
+          grep -q '"protocolVersion":1' /tmp/reality-health.json
+          curl --fail --silent -H 'Accept: text/html' http://127.0.0.1:3000/stage | grep -q '<div id="root"></div>'
+          curl --fail --silent -H 'Accept: text/html' http://127.0.0.1:3000/control | grep -q '<div id="root"></div>'
+          if curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:3000/api/does-not-exist | grep -q '^404$'; then
+            echo 'Smoke de API desconhecida OK'
+          else
+            exit 1
+          fi
+      - name: Validar memória em grafo
+        run: |
+          node scripts/context-graph.mjs validate
+          node --test tests/context-graph.test.mjs

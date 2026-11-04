@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-001-foundation-base",
+  "recordedAt": "2026-11-04T00:00:02.200Z",
+  "agent": "GPT-6",
+  "intent": "Implementar a fundação executável da issue #1 sem simular câmera, sessão ou efeitos",
+  "summary": "Criados frontend React, backend Express, comunicação Socket.IO tipada com ping, validação de configuração, testes, interface responsiva e CI; instalação npm e smoke de produção ainda não executados antes do commit",
+  "status": "partial",
+  "files": [
+    {
+      "path": ".env.example",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "src/server/config/env.ts",
+          "type": "configures",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "invokes",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": ".nvmrc",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "configures",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "summary": "Documentados ambiente, comandos, HTTPS, estado real e limitações",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "documents",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "eslint.config.js",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "configures",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "index.html",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "src/client/main.tsx",
+          "type": "invokes",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "package.json",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/App.tsx",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/routes/StagePage.tsx",
+          "type": "renders",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/AppErrorBoundary.tsx",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/main.tsx",
+          "type": "relates_to",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/ConnectionStatus.tsx",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/shared/types/connection-state.ts",
+          "type": "uses",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/hooks/use-system-connection.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/realtime/create-system-client.ts",
+          "type": "uses",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/main.tsx",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/App.tsx",
+          "type": "renders",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/realtime/create-system-client.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/shared/contracts/system-events.ts",
+          "type": "uses",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/ControlPage.tsx",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/components/ConnectionStatus.tsx",
+          "type": "renders",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/NotFoundPage.tsx",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/App.tsx",
+          "type": "relates_to",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/StagePage.tsx",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/components/ConnectionStatus.tsx",
+          "type": "renders",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/styles/global.css",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/routes/StagePage.tsx",
+          "type": "relates_to",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/server/app.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/server/routes/health.ts",
+          "type": "uses",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/server/config/env.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": ".env.example",
+          "type": "uses",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/server/index.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "invokes",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/server/realtime/system-socket.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/shared/contracts/system-events.ts",
+          "type": "implements",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/server/routes/health.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "relates_to",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/contracts/system-events.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/server/realtime/system-socket.ts",
+          "type": "relates_to",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/types/connection-state.ts",
+      "change": "created",
+      "summary": "Implementada parte executável da fundação",
+      "links": [
+        {
+          "to": "src/client/hooks/use-system-connection.ts",
+          "type": "relates_to",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/health.test.ts",
+      "change": "created",
+      "summary": "Incluídos testes comportamentais de fundação",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "tests",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/socket.test.ts",
+      "change": "created",
+      "summary": "Incluídos testes comportamentais de fundação",
+      "links": [
+        {
+          "to": "src/server/realtime/system-socket.ts",
+          "type": "tests",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/ui/connection-hook.test.tsx",
+      "change": "created",
+      "summary": "Incluídos testes comportamentais de fundação",
+      "links": [
+        {
+          "to": "src/client/hooks/use-system-connection.ts",
+          "type": "tests",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/ui/routes.test.tsx",
+      "change": "created",
+      "summary": "Incluídos testes comportamentais de fundação",
+      "links": [
+        {
+          "to": "src/client/App.tsx",
+          "type": "tests",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/connection-state.test.ts",
+      "change": "created",
+      "summary": "Incluídos testes comportamentais de fundação",
+      "links": [
+        {
+          "to": "src/shared/types/connection-state.ts",
+          "type": "tests",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/env.test.ts",
+      "change": "created",
+      "summary": "Incluídos testes comportamentais de fundação",
+      "links": [
+        {
+          "to": "src/server/config/env.ts",
+          "type": "tests",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.json",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "configures",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "vite.config.ts",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "configures",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "vitest.config.ts",
+      "change": "created",
+      "summary": "Adicionada configuração executável para a issue #1",
+      "links": [
+        {
+          "to": "tests/ui/routes.test.tsx",
+          "type": "configures",
+          "reason": "Relação necessária para a execução e rastreabilidade da fundação descrita na issue #1"
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "change": "reviewed",
+      "summary": "Contrato detalhado da issue #1 consultado e preservado",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "A ERS define o contrato superior"
+        }
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "change": "reviewed",
+      "summary": "Protocolo de registro JSON e consulta de grafo consultado e preservado",
+      "links": [
+        {
+          "to": "documentos de contexto/graph-record.schema.json",
+          "type": "references",
+          "reason": "As instruções determinam o formato dos registros imutáveis"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "node --version",
+      "status": "passed",
+      "notes": "Node.js v22.16.0 verificado no ambiente de trabalho"
+    },
+    {
+      "command": "npm --version",
+      "status": "passed",
+      "notes": "npm 10.9.2 verificado no ambiente de trabalho"
+    },
+    {
+      "command": "npm ci",
+      "status": "not_run",
+      "notes": "Lockfile inicial será gerado pelo pipeline GitHub Actions com acesso ao registro npm"
+    },
+    {
+      "command": "npm run lint && npm run typecheck && npm run test && npm run build",
+      "status": "not_run",
+      "notes": "Dependências ainda não instaladas; aguardando verificação via CI"
+    },
+    {
+      "command": "Smoke /stage /control /api/health e Socket.IO",
+      "status": "not_run",
+      "notes": "Validação automatizada planejada no GitHub Actions; câmera física fora do escopo desta issue"
+    }
+  ]
+}
