@@ -1,0 +1,99 @@
+:root {
+  color-scheme: dark;
+  --bg-primary: #05070e;
+  --bg-panel: #0d1322;
+  --border-subtle: rgba(110, 168, 254, 0.22);
+  --accent-cyan: #29b6f6;
+  --accent-amber: #ff9800;
+  --text-main: #f4f7ff;
+  --text-muted: #9aa8c7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(13, 19, 34, 0.88);
+}
+
+.stage-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.projection-panel {
+  position: relative;
+  min-height: 520px;
+  background: #020308;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage-video,
+.stage-webgl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.stage-video--mirrored {
+  transform: scaleX(-1);
+}
+
+.stage-webgl-canvas {
+  pointer-events: none;
+}
+
+.diagnostics-hud {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(5, 7, 14, 0.86);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  z-index: 10;
+}
+
+.operations-panel,
+.control-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.qr-svg-wrapper {
+  width: 168px;
+  height: 168px;
+  margin: 0.75rem auto;
+}
+
+.pin-display {
+  display: block;
+  font-size: 1.75rem;
+  letter-spacing: 0.25rem;
+  color: var(--accent-cyan);
+}

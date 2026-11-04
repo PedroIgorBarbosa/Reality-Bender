@@ -1,0 +1,32 @@
+name: Reality Bender CI
+
+on:
+  push:
+    branches: [main, 'feat/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Validate Context Graph
+        run: |
+          node scripts/context-graph.mjs validate
+          node --test tests/context-graph.test.mjs
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Run Unit, Integration & E2E Tests
+        run: npm test
+      - name: Build Production Bundle
+        run: npm run build
+      - name: Smoke Test Server
+        run: npm run smoke:server

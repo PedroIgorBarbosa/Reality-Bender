@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-004-projection-geometry",
+  "recordedAt": "2026-11-04T01:51:30.739Z",
+  "agent": "Gemini-Argon",
+  "intent": "ISSUE-004 / RF-10, RF-11, RF-21, RF-22, RF-23",
+  "summary": "Implementada geometria de projeção computeContentRect, transformação canônica videoNormalizedToStage e perfis de qualidade",
+  "status": "done",
+  "files": [
+    {
+      "path": "src/shared/geometry/projection-geometry.ts",
+      "change": "created",
+      "summary": "Funções puras computeContentRect, videoNormalizedToStage, stageCssToNormalized, QUALITY_PROFILES e atalhos de palco",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa transformação canônica 0..1 -> CSS/NDC"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/projection-geometry.test.ts",
+      "change": "created",
+      "summary": "Testes unitários de transformação geométrica retrato/paisagem, espelhamento e NDC",
+      "links": [
+        {
+          "to": "src/shared/geometry/projection-geometry.ts",
+          "type": "tests",
+          "reason": "Comprova precisão matemática em retrato/paisagem e mirror"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm test",
+      "status": "passed",
+      "notes": "Testes de geometria de projeção aprovados"
+    }
+  ]
+}

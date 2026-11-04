@@ -1,0 +1,1756 @@
+{
+  "filter": {
+    "file": null,
+    "id": null,
+    "text": "ISSUE",
+    "relation": null,
+    "depth": 3,
+    "direction": "both"
+  },
+  "matches": [
+    "action:evt-20261103-initialize-context-graph",
+    "file:docs/specs/INDEX.md",
+    "action:evt-20261103-issue-001-foundation",
+    "file:docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+    "action:evt-20261103-issue-002-sessions-pairing",
+    "file:docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+    "action:evt-20261103-issue-003-camera-webrtc",
+    "file:docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+    "action:evt-20261103-issue-004-projection-geometry",
+    "file:docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+    "action:evt-20261103-issue-005-mediapipe-gestures",
+    "file:docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+    "action:evt-20261103-issue-006-007-008-effects-3d",
+    "file:docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+    "file:docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+    "file:docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+    "action:evt-20261103-issue-009-010-resilience-homologation",
+    "file:docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+    "file:docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+    "file:docs/REALITY_BENDER_ERS_v1.0.md"
+  ],
+  "nodes": [
+    {
+      "id": "action:evt-20261103-initialize-context-graph",
+      "kind": "action",
+      "at": "2026-11-04T01:33:50.638Z",
+      "agent": "Gemini-Argon",
+      "intent": "DOC-01",
+      "summary": "Inicialização do repositório, especificações ERS/Issues #1-#10 e infraestrutura do grafo de conhecimento",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/INDEX.md",
+      "kind": "file",
+      "path": "docs/specs/INDEX.md",
+      "summary": "Índice de especificações das Issues #1 a #10",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:33:50.638Z"
+    },
+    {
+      "id": "action:evt-20261103-issue-001-foundation",
+      "kind": "action",
+      "at": "2026-11-04T01:51:30.434Z",
+      "agent": "Gemini-Argon",
+      "intent": "ISSUE-001 / RF-01, RF-23, RF-24",
+      "summary": "Implementada fundação executável cliente/servidor, validação de ambiente parseServerConfig, rota /api/health e handshake Socket.IO",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "action:evt-20261103-issue-002-sessions-pairing",
+      "kind": "action",
+      "at": "2026-11-04T01:51:30.538Z",
+      "agent": "Gemini-Argon",
+      "intent": "ISSUE-002 / RF-01, RF-02, RF-03, RF-06, RF-09",
+      "summary": "Implementadas sessões efêmeras, geração de QR Code SVG, PIN de 6 dígitos com TTL de 5 min e bloqueio de intrusão",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "action:evt-20261103-issue-003-camera-webrtc",
+      "kind": "action",
+      "at": "2026-11-04T01:51:30.639Z",
+      "agent": "Gemini-Argon",
+      "intent": "ISSUE-003 / RF-04, RF-05, RF-08, RF-09, RF-10",
+      "summary": "Implementada captura real de câmera móvel getUserMedia e controlador WebRTC P2P com fila de candidatos ICE e reconexão",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "action:evt-20261103-issue-004-projection-geometry",
+      "kind": "action",
+      "at": "2026-11-04T01:51:30.739Z",
+      "agent": "Gemini-Argon",
+      "intent": "ISSUE-004 / RF-10, RF-11, RF-21, RF-22, RF-23",
+      "summary": "Implementada geometria de projeção computeContentRect, transformação canônica videoNormalizedToStage e perfis de qualidade",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "action:evt-20261103-issue-005-mediapipe-gestures",
+      "kind": "action",
+      "at": "2026-11-04T01:51:30.842Z",
+      "agent": "Gemini-Argon",
+      "intent": "ISSUE-005 / RF-12, RF-13, RF-14, RF-15, RF-16",
+      "summary": "Implementado motor de gestos MediaPipe Hands/Pose, filtro OneEuroFilter, máquina de calibração e controle de backpressure",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "action:evt-20261103-issue-006-007-008-effects-3d",
+      "kind": "action",
+      "at": "2026-11-04T01:51:30.939Z",
+      "agent": "Gemini-Argon",
+      "intent": "ISSUE-006, ISSUE-007, ISSUE-008 / RF-17, RF-18, RF-19, RF-20",
+      "summary": "Implementada arquitetura EffectPlugin e os 3 efeitos 3D interativos em Three.js/WebGL: Esfera de Energia, Portal Dimensional e Aura Elétrica",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "file:docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "file:docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "kind": "action",
+      "at": "2026-11-04T01:51:31.053Z",
+      "agent": "Gemini-Argon",
+      "intent": "ISSUE-009, ISSUE-010 / RF-21 a RF-26, CT-010-1 a CT-010-7",
+      "summary": "Implementados diagnósticos em tempo real, detecção de congelamento de vídeo, integração completa em /stage e /control, matriz de homologação e roteiro HTTPS",
+      "status": "done"
+    },
+    {
+      "id": "file:docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "file:docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+      "kind": "file",
+      "path": "docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    },
+    {
+      "id": "file:docs/REALITY_BENDER_ERS_v1.0.md",
+      "kind": "file",
+      "path": "docs/REALITY_BENDER_ERS_v1.0.md",
+      "summary": "Especificação de Requisitos do Sistema v1.0 (RF-01 a RF-26, RNF-01 a RNF-20, CT-01 a CT-18)",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:33:50.638Z"
+    },
+    {
+      "id": "file:AGENTS.md",
+      "kind": "file",
+      "path": "AGENTS.md",
+      "summary": "Regras de governança e memória obrigatória do grafo de conhecimento",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:33:50.638Z"
+    },
+    {
+      "id": "file:README.md",
+      "kind": "file",
+      "path": "README.md",
+      "summary": "Atualizado com arquitetura completa, scripts e instruções de operação",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:scripts/context-graph.mjs",
+      "kind": "file",
+      "path": "scripts/context-graph.mjs",
+      "summary": "CLI de gerenciamento e validação do grafo de conhecimento",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:33:50.638Z"
+    },
+    {
+      "id": "file:tests/context-graph.test.mjs",
+      "kind": "file",
+      "path": "tests/context-graph.test.mjs",
+      "summary": "Testes automatizados do grafo de conhecimento",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:33:50.638Z"
+    },
+    {
+      "id": "file:package.json",
+      "kind": "file",
+      "path": "package.json",
+      "summary": "Scripts reproduzíveis de dev, build, test, lint, typecheck, smoke e homologate",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:tsconfig.json",
+      "kind": "file",
+      "path": "tsconfig.json",
+      "summary": "Configuração TypeScript em modo estrito",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:tsconfig.app.json",
+      "kind": "file",
+      "path": "tsconfig.app.json",
+      "summary": "Configuração TypeScript do cliente React",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:tsconfig.node.json",
+      "kind": "file",
+      "path": "tsconfig.node.json",
+      "summary": "Configuração TypeScript do servidor Node",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:vite.config.ts",
+      "kind": "file",
+      "path": "vite.config.ts",
+      "summary": "Configuração do Vite para /stage e /control",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:vitest.config.ts",
+      "kind": "file",
+      "path": "vitest.config.ts",
+      "summary": "Configuração de testes Vitest",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:eslint.config.js",
+      "kind": "file",
+      "path": "eslint.config.js",
+      "summary": "Configuração de lint estático",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:index.html",
+      "kind": "file",
+      "path": "index.html",
+      "summary": "Entrada HTML da aplicação SPA",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:.github/workflows/ci.yml",
+      "kind": "file",
+      "path": ".github/workflows/ci.yml",
+      "summary": "Pipeline de integração contínua",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:scripts/typecheck.mjs",
+      "kind": "file",
+      "path": "scripts/typecheck.mjs",
+      "summary": "Verificador de sintaxe e tipos TypeScript e resolução de imports",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:scripts/lint.mjs",
+      "kind": "file",
+      "path": "scripts/lint.mjs",
+      "summary": "Verificador de lint estático do projeto",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:scripts/build-server.mjs",
+      "kind": "file",
+      "path": "scripts/build-server.mjs",
+      "summary": "Compilador do servidor TypeScript para dist/server",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:scripts/build-web.mjs",
+      "kind": "file",
+      "path": "scripts/build-web.mjs",
+      "summary": "Compilador do cliente React para dist/client",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:scripts/run-tests.mjs",
+      "kind": "file",
+      "path": "scripts/run-tests.mjs",
+      "summary": "Executor de suíte de testes unitários, integração e UI",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:scripts/dev.mjs",
+      "kind": "file",
+      "path": "scripts/dev.mjs",
+      "summary": "Script de execução em modo desenvolvimento",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/shared/contracts/system-events.ts",
+      "kind": "file",
+      "path": "src/shared/contracts/system-events.ts",
+      "summary": "Contratos tipados de eventos Socket.IO e estados de sessão",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/shared/types/connection-state.ts",
+      "kind": "file",
+      "path": "src/shared/types/connection-state.ts",
+      "summary": "Máquina de estados de conexão cliente-servidor",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/server/config/env.ts",
+      "kind": "file",
+      "path": "src/server/config/env.ts",
+      "summary": "Módulo parseServerConfig com validação estrita de HOST, PORT, CLIENT_ORIGINS e PUBLIC_BASE_URL",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/server/routes/health.ts",
+      "kind": "file",
+      "path": "src/server/routes/health.ts",
+      "summary": "Endpoint GET /api/health",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/server/app.ts",
+      "kind": "file",
+      "path": "src/server/app.ts",
+      "summary": "Aplicação HTTP Express com cabeçalhos de segurança e fallback SPA",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/server/index.ts",
+      "kind": "file",
+      "path": "src/server/index.ts",
+      "summary": "Inicialização do servidor HTTP/Socket.IO e graceful shutdown",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/realtime/create-system-client.ts",
+      "kind": "file",
+      "path": "src/client/realtime/create-system-client.ts",
+      "summary": "Fábrica tipada do cliente Socket.IO",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/hooks/use-system-connection.ts",
+      "kind": "file",
+      "path": "src/client/hooks/use-system-connection.ts",
+      "summary": "Hook React de conexão com verificação de handshake e medição RTT",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/components/AppErrorBoundary.tsx",
+      "kind": "file",
+      "path": "src/client/components/AppErrorBoundary.tsx",
+      "summary": "ErrorBoundary global da interface React",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/components/ConnectionStatus.tsx",
+      "kind": "file",
+      "path": "src/client/components/ConnectionStatus.tsx",
+      "summary": "Indicador visual de estado da conexão",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/routes/NotFoundPage.tsx",
+      "kind": "file",
+      "path": "src/client/routes/NotFoundPage.tsx",
+      "summary": "Página 404 com links para /stage e /control",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/App.tsx",
+      "kind": "file",
+      "path": "src/client/App.tsx",
+      "summary": "Roteador principal para /stage e /control",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/main.tsx",
+      "kind": "file",
+      "path": "src/client/main.tsx",
+      "summary": "Ponto de entrada React no DOM",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/client/styles/global.css",
+      "kind": "file",
+      "path": "src/client/styles/global.css",
+      "summary": "Estilos globais do palco e controle móvel",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:tests/unit/env.test.ts",
+      "kind": "file",
+      "path": "tests/unit/env.test.ts",
+      "summary": "Testes unitários de parseServerConfig e ConfigurationError",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:tests/unit/connection-state.test.ts",
+      "kind": "file",
+      "path": "tests/unit/connection-state.test.ts",
+      "summary": "Testes unitários de reduceConnectionState",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:tests/integration/health.test.ts",
+      "kind": "file",
+      "path": "tests/integration/health.test.ts",
+      "summary": "Testes de integração de /api/health e segurança HTTP",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.434Z"
+    },
+    {
+      "id": "file:src/server/realtime/session-manager.ts",
+      "kind": "file",
+      "path": "src/server/realtime/session-manager.ts",
+      "summary": "Gerenciador de sessões efêmeras com token de 192 bits, PIN de 6 dígitos, TTL de 5 min e proteção contra segundo celular intruso",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.538Z"
+    },
+    {
+      "id": "file:src/server/realtime/system-socket.ts",
+      "kind": "file",
+      "path": "src/server/realtime/system-socket.ts",
+      "summary": "Servidor Socket.IO integrando criação/pareamento de sessão, isolamento por sala e relé de sinalização",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.538Z"
+    },
+    {
+      "id": "file:src/shared/pairing/qr-matrix.ts",
+      "kind": "file",
+      "path": "src/shared/pairing/qr-matrix.ts",
+      "summary": "Gerador determinístico de matriz e SVG QR Code e parser de query string de pareamento",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.538Z"
+    },
+    {
+      "id": "file:tests/unit/session-manager.test.ts",
+      "kind": "file",
+      "path": "tests/unit/session-manager.test.ts",
+      "summary": "Testes unitários de sessão, expiração TTL, QR SVG e proteção contra intrusão",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.538Z"
+    },
+    {
+      "id": "file:tests/integration/socket.test.ts",
+      "kind": "file",
+      "path": "tests/integration/socket.test.ts",
+      "summary": "Teste de integração ponta a ponta de pareamento, bloqueio de intruso, relé WebRTC e comandos",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.538Z"
+    },
+    {
+      "id": "file:src/client/services/camera-capture.ts",
+      "kind": "file",
+      "path": "src/client/services/camera-capture.ts",
+      "summary": "Serviço de captura de câmera com verificação de HTTPS, troca frontal/traseira, fallback de resolução e parada limpa de tracks",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.639Z"
+    },
+    {
+      "id": "file:src/client/realtime/webrtc-peer.ts",
+      "kind": "file",
+      "path": "src/client/realtime/webrtc-peer.ts",
+      "summary": "Controlador RTCPeerConnection P2P com enfileiramento de candidatos ICE antes de remoteDescription e reconexão ICE restart",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.639Z"
+    },
+    {
+      "id": "file:tests/unit/webrtc-peer.test.ts",
+      "kind": "file",
+      "path": "tests/unit/webrtc-peer.test.ts",
+      "summary": "Testes unitários de captura de câmera, permissões, fila de ICE candidates e reconexão WebRTC",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.639Z"
+    },
+    {
+      "id": "file:src/shared/geometry/projection-geometry.ts",
+      "kind": "file",
+      "path": "src/shared/geometry/projection-geometry.ts",
+      "summary": "Funções puras computeContentRect, videoNormalizedToStage, stageCssToNormalized, QUALITY_PROFILES e atalhos de palco",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.739Z"
+    },
+    {
+      "id": "file:tests/unit/projection-geometry.test.ts",
+      "kind": "file",
+      "path": "tests/unit/projection-geometry.test.ts",
+      "summary": "Testes unitários de transformação geométrica retrato/paisagem, espelhamento e NDC",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.739Z"
+    },
+    {
+      "id": "file:src/shared/tracking/smoothing-filter.ts",
+      "kind": "file",
+      "path": "src/shared/tracking/smoothing-filter.ts",
+      "summary": "Filtro exponencial adaptativo OneEuroFilter e LandmarkBankSmoother",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.842Z"
+    },
+    {
+      "id": "file:src/shared/tracking/calibration-state.ts",
+      "kind": "file",
+      "path": "src/shared/tracking/calibration-state.ts",
+      "summary": "Máquina de estados de calibração UNINITIALIZED, CALIBRATING, CALIBRATED e LOST",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.842Z"
+    },
+    {
+      "id": "file:src/shared/tracking/gesture-engine.ts",
+      "kind": "file",
+      "path": "src/shared/tracking/gesture-engine.ts",
+      "summary": "Classificação determinística de gestos, abertura/orientação de palma, distância de pinch e suavização temporal",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.842Z"
+    },
+    {
+      "id": "file:src/client/tracking/mediapipe-tracker.ts",
+      "kind": "file",
+      "path": "src/client/tracking/mediapipe-tracker.ts",
+      "summary": "Pipeline iniciarMediaPipeHands com bloqueio de concorrência (backpressure de 1 quadro em voo)",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.842Z"
+    },
+    {
+      "id": "file:tests/unit/gesture-engine.test.ts",
+      "kind": "file",
+      "path": "tests/unit/gesture-engine.test.ts",
+      "summary": "Testes unitários de classificação dos 5 gestos, OneEuroFilter, calibração e backpressure",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.842Z"
+    },
+    {
+      "id": "file:src/client/effects/effect-plugin.ts",
+      "kind": "file",
+      "path": "src/client/effects/effect-plugin.ts",
+      "summary": "Contrato compartilhado EffectPlugin, GpuResourceTracker e StageEffectsOrchestrator",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.939Z"
+    },
+    {
+      "id": "file:src/client/effects/energy-sphere.ts",
+      "kind": "file",
+      "path": "src/client/effects/energy-sphere.ts",
+      "summary": "Plugin ENERGY controlado pelas duas mãos com carga progressiva, partículas e distorção espacial",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.939Z"
+    },
+    {
+      "id": "file:src/client/effects/dimensional-portal.ts",
+      "kind": "file",
+      "path": "src/client/effects/dimensional-portal.ts",
+      "summary": "Plugin PORTAL responsivo à abertura/orientação 3D da palma e ao gesto circular do indicador",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.939Z"
+    },
+    {
+      "id": "file:src/client/effects/electric-aura.ts",
+      "kind": "file",
+      "path": "src/client/effects/electric-aura.ts",
+      "summary": "Plugin AURA com geração procedural fractal de raios ancorados ao tronco, ombros, cotovelos e punhos",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.939Z"
+    },
+    {
+      "id": "file:tests/unit/effects-3d.test.ts",
+      "kind": "file",
+      "path": "tests/unit/effects-3d.test.ts",
+      "summary": "Testes unitários dos 3 efeitos 3D e verificação de descarte de recursos de GPU",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:30.939Z"
+    },
+    {
+      "id": "file:src/shared/diagnostics/metrics.ts",
+      "kind": "file",
+      "path": "src/shared/diagnostics/metrics.ts",
+      "summary": "Cálculo de FPS de render/vídeo, percentis P50/P95 de inferência e detecção de vídeo congelado em 3s",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:src/shared/homologation/homologation-matrix.ts",
+      "kind": "file",
+      "path": "src/shared/homologation/homologation-matrix.ts",
+      "summary": "Matriz de homologação CT-010-1..CT-010-7, evidências e análise estatística de regressão",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:src/client/components/DiagnosticsHud.tsx",
+      "kind": "file",
+      "path": "src/client/components/DiagnosticsHud.tsx",
+      "summary": "Overlay HUD de diagnóstico operacional em tempo real na /stage",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:src/client/routes/StagePage.tsx",
+      "kind": "file",
+      "path": "src/client/routes/StagePage.tsx",
+      "summary": "Tela /stage integrada com QR Code, receptor WebRTC, MediaPipe, efeitos 3D, atalhos e HUD",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:src/client/routes/ControlPage.tsx",
+      "kind": "file",
+      "path": "src/client/routes/ControlPage.tsx",
+      "summary": "Tela /control integrada com pareamento PIN/QR, captura de câmera, emissor WebRTC e comandos com ACK",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:scripts/smoke-server.mjs",
+      "kind": "file",
+      "path": "scripts/smoke-server.mjs",
+      "summary": "Smoke test automatizado do servidor de produção compilado",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:scripts/setup-https-dev.mjs",
+      "kind": "file",
+      "path": "scripts/setup-https-dev.mjs",
+      "summary": "Gerador de instruções e estrutura HTTPS/WSS para câmera móvel",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:scripts/homologation-runner.mjs",
+      "kind": "file",
+      "path": "scripts/homologation-runner.mjs",
+      "summary": "Executor da matriz de homologação e gerador de docs/HOMOLOGATION_REPORT.json",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:docs/OPERACAO_E_HOMOLOGACAO.md",
+      "kind": "file",
+      "path": "docs/OPERACAO_E_HOMOLOGACAO.md",
+      "summary": "Manual completo de operação, configuração HTTPS e matriz de homologação",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:docs/HOMOLOGATION_REPORT.json",
+      "kind": "file",
+      "path": "docs/HOMOLOGATION_REPORT.json",
+      "summary": "Relatório JSON estruturado de homologação dos casos de teste",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:tests/unit/diagnostics-resilience.test.ts",
+      "kind": "file",
+      "path": "tests/unit/diagnostics-resilience.test.ts",
+      "summary": "Testes unitários de métricas de diagnóstico, detecção de congelamento e matriz de homologação",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:tests/ui/routes.test.tsx",
+      "kind": "file",
+      "path": "tests/ui/routes.test.tsx",
+      "summary": "Testes de renderização de StagePage, ControlPage, NotFoundPage, ConnectionStatus e DiagnosticsHud",
+      "exists": true,
+      "lastSeen": "2026-11-04T01:51:31.053Z"
+    },
+    {
+      "id": "file:documentos de contexto/graph-record.schema.json",
+      "kind": "file",
+      "path": "documentos de contexto/graph-record.schema.json",
+      "summary": "",
+      "exists": true,
+      "lastSeen": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "action:evt-20261103-initialize-context-graph",
+      "to": "file:AGENTS.md",
+      "type": "created",
+      "reason": "Regras de governança e memória obrigatória do grafo de conhecimento",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "file:AGENTS.md",
+      "to": "file:docs/REALITY_BENDER_ERS_v1.0.md",
+      "type": "documents",
+      "reason": "Define ERS como contrato supremo",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "action:evt-20261103-initialize-context-graph",
+      "to": "file:README.md",
+      "type": "created",
+      "reason": "Documentação principal do projeto Reality Bender",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "file:README.md",
+      "to": "file:docs/specs/INDEX.md",
+      "type": "references",
+      "reason": "Referencia índice das especificações",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "action:evt-20261103-initialize-context-graph",
+      "to": "file:docs/REALITY_BENDER_ERS_v1.0.md",
+      "type": "created",
+      "reason": "Especificação de Requisitos do Sistema v1.0 (RF-01 a RF-26, RNF-01 a RNF-20, CT-01 a CT-18)",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "file:docs/REALITY_BENDER_ERS_v1.0.md",
+      "to": "file:AGENTS.md",
+      "type": "governed_by",
+      "reason": "Regido pelas diretrizes do projeto",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "action:evt-20261103-initialize-context-graph",
+      "to": "file:docs/specs/INDEX.md",
+      "type": "created",
+      "reason": "Índice de especificações das Issues #1 a #10",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "file:docs/specs/INDEX.md",
+      "to": "file:docs/REALITY_BENDER_ERS_v1.0.md",
+      "type": "references",
+      "reason": "Mapeia requisitos da ERS por issue",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "action:evt-20261103-initialize-context-graph",
+      "to": "file:scripts/context-graph.mjs",
+      "type": "created",
+      "reason": "CLI de gerenciamento e validação do grafo de conhecimento",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "file:scripts/context-graph.mjs",
+      "to": "file:documentos de contexto/graph-record.schema.json",
+      "type": "implements",
+      "reason": "Valida registros contra o schema",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "action:evt-20261103-initialize-context-graph",
+      "to": "file:tests/context-graph.test.mjs",
+      "type": "created",
+      "reason": "Testes automatizados do grafo de conhecimento",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "file:tests/context-graph.test.mjs",
+      "to": "file:scripts/context-graph.mjs",
+      "type": "tests",
+      "reason": "Verifica operações do grafo",
+      "record": "evt-20261103-initialize-context-graph"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:package.json",
+      "type": "created",
+      "reason": "Scripts reproduzíveis de dev, build, test, lint, typecheck, smoke e homologate",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:package.json",
+      "to": "file:src/server/index.ts",
+      "type": "configures",
+      "reason": "Define scripts de build e inicialização",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:tsconfig.json",
+      "type": "created",
+      "reason": "Configuração TypeScript em modo estrito",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:tsconfig.json",
+      "to": "file:src/shared/contracts/system-events.ts",
+      "type": "configures",
+      "reason": "Habilita strict mode",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:tsconfig.app.json",
+      "type": "created",
+      "reason": "Configuração TypeScript do cliente React",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:tsconfig.app.json",
+      "to": "file:src/client/App.tsx",
+      "type": "configures",
+      "reason": "Configura compilação do cliente",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:tsconfig.node.json",
+      "type": "created",
+      "reason": "Configuração TypeScript do servidor Node",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:tsconfig.node.json",
+      "to": "file:src/server/app.ts",
+      "type": "configures",
+      "reason": "Configura compilação do servidor",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:vite.config.ts",
+      "type": "created",
+      "reason": "Configuração do Vite para /stage e /control",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:vite.config.ts",
+      "to": "file:src/client/main.tsx",
+      "type": "configures",
+      "reason": "Configura bundle do cliente",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:vitest.config.ts",
+      "type": "created",
+      "reason": "Configuração de testes Vitest",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:vitest.config.ts",
+      "to": "file:tests/unit/env.test.ts",
+      "type": "configures",
+      "reason": "Configura runner de testes",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:eslint.config.js",
+      "type": "created",
+      "reason": "Configuração de lint estático",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:eslint.config.js",
+      "to": "file:scripts/lint.mjs",
+      "type": "configures",
+      "reason": "Define escopo de lint",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:index.html",
+      "type": "created",
+      "reason": "Entrada HTML da aplicação SPA",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:index.html",
+      "to": "file:src/client/main.tsx",
+      "type": "renders",
+      "reason": "Carrega ponto de entrada React",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:.github/workflows/ci.yml",
+      "type": "created",
+      "reason": "Pipeline de integração contínua",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:.github/workflows/ci.yml",
+      "to": "file:package.json",
+      "type": "invokes",
+      "reason": "Executa scripts de CI",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:scripts/typecheck.mjs",
+      "type": "created",
+      "reason": "Verificador de sintaxe e tipos TypeScript e resolução de imports",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:scripts/typecheck.mjs",
+      "to": "file:tsconfig.json",
+      "type": "tests",
+      "reason": "Valida todos os módulos TS/TSX",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:scripts/lint.mjs",
+      "type": "created",
+      "reason": "Verificador de lint estático do projeto",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:scripts/lint.mjs",
+      "to": "file:eslint.config.js",
+      "type": "tests",
+      "reason": "Executa inspeção estática",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:scripts/build-server.mjs",
+      "type": "created",
+      "reason": "Compilador do servidor TypeScript para dist/server",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:scripts/build-server.mjs",
+      "to": "file:src/server/index.ts",
+      "type": "uses",
+      "reason": "Compila servidor para produção",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:scripts/build-web.mjs",
+      "type": "created",
+      "reason": "Compilador do cliente React para dist/client",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:scripts/build-web.mjs",
+      "to": "file:src/client/main.tsx",
+      "type": "uses",
+      "reason": "Compila frontend para produção",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:scripts/run-tests.mjs",
+      "type": "created",
+      "reason": "Executor de suíte de testes unitários, integração e UI",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:scripts/run-tests.mjs",
+      "to": "file:tests/unit/env.test.ts",
+      "type": "invokes",
+      "reason": "Executa suíte automatizada",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:scripts/dev.mjs",
+      "type": "created",
+      "reason": "Script de execução em modo desenvolvimento",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:scripts/dev.mjs",
+      "to": "file:src/server/index.ts",
+      "type": "invokes",
+      "reason": "Inicia ambiente de desenvolvimento",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/shared/contracts/system-events.ts",
+      "type": "created",
+      "reason": "Contratos tipados de eventos Socket.IO e estados de sessão",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/shared/contracts/system-events.ts",
+      "to": "file:docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Define eventos canônicos de sinalização",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/shared/types/connection-state.ts",
+      "type": "created",
+      "reason": "Máquina de estados de conexão cliente-servidor",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/shared/types/connection-state.ts",
+      "to": "file:docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa máquina de estados de conexão",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/server/config/env.ts",
+      "type": "created",
+      "reason": "Módulo parseServerConfig com validação estrita de HOST, PORT, CLIENT_ORIGINS e PUBLIC_BASE_URL",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/server/config/env.ts",
+      "to": "file:docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Valida variáveis de ambiente do servidor",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/server/routes/health.ts",
+      "type": "created",
+      "reason": "Endpoint GET /api/health",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/server/routes/health.ts",
+      "to": "file:src/shared/contracts/system-events.ts",
+      "type": "uses",
+      "reason": "Retorna versão de protocolo em /api/health",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/server/app.ts",
+      "type": "created",
+      "reason": "Aplicação HTTP Express com cabeçalhos de segurança e fallback SPA",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/server/app.ts",
+      "to": "file:src/server/routes/health.ts",
+      "type": "uses",
+      "reason": "Registra rota de saúde e cabeçalhos seguros",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/server/index.ts",
+      "type": "created",
+      "reason": "Inicialização do servidor HTTP/Socket.IO e graceful shutdown",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/server/index.ts",
+      "to": "file:src/server/app.ts",
+      "type": "uses",
+      "reason": "Inicializa servidor HTTP e sinais de encerramento",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/realtime/create-system-client.ts",
+      "type": "created",
+      "reason": "Fábrica tipada do cliente Socket.IO",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/realtime/create-system-client.ts",
+      "to": "file:src/shared/contracts/system-events.ts",
+      "type": "uses",
+      "reason": "Instancia cliente Socket.IO tipado",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/hooks/use-system-connection.ts",
+      "type": "created",
+      "reason": "Hook React de conexão com verificação de handshake e medição RTT",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/hooks/use-system-connection.ts",
+      "to": "file:src/shared/types/connection-state.ts",
+      "type": "uses",
+      "reason": "Gerencia ciclo de vida do handshake",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/components/AppErrorBoundary.tsx",
+      "type": "created",
+      "reason": "ErrorBoundary global da interface React",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/components/AppErrorBoundary.tsx",
+      "to": "file:docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Trata falhas de renderização na UI",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/components/ConnectionStatus.tsx",
+      "type": "created",
+      "reason": "Indicador visual de estado da conexão",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/components/ConnectionStatus.tsx",
+      "to": "file:src/shared/types/connection-state.ts",
+      "type": "uses",
+      "reason": "Exibe fase atual da conexão",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/routes/NotFoundPage.tsx",
+      "type": "created",
+      "reason": "Página 404 com links para /stage e /control",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/routes/NotFoundPage.tsx",
+      "to": "file:docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Exibe rota 404 amigável",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/App.tsx",
+      "type": "created",
+      "reason": "Roteador principal para /stage e /control",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/App.tsx",
+      "to": "file:src/client/components/AppErrorBoundary.tsx",
+      "type": "uses",
+      "reason": "Envolve rotas /stage e /control",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/main.tsx",
+      "type": "created",
+      "reason": "Ponto de entrada React no DOM",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/main.tsx",
+      "to": "file:src/client/App.tsx",
+      "type": "uses",
+      "reason": "Monta aplicação React",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:src/client/styles/global.css",
+      "type": "created",
+      "reason": "Estilos globais do palco e controle móvel",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:src/client/styles/global.css",
+      "to": "file:src/client/App.tsx",
+      "type": "renders",
+      "reason": "Define layout visual",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:tests/unit/env.test.ts",
+      "type": "created",
+      "reason": "Testes unitários de parseServerConfig e ConfigurationError",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:tests/unit/env.test.ts",
+      "to": "file:src/server/config/env.ts",
+      "type": "tests",
+      "reason": "Verifica entradas válidas e inválidas de ambiente",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:tests/unit/connection-state.test.ts",
+      "type": "created",
+      "reason": "Testes unitários de reduceConnectionState",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:tests/unit/connection-state.test.ts",
+      "to": "file:src/shared/types/connection-state.ts",
+      "type": "tests",
+      "reason": "Verifica transições de estado",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-001-foundation",
+      "to": "file:tests/integration/health.test.ts",
+      "type": "created",
+      "reason": "Testes de integração de /api/health e segurança HTTP",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "file:tests/integration/health.test.ts",
+      "to": "file:src/server/app.ts",
+      "type": "tests",
+      "reason": "Verifica HTTP 200 /api/health e 404",
+      "record": "evt-20261103-issue-001-foundation"
+    },
+    {
+      "from": "action:evt-20261103-issue-002-sessions-pairing",
+      "to": "file:src/server/realtime/session-manager.ts",
+      "type": "created",
+      "reason": "Gerenciador de sessões efêmeras com token de 192 bits, PIN de 6 dígitos, TTL de 5 min e proteção contra segundo celular intruso",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "file:src/server/realtime/session-manager.ts",
+      "to": "file:docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa S-01 a S-05 e RF-06",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "action:evt-20261103-issue-002-sessions-pairing",
+      "to": "file:src/server/realtime/system-socket.ts",
+      "type": "created",
+      "reason": "Servidor Socket.IO integrando criação/pareamento de sessão, isolamento por sala e relé de sinalização",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "file:src/server/realtime/system-socket.ts",
+      "to": "file:src/server/realtime/session-manager.ts",
+      "type": "uses",
+      "reason": "Isola salas Socket.IO por sessão",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "action:evt-20261103-issue-002-sessions-pairing",
+      "to": "file:src/shared/pairing/qr-matrix.ts",
+      "type": "created",
+      "reason": "Gerador determinístico de matriz e SVG QR Code e parser de query string de pareamento",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "file:src/shared/pairing/qr-matrix.ts",
+      "to": "file:docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa S-06 renderização QR Code no palco",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "action:evt-20261103-issue-002-sessions-pairing",
+      "to": "file:tests/unit/session-manager.test.ts",
+      "type": "created",
+      "reason": "Testes unitários de sessão, expiração TTL, QR SVG e proteção contra intrusão",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "file:tests/unit/session-manager.test.ts",
+      "to": "file:src/server/realtime/session-manager.ts",
+      "type": "tests",
+      "reason": "Comprova TTL, reconexão e rejeição de intruso",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "action:evt-20261103-issue-002-sessions-pairing",
+      "to": "file:tests/integration/socket.test.ts",
+      "type": "created",
+      "reason": "Teste de integração ponta a ponta de pareamento, bloqueio de intruso, relé WebRTC e comandos",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "file:tests/integration/socket.test.ts",
+      "to": "file:src/server/realtime/system-socket.ts",
+      "type": "tests",
+      "reason": "Comprova sinalização em sala isolada",
+      "record": "evt-20261103-issue-002-sessions-pairing"
+    },
+    {
+      "from": "action:evt-20261103-issue-003-camera-webrtc",
+      "to": "file:src/client/services/camera-capture.ts",
+      "type": "created",
+      "reason": "Serviço de captura de câmera com verificação de HTTPS, troca frontal/traseira, fallback de resolução e parada limpa de tracks",
+      "record": "evt-20261103-issue-003-camera-webrtc"
+    },
+    {
+      "from": "file:src/client/services/camera-capture.ts",
+      "to": "file:docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-04, RF-05 e RF-07",
+      "record": "evt-20261103-issue-003-camera-webrtc"
+    },
+    {
+      "from": "action:evt-20261103-issue-003-camera-webrtc",
+      "to": "file:src/client/realtime/webrtc-peer.ts",
+      "type": "created",
+      "reason": "Controlador RTCPeerConnection P2P com enfileiramento de candidatos ICE antes de remoteDescription e reconexão ICE restart",
+      "record": "evt-20261103-issue-003-camera-webrtc"
+    },
+    {
+      "from": "file:src/client/realtime/webrtc-peer.ts",
+      "to": "file:docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-08, RF-09 e fila de ICE",
+      "record": "evt-20261103-issue-003-camera-webrtc"
+    },
+    {
+      "from": "action:evt-20261103-issue-003-camera-webrtc",
+      "to": "file:tests/unit/webrtc-peer.test.ts",
+      "type": "created",
+      "reason": "Testes unitários de captura de câmera, permissões, fila de ICE candidates e reconexão WebRTC",
+      "record": "evt-20261103-issue-003-camera-webrtc"
+    },
+    {
+      "from": "file:tests/unit/webrtc-peer.test.ts",
+      "to": "file:src/client/realtime/webrtc-peer.ts",
+      "type": "tests",
+      "reason": "Verifica negociação SDP/ICE e limpeza de tracks",
+      "record": "evt-20261103-issue-003-camera-webrtc"
+    },
+    {
+      "from": "action:evt-20261103-issue-004-projection-geometry",
+      "to": "file:src/shared/geometry/projection-geometry.ts",
+      "type": "created",
+      "reason": "Funções puras computeContentRect, videoNormalizedToStage, stageCssToNormalized, QUALITY_PROFILES e atalhos de palco",
+      "record": "evt-20261103-issue-004-projection-geometry"
+    },
+    {
+      "from": "file:src/shared/geometry/projection-geometry.ts",
+      "to": "file:docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa transformação canônica 0..1 -> CSS/NDC",
+      "record": "evt-20261103-issue-004-projection-geometry"
+    },
+    {
+      "from": "action:evt-20261103-issue-004-projection-geometry",
+      "to": "file:tests/unit/projection-geometry.test.ts",
+      "type": "created",
+      "reason": "Testes unitários de transformação geométrica retrato/paisagem, espelhamento e NDC",
+      "record": "evt-20261103-issue-004-projection-geometry"
+    },
+    {
+      "from": "file:tests/unit/projection-geometry.test.ts",
+      "to": "file:src/shared/geometry/projection-geometry.ts",
+      "type": "tests",
+      "reason": "Comprova precisão matemática em retrato/paisagem e mirror",
+      "record": "evt-20261103-issue-004-projection-geometry"
+    },
+    {
+      "from": "action:evt-20261103-issue-005-mediapipe-gestures",
+      "to": "file:src/shared/tracking/smoothing-filter.ts",
+      "type": "created",
+      "reason": "Filtro exponencial adaptativo OneEuroFilter e LandmarkBankSmoother",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "file:src/shared/tracking/smoothing-filter.ts",
+      "to": "file:docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-14 suavização de landmarks",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "action:evt-20261103-issue-005-mediapipe-gestures",
+      "to": "file:src/shared/tracking/calibration-state.ts",
+      "type": "created",
+      "reason": "Máquina de estados de calibração UNINITIALIZED, CALIBRATING, CALIBRATED e LOST",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "file:src/shared/tracking/calibration-state.ts",
+      "to": "file:docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-16 máquina de calibração",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "action:evt-20261103-issue-005-mediapipe-gestures",
+      "to": "file:src/shared/tracking/gesture-engine.ts",
+      "type": "created",
+      "reason": "Classificação determinística de gestos, abertura/orientação de palma, distância de pinch e suavização temporal",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "file:src/shared/tracking/gesture-engine.ts",
+      "to": "file:docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-15 motor de gestos testável",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "action:evt-20261103-issue-005-mediapipe-gestures",
+      "to": "file:src/client/tracking/mediapipe-tracker.ts",
+      "type": "created",
+      "reason": "Pipeline iniciarMediaPipeHands com bloqueio de concorrência (backpressure de 1 quadro em voo)",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "file:src/client/tracking/mediapipe-tracker.ts",
+      "to": "file:src/shared/tracking/gesture-engine.ts",
+      "type": "uses",
+      "reason": "Executa inferência sem bloquear o loop de renderização",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "action:evt-20261103-issue-005-mediapipe-gestures",
+      "to": "file:tests/unit/gesture-engine.test.ts",
+      "type": "created",
+      "reason": "Testes unitários de classificação dos 5 gestos, OneEuroFilter, calibração e backpressure",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "file:tests/unit/gesture-engine.test.ts",
+      "to": "file:src/client/tracking/mediapipe-tracker.ts",
+      "type": "tests",
+      "reason": "Comprova classificação de gestos e descarte por backpressure",
+      "record": "evt-20261103-issue-005-mediapipe-gestures"
+    },
+    {
+      "from": "action:evt-20261103-issue-006-007-008-effects-3d",
+      "to": "file:src/client/effects/effect-plugin.ts",
+      "type": "created",
+      "reason": "Contrato compartilhado EffectPlugin, GpuResourceTracker e StageEffectsOrchestrator",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "file:src/client/effects/effect-plugin.ts",
+      "to": "file:docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-17 arquitetura de plugins e limpeza GPU",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "action:evt-20261103-issue-006-007-008-effects-3d",
+      "to": "file:src/client/effects/energy-sphere.ts",
+      "type": "created",
+      "reason": "Plugin ENERGY controlado pelas duas mãos com carga progressiva, partículas e distorção espacial",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "file:src/client/effects/energy-sphere.ts",
+      "to": "file:docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-18 Esfera de Energia",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "action:evt-20261103-issue-006-007-008-effects-3d",
+      "to": "file:src/client/effects/dimensional-portal.ts",
+      "type": "created",
+      "reason": "Plugin PORTAL responsivo à abertura/orientação 3D da palma e ao gesto circular do indicador",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "file:src/client/effects/dimensional-portal.ts",
+      "to": "file:docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-19 Portal Dimensional",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "action:evt-20261103-issue-006-007-008-effects-3d",
+      "to": "file:src/client/effects/electric-aura.ts",
+      "type": "created",
+      "reason": "Plugin AURA com geração procedural fractal de raios ancorados ao tronco, ombros, cotovelos e punhos",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "file:src/client/effects/electric-aura.ts",
+      "to": "file:docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-20 Aura Elétrica",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "action:evt-20261103-issue-006-007-008-effects-3d",
+      "to": "file:tests/unit/effects-3d.test.ts",
+      "type": "created",
+      "reason": "Testes unitários dos 3 efeitos 3D e verificação de descarte de recursos de GPU",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "file:tests/unit/effects-3d.test.ts",
+      "to": "file:src/client/effects/effect-plugin.ts",
+      "type": "tests",
+      "reason": "Comprova física, reatividade e dispose() dos efeitos 3D",
+      "record": "evt-20261103-issue-006-007-008-effects-3d"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:src/shared/diagnostics/metrics.ts",
+      "type": "created",
+      "reason": "Cálculo de FPS de render/vídeo, percentis P50/P95 de inferência e detecção de vídeo congelado em 3s",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:src/shared/diagnostics/metrics.ts",
+      "to": "file:docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa RF-24 e RF-25",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:src/shared/homologation/homologation-matrix.ts",
+      "type": "created",
+      "reason": "Matriz de homologação CT-010-1..CT-010-7, evidências e análise estatística de regressão",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:src/shared/homologation/homologation-matrix.ts",
+      "to": "file:docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Implementa CT-010-1 a CT-010-7",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:src/client/components/DiagnosticsHud.tsx",
+      "type": "created",
+      "reason": "Overlay HUD de diagnóstico operacional em tempo real na /stage",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:src/client/components/DiagnosticsHud.tsx",
+      "to": "file:src/shared/diagnostics/metrics.ts",
+      "type": "uses",
+      "reason": "Exibe métricas em tempo real",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:src/client/routes/StagePage.tsx",
+      "type": "created",
+      "reason": "Tela /stage integrada com QR Code, receptor WebRTC, MediaPipe, efeitos 3D, atalhos e HUD",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:src/client/routes/StagePage.tsx",
+      "to": "file:src/client/effects/effect-plugin.ts",
+      "type": "uses",
+      "reason": "Integra recepção WebRTC, MediaPipe e efeitos 3D no palco",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:src/client/routes/ControlPage.tsx",
+      "type": "created",
+      "reason": "Tela /control integrada com pareamento PIN/QR, captura de câmera, emissor WebRTC e comandos com ACK",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:src/client/routes/ControlPage.tsx",
+      "to": "file:src/client/services/camera-capture.ts",
+      "type": "uses",
+      "reason": "Integra câmera móvel, WebRTC e comandos remotos com ACK",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:scripts/smoke-server.mjs",
+      "type": "created",
+      "reason": "Smoke test automatizado do servidor de produção compilado",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:scripts/smoke-server.mjs",
+      "to": "file:src/server/app.ts",
+      "type": "tests",
+      "reason": "Homologa build de produção em execução real",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:scripts/setup-https-dev.mjs",
+      "type": "created",
+      "reason": "Gerador de instruções e estrutura HTTPS/WSS para câmera móvel",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:scripts/setup-https-dev.mjs",
+      "to": "file:docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+      "type": "implements",
+      "reason": "Prepara setup HTTPS móvel",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:scripts/homologation-runner.mjs",
+      "type": "created",
+      "reason": "Executor da matriz de homologação e gerador de docs/HOMOLOGATION_REPORT.json",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:scripts/homologation-runner.mjs",
+      "to": "file:src/shared/homologation/homologation-matrix.ts",
+      "type": "uses",
+      "reason": "Gera relatório de homologação verificável",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:docs/OPERACAO_E_HOMOLOGACAO.md",
+      "type": "created",
+      "reason": "Manual completo de operação, configuração HTTPS e matriz de homologação",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:docs/OPERACAO_E_HOMOLOGACAO.md",
+      "to": "file:docs/REALITY_BENDER_ERS_v1.0.md",
+      "type": "documents",
+      "reason": "Documenta operação e resultados CT-010-1..CT-010-7",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:docs/HOMOLOGATION_REPORT.json",
+      "type": "created",
+      "reason": "Relatório JSON estruturado de homologação dos casos de teste",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:docs/HOMOLOGATION_REPORT.json",
+      "to": "file:docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+      "type": "references",
+      "reason": "Registra status PASS/BLOCKED reais",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:README.md",
+      "type": "modified",
+      "reason": "Atualizado com arquitetura completa, scripts e instruções de operação",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:README.md",
+      "to": "file:docs/OPERACAO_E_HOMOLOGACAO.md",
+      "type": "documents",
+      "reason": "Apresenta guia rápido e referência ao manual operacional",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:tests/unit/diagnostics-resilience.test.ts",
+      "type": "created",
+      "reason": "Testes unitários de métricas de diagnóstico, detecção de congelamento e matriz de homologação",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:tests/unit/diagnostics-resilience.test.ts",
+      "to": "file:src/shared/diagnostics/metrics.ts",
+      "type": "tests",
+      "reason": "Comprova cálculo de FPS, P50/P95 e freeze detection",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "action:evt-20261103-issue-009-010-resilience-homologation",
+      "to": "file:tests/ui/routes.test.tsx",
+      "type": "created",
+      "reason": "Testes de renderização de StagePage, ControlPage, NotFoundPage, ConnectionStatus e DiagnosticsHud",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    },
+    {
+      "from": "file:tests/ui/routes.test.tsx",
+      "to": "file:src/client/routes/StagePage.tsx",
+      "type": "tests",
+      "reason": "Comprova renderização das telas sem estados falsos",
+      "record": "evt-20261103-issue-009-010-resilience-homologation"
+    }
+  ],
+  "totals": {
+    "records": 8,
+    "graphNodes": 89,
+    "graphEdges": 142
+  },
+  "truncated": true
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-006-007-008-effects-3d",
+  "recordedAt": "2026-11-04T01:51:30.939Z",
+  "agent": "Gemini-Argon",
+  "intent": "ISSUE-006, ISSUE-007, ISSUE-008 / RF-17, RF-18, RF-19, RF-20",
+  "summary": "Implementada arquitetura EffectPlugin e os 3 efeitos 3D interativos em Three.js/WebGL: Esfera de Energia, Portal Dimensional e Aura Elétrica",
+  "status": "done",
+  "files": [
+    {
+      "path": "src/client/effects/effect-plugin.ts",
+      "change": "created",
+      "summary": "Contrato compartilhado EffectPlugin, GpuResourceTracker e StageEffectsOrchestrator",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-17 arquitetura de plugins e limpeza GPU"
+        }
+      ]
+    },
+    {
+      "path": "src/client/effects/energy-sphere.ts",
+      "change": "created",
+      "summary": "Plugin ENERGY controlado pelas duas mãos com carga progressiva, partículas e distorção espacial",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-18 Esfera de Energia"
+        }
+      ]
+    },
+    {
+      "path": "src/client/effects/dimensional-portal.ts",
+      "change": "created",
+      "summary": "Plugin PORTAL responsivo à abertura/orientação 3D da palma e ao gesto circular do indicador",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-19 Portal Dimensional"
+        }
+      ]
+    },
+    {
+      "path": "src/client/effects/electric-aura.ts",
+      "change": "created",
+      "summary": "Plugin AURA com geração procedural fractal de raios ancorados ao tronco, ombros, cotovelos e punhos",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-20 Aura Elétrica"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/effects-3d.test.ts",
+      "change": "created",
+      "summary": "Testes unitários dos 3 efeitos 3D e verificação de descarte de recursos de GPU",
+      "links": [
+        {
+          "to": "src/client/effects/effect-plugin.ts",
+          "type": "tests",
+          "reason": "Comprova física, reatividade e dispose() dos efeitos 3D"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm test",
+      "status": "passed",
+      "notes": "Testes dos efeitos 3D ENERGY, PORTAL e AURA aprovados"
+    }
+  ]
+}

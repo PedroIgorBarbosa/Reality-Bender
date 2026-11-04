@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-002-sessions-pairing",
+  "recordedAt": "2026-11-04T01:51:30.538Z",
+  "agent": "Gemini-Argon",
+  "intent": "ISSUE-002 / RF-01, RF-02, RF-03, RF-06, RF-09",
+  "summary": "Implementadas sessões efêmeras, geração de QR Code SVG, PIN de 6 dígitos com TTL de 5 min e bloqueio de intrusão",
+  "status": "done",
+  "files": [
+    {
+      "path": "src/server/realtime/session-manager.ts",
+      "change": "created",
+      "summary": "Gerenciador de sessões efêmeras com token de 192 bits, PIN de 6 dígitos, TTL de 5 min e proteção contra segundo celular intruso",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa S-01 a S-05 e RF-06"
+        }
+      ]
+    },
+    {
+      "path": "src/server/realtime/system-socket.ts",
+      "change": "created",
+      "summary": "Servidor Socket.IO integrando criação/pareamento de sessão, isolamento por sala e relé de sinalização",
+      "links": [
+        {
+          "to": "src/server/realtime/session-manager.ts",
+          "type": "uses",
+          "reason": "Isola salas Socket.IO por sessão"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/pairing/qr-matrix.ts",
+      "change": "created",
+      "summary": "Gerador determinístico de matriz e SVG QR Code e parser de query string de pareamento",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa S-06 renderização QR Code no palco"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/session-manager.test.ts",
+      "change": "created",
+      "summary": "Testes unitários de sessão, expiração TTL, QR SVG e proteção contra intrusão",
+      "links": [
+        {
+          "to": "src/server/realtime/session-manager.ts",
+          "type": "tests",
+          "reason": "Comprova TTL, reconexão e rejeição de intruso"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/socket.test.ts",
+      "change": "created",
+      "summary": "Teste de integração ponta a ponta de pareamento, bloqueio de intruso, relé WebRTC e comandos",
+      "links": [
+        {
+          "to": "src/server/realtime/system-socket.ts",
+          "type": "tests",
+          "reason": "Comprova sinalização em sala isolada"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm test",
+      "status": "passed",
+      "notes": "Testes unitários e de integração de sessão e pareamento aprovados"
+    }
+  ]
+}

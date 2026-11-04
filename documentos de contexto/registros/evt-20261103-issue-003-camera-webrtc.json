@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-003-camera-webrtc",
+  "recordedAt": "2026-11-04T01:51:30.639Z",
+  "agent": "Gemini-Argon",
+  "intent": "ISSUE-003 / RF-04, RF-05, RF-08, RF-09, RF-10",
+  "summary": "Implementada captura real de câmera móvel getUserMedia e controlador WebRTC P2P com fila de candidatos ICE e reconexão",
+  "status": "done",
+  "files": [
+    {
+      "path": "src/client/services/camera-capture.ts",
+      "change": "created",
+      "summary": "Serviço de captura de câmera com verificação de HTTPS, troca frontal/traseira, fallback de resolução e parada limpa de tracks",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-04, RF-05 e RF-07"
+        }
+      ]
+    },
+    {
+      "path": "src/client/realtime/webrtc-peer.ts",
+      "change": "created",
+      "summary": "Controlador RTCPeerConnection P2P com enfileiramento de candidatos ICE antes de remoteDescription e reconexão ICE restart",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-08, RF-09 e fila de ICE"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/webrtc-peer.test.ts",
+      "change": "created",
+      "summary": "Testes unitários de captura de câmera, permissões, fila de ICE candidates e reconexão WebRTC",
+      "links": [
+        {
+          "to": "src/client/realtime/webrtc-peer.ts",
+          "type": "tests",
+          "reason": "Verifica negociação SDP/ICE e limpeza de tracks"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm test",
+      "status": "passed",
+      "notes": "Testes de câmera e WebRTC aprovados"
+    }
+  ]
+}
