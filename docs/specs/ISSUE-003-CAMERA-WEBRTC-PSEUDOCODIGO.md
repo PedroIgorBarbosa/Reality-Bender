@@ -1,18 +1,18 @@
 # REALITY BENDER — Issue #3: câmera real e WebRTC ponta a ponta
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/3  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Depende de:** #1, #2  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Depende de:** #1, #2  
 **RF:** RF-04, RF-05, RF-06, RF-08, RF-09, RF-10 · **RNF:** RNF-03, RNF-07, RNF-08, RNF-13.
 
 ## 1. Entrega observável e limites
 
-O celular, pareado por convite da #2, obtém vídeo da **câmera física somente após interação** e transmite uma \`MediaStreamTrack\` de vídeo por \`RTCPeerConnection\` ao PC. O PC exibe o vídeo real na rota \`/stage\`. Sem MediaPipe, efeitos ou áudio nesta issue. Uma alteração inesperada no campo de visão deve aparecer no PC.
+O celular, pareado por convite da #2, obtém vídeo da **câmera física somente após interação** e transmite uma `MediaStreamTrack` de vídeo por `RTCPeerConnection` ao PC. O PC exibe o vídeo real na rota `/stage`. Sem MediaPipe, efeitos ou áudio nesta issue. Uma alteração inesperada no campo de visão deve aparecer no PC.
 
 **Invariantes:** (I1) nunca solicitar microfone; (I2) nenhum frame por Socket.IO/upload/base64; (I3) a sessão autoriza toda oferta/resposta/ICE; (I4) somente uma conexão RTC ativa por par/época; (I5) sem primeiro frame não dizer “Ao vivo”; (I6) encerramento interrompe tracks físicas; (I7) comunicação no celular sob HTTPS confiável; (I8) vídeo desconectado não fica exibido como live.
 
 ## 2. Componentes e arquivos previstos
 
-\`\`\`text
+```text
 src/client/camera/capture-constraints.ts       # presets e fallback
 src/client/camera/capture-controller.ts        # permissão/stream/track/cleanup
 src/client/rtc/peer-config.ts                  # config ICE sem segredos
@@ -28,13 +28,13 @@ tests/unit/candidate-buffer.test.ts
 tests/unit/rtc-state.test.ts
 tests/integration/rtc-signaling.test.ts
 tests/ui/camera-permission.test.tsx
-\`\`\`
+```
 
 Modificar handlers de #2 apenas para integrar nova negociação e transições de mídia verificadas. Não mudar papéis, contratos canônicos nem expiração de convite.
 
 ## 3. Tipos e contratos de controle
 
-\`\`\`pseudocode
+```pseudocode
 ENUM CapturePhase =
     IDLE | REQUESTING_PERMISSION | CAPTURING | STOPPED | DENIED | NOT_FOUND
     | IN_USE | SECURITY_ERROR | UNKNOWN_ERROR
@@ -68,13 +68,13 @@ TIPO CameraResult:
     activeTrack: MediaStreamTrack(kind="video")
     width/height/fps: valores observados por track.getSettings()
 FIM_TIPO
-\`\`\`
+```
 
-O servidor não recebe stream: apenas \`rtc:offer\`, \`rtc:answer\` e \`rtc:ice-candidate\` validados pela #2.
+O servidor não recebe stream: apenas `rtc:offer`, `rtc:answer` e `rtc:ice-candidate` validados pela #2.
 
 ## 4. Algoritmo C-01 — inicialização segura do controle móvel
 
-\`\`\`pseudocode
+```pseudocode
 COMPONENTE ControlPage():
     session <- sessaoPareadaDaIssue2()
     capture <- NOVO CaptureController()
@@ -101,11 +101,11 @@ COMPONENTE ControlPage():
         AGUARDAR iniciarCapturaETransmissao() // ação explícita
     FIM
 FIM_COMPONENTE
-\`\`\`
+```
 
 ## 5. Algoritmo C-02 — pedir câmera física sem áudio
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO solicitarCameraFisica():
     SE captura em andamento ou permissionRequestInFlight:
         RETORNAR resultado já pendente; NÃO abrir outra permissão
@@ -152,13 +152,13 @@ FUNÇÃO solicitarCameraFisica():
     ATUALIZAR estado CAPTURING e resolução real por track.getSettings()
     RETORNAR stream
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Os campos \`ideal\` são metas; não afirmar 720p/30fps apenas porque foram solicitados. A resolução real é a observada no track, não um valor fixo.
+Os campos `ideal` são metas; não afirmar 720p/30fps apenas porque foram solicitados. A resolução real é a observada no track, não um valor fixo.
 
 ## 6. Algoritmo C-03 — prévia local verdadeira
 
-\`\`\`pseudocode
+```pseudocode
 COMPONENTE LocalCameraPreview(stream):
     videoRef <- referência ao elemento <video>
     AO_RECEBER stream:
@@ -178,13 +178,13 @@ COMPONENTE LocalCameraPreview(stream):
         DESANEXAR srcObject sem parar stream que pertença a outro dono
     FIM
 FIM_COMPONENTE
-\`\`\`
+```
 
-A câmera é propriedade de \`CaptureController\`, não do elemento React: desmontar uma UI não deve encerrar tracks se o fluxo continua em outra página sem intenção de parada.
+A câmera é propriedade de `CaptureController`, não do elemento React: desmontar uma UI não deve encerrar tracks se o fluxo continua em outra página sem intenção de parada.
 
 ## 7. Algoritmo C-04 — criar par RTC com época e callbacks
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO criarPeerController(role, sessionAuthorization, epoch):
     VALIDAR role=CONTROL ou STAGE e vínculo de sessão atual
     VALIDAR epoch >= 0, compatível com server negotiationEpoch
@@ -220,11 +220,11 @@ FUNÇÃO criarPeerController(role, sessionAuthorization, epoch):
     FIM
     RETORNAR registro
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 8. Algoritmo C-05 — negociação: celular sempre inicia oferta
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO iniciarTransmissaoComoControl(stream, session):
     PRECONDICAO session.role=CONTROL e stream com videoTrack.live
     epoch <- AGUARDAR servidorAutorizarNovaNegociacao(session)
@@ -249,13 +249,13 @@ FUNÇÃO iniciarTransmissaoComoControl(stream, session):
         registro.offerInFlight = false
     FIM_TENTATIVA
 FIM_FUNÇÃO
-\`\`\`
+```
 
-O serviço de sessão da #2 deve adicionar a operação atômica de \`negotiationEpoch\` para impedir ofertas simultâneas/obsoletas; não criar eventos sem autorização.
+O serviço de sessão da #2 deve adicionar a operação atômica de `negotiationEpoch` para impedir ofertas simultâneas/obsoletas; não criar eventos sem autorização.
 
 ## 9. Algoritmo C-06 — PC recebe oferta e responde
 
-\`\`\`pseudocode
+```pseudocode
 QUANDO STAGE receber rtc:offer(envelope):
     VALIDAR remetente CONTROL autorizado e epoch atual via servidor
     SERIALIZAR negociação por sessionId/epoch
@@ -283,13 +283,13 @@ QUANDO CONTROL receber rtc:answer(envelope):
     APLICAR candidatos pendentes somente do mesmo epoch
     ALTERAR status para CHECKING_ICE
 FIM
-\`\`\`
+```
 
-Se \`setRemoteDescription\` falhar, descartar recursos da época e mostrar código \`RTC_NEGOTIATION_FAILED\`; nunca permanecer indefinidamente em \`CONNECTING\`.
+Se `setRemoteDescription` falhar, descartar recursos da época e mostrar código `RTC_NEGOTIATION_FAILED`; nunca permanecer indefinidamente em `CONNECTING`.
 
 ## 10. Algoritmo C-07 — Trickle ICE com buffering limitado
 
-\`\`\`pseudocode
+```pseudocode
 QUANDO receber rtc:ice-candidate(envelope):
     SE epoch não corresponde ao peer ativo: DESCARTAR
     VALIDAR candidato foi aceito pelo servidor/autorizado
@@ -312,13 +312,13 @@ FUNÇÃO drenarCandidatos(epoch):
     FIM
     ESVAZIAR fila e liberar referências
 FIM_FUNÇÃO
-\`\`\`
+```
 
 A ordem de chegada ICE vs SDP pode variar. A fila deve ser limitada, segregada por negociação e descartada ao trocar de época.
 
 ## 11. Algoritmo C-08 — vídeo remoto, detecção de primeiro quadro e vida
 
-\`\`\`pseudocode
+```pseudocode
 QUANDO STAGE.pc.ontrack(event):
     SE event.track.kind != "video": IGNORAR
     stream <- event.streams[0] SE presente
@@ -353,13 +353,13 @@ ROTINA verificarMediaSaudavel():
         SUSPENDER indicador "Ao vivo"; preparar reconexão
     FIM_SE
 FIM_ROTINA
-\`\`\`
+```
 
-Não confundir o evento \`ontrack\` com comprovação de frames renderizados. A aferição de latência física só pertence à #10.
+Não confundir o evento `ontrack` com comprovação de frames renderizados. A aferição de latência física só pertence à #10.
 
 ## 12. Algoritmo C-09 — parar, reconectar e fechar
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO pararTransmissao(reason):
     SE já parado: RETORNAR sucesso idempotente
     INVALIDAR epoch/generation locais e callbacks RTC assíncronos
@@ -394,11 +394,11 @@ QUANDO track.onended OU pagehide OU encerrarSessao():
     ABORTAR operações pendentes, fechar pares e liberar camera de forma idempotente
     NÃO repetir automaticamente prompt de permissão após recusa
 FIM
-\`\`\`
+```
 
 ## 13. Máquina de estados, concorrência e fluxos de falha
 
-\`\`\`text
+```text
 Celular: IDLE -> REQUESTING_PERMISSION -> CAPTURING -> OFFERING
                                |              |              |
                             DENIED          STOPPED       CHECKING_ICE
@@ -410,7 +410,7 @@ PC: NO_VIDEO -> OFFER_RECEIVED -> ANSWERING -> FRAME_WAIT -> RECEIVING_FRAMES
                                                          INTERRUPTED
                                                                |
                                                   RECONNECTING -> FRAME_WAIT
-\`\`\`
+```
 
 | Evento | Resposta correta |
 | --- | --- |
@@ -429,7 +429,7 @@ PC: NO_VIDEO -> OFFER_RECEIVED -> ANSWERING -> FRAME_WAIT -> RECEIVING_FRAMES
 
 ## 14. Pseudocódigo de testes obrigatórios
 
-\`\`\`pseudocode
+```pseudocode
 SUITE CaptureController:
     mock getUserMedia resolved com MediaStream contendo apenas video
     CHAMAR solicitarCamera -> chamada com audio:false e video ideal 720p
@@ -476,12 +476,12 @@ SUITE Física (registro manual, não afirmar aprovado sem executar):
 FIM_SUITE
 
 EXECUTAR npm ci, lint, typecheck, test e build; anexar logs reais.
-\`\`\`
+```
 
 ## 15. Critérios de aceite e negative prompt
 
-- Vídeo real proveniente de \`getUserMedia\` do celular, sem áudio, chega por WebRTC ao PC.
-- Não declarar \`LIVE\` antes de receber quadros; em falha a tela mostra status verídico.
+- Vídeo real proveniente de `getUserMedia` do celular, sem áudio, chega por WebRTC ao PC.
+- Não declarar `LIVE` antes de receber quadros; em falha a tela mostra status verídico.
 - P2P e rede local são preferenciais; nenhum servidor de vídeo remoto necessário.
 - Permissões, erros de câmera, falhas SDP/ICE, desligamento e reconexão têm caminhos específicos.
 - Eventos obedecem ao contrato e à autorização da issue #2.
@@ -490,4 +490,4 @@ EXECUTAR npm ci, lint, typecheck, test e build; anexar logs reais.
 
 **Não entregar:** slideshow em vídeo, GIF, tela negra simulando transmissão, screenshots periódicos, enviar frames por Socket.IO, stream de microfone, gravação oculta, STUN/TURN pago sem decisão registrada, números FPS/latência inventados, múltiplos peers sem limpeza, certificado inseguro, alteração da ERS para adaptar falhas do código.
 
-**Handoff para #4:** disponibilizar \`MediaStream\` remoto vivo, metadados de resolução/frames e estados tipados. A próxima issue alinhará canvas e sistema de coordenadas ao vídeo.
+**Handoff para #4:** disponibilizar `MediaStream` remoto vivo, metadados de resolução/frames e estados tipados. A próxima issue alinhará canvas e sistema de coordenadas ao vídeo.

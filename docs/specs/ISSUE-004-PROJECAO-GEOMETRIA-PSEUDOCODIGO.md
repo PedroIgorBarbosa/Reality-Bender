@@ -1,18 +1,18 @@
 # REALITY BENDER — Issue #4: projeção ao vivo e transformação espacial
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/4  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependência:** #3  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependência:** #3  
 **RF:** RF-10, RF-11, RF-21, RF-22, RF-23 · **RNF:** RNF-02, RNF-06, RNF-12.
 
 ## 1. Resultado esperado e fronteira
 
-\`/stage\` deverá exibir o \`MediaStream\` recebido pela #3, com proporção correta em retrato/paisagem e uma camada WebGL2 transparente exatamente alinhada com os pixels do vídeo. Um único transformador geométrico converterá landmarks normalizados para posições da projeção. Tela cheia, espelhamento, redimensionamento, modos e qualidade gráfica terão interfaces funcionais, sem inventar efeitos antes das issues #6–#8.
+`/stage` deverá exibir o `MediaStream` recebido pela #3, com proporção correta em retrato/paisagem e uma camada WebGL2 transparente exatamente alinhada com os pixels do vídeo. Um único transformador geométrico converterá landmarks normalizados para posições da projeção. Tela cheia, espelhamento, redimensionamento, modos e qualidade gráfica terão interfaces funcionais, sem inventar efeitos antes das issues #6–#8.
 
-**Invariantes:** vídeo é a camada real mais baixa; canvas tem \`pointer-events:none\`; a câmera não reinicia ao alterar fullscreen/qualidade/modo; o espelhamento acontece uma vez; coordenadas CSS não são confundidas com pixels de framebuffer; quando não há vídeo não permanece frame congelado rotulado “Ao vivo”.
+**Invariantes:** vídeo é a camada real mais baixa; canvas tem `pointer-events:none`; a câmera não reinicia ao alterar fullscreen/qualidade/modo; o espelhamento acontece uma vez; coordenadas CSS não são confundidas com pixels de framebuffer; quando não há vídeo não permanece frame congelado rotulado “Ao vivo”.
 
 ## 2. Organização de módulos
 
-\`\`\`text
+```text
 src/client/stage/StageComposition.tsx
 src/client/stage/RemoteVideoLayer.tsx
 src/client/stage/StageHud.tsx
@@ -28,13 +28,13 @@ tests/unit/video-geometry.test.ts
 tests/unit/quality-profiles.test.ts
 tests/ui/stage-fullscreen.test.tsx
 tests/ui/stage-modes.test.tsx
-\`\`\`
+```
 
-Reusar stream/estado da #3 e eventos autorizados \`stage:set-mode\` da #2; não duplicar pipeline RTC nem listeners de tela.
+Reusar stream/estado da #3 e eventos autorizados `stage:set-mode` da #2; não duplicar pipeline RTC nem listeners de tela.
 
 ## 3. Contratos geométricos e visuais
 
-\`\`\`pseudocode
+```pseudocode
 TIPO VideoDimensions = {widthPx:inteiro>0, heightPx:inteiro>0}
 TIPO StageDimensions = {cssWidth:real>0, cssHeight:real>0, dpr:real>0}
 TIPO GeometryConfig = {
@@ -68,11 +68,11 @@ NOTA:
     partículas implementadas. Nesta issue, mudança de renderScale/
     pixelRatio precisa ser observável no renderer.
 FIM
-\`\`\`
+```
 
 ## 4. Algoritmo G-01 — medir a área real de exibição
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO medirGeometria(videoElement, stageElement, canvasElement, quality):
     videoWidth <- videoElement.videoWidth
     videoHeight <- videoElement.videoHeight
@@ -95,13 +95,13 @@ FUNÇÃO medirGeometria(videoElement, stageElement, canvasElement, quality):
     DEFINIR renderer.setPixelRatio(dprLimitado * quality.renderScale)
     RETORNAR snapshot imutável com dimensões, fit, mirror e viewportVersion
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Importante: não aplicar o fator DPR novamente no cálculo das landmarks. O renderer converte espaço CSS de tela para framebuffer internamente.
 
-## 5. Algoritmo G-02 — calcular \`object-fit\` com barras ou corte
+## 5. Algoritmo G-02 — calcular `object-fit` com barras ou corte
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO calcularRetanguloVideo(videoW,videoH,stageW,stageH,fit):
     VALIDAR dimensões finitas e >0
     SE fit="contain":
@@ -131,13 +131,13 @@ EXEMPLO_RETRATO_CONTAIN:
     scale=0.6
     rect={left:296,top:0,width:432,height:768}
 FIM
-\`\`\`
+```
 
-É obrigatório usar o mesmo \`fit\` no elemento de vídeo e no transformador. Preferir \`contain\` para apresentação porque mostra corpo inteiro; \`cover\` só se os testes de clipping forem explícitos.
+É obrigatório usar o mesmo `fit` no elemento de vídeo e no transformador. Preferir `contain` para apresentação porque mostra corpo inteiro; `cover` só se os testes de clipping forem explícitos.
 
 ## 6. Algoritmo G-03 — normalizado → CSS → NDC
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO videoNormalizedToStage(point, geometry):
     VALIDAR point.x, point.y finitos
     SE point fora [0,1]:
@@ -171,13 +171,13 @@ FUNÇÃO ndcToStageCss(ndc,stage):
     yCss <- (1-ndc.y)*stage.cssHeight/2
     RETORNAR {x:xCss,y:yCss}
 FIM_FUNÇÃO
-\`\`\`
+```
 
-A orientação da imagem deve ser determinada pelas dimensões do frame **já decodificado** (videoWidth/videoHeight). Não rotacionar novamente com base em \`screen.orientation\` sem evidência; isso causaria dupla rotação.
+A orientação da imagem deve ser determinada pelas dimensões do frame **já decodificado** (videoWidth/videoHeight). Não rotacionar novamente com base em `screen.orientation` sem evidência; isso causaria dupla rotação.
 
 ## 7. Algoritmo G-04 — alinhar camadas sem dupla inversão
 
-\`\`\`pseudocode
+```pseudocode
 COMPONENTE StageComposition(remoteStream):
     elementoStage <- DIV posicionado, overflow hidden, fundo escuro
     video <- VIDEO absolute inset 0; width=100%;height=100%;
@@ -207,13 +207,13 @@ COMPONENTE StageComposition(remoteStream):
         MOSTRAR overlay de "Sinal interrompido"
     FIM_SE
 FIM_COMPONENTE
-\`\`\`
+```
 
-\`StageComposition\` deve usar uma única versão de geometria por frame, evitando capturar snapshots diferentes entre vídeo e efeitos.
+`StageComposition` deve usar uma única versão de geometria por frame, evitando capturar snapshots diferentes entre vídeo e efeitos.
 
 ## 8. Algoritmo G-05 — ciclo de vida do renderer Three.js
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO criarRenderer(canvas,quality):
     SE WebGL2 não disponível:
         RETORNAR erro tipado WEBGL2_UNAVAILABLE
@@ -258,13 +258,13 @@ FUNÇÃO dispose():
     renderer.dispose()
     DESVINCULAR canvas, eliminar referências
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Não criar uma nova instância de \`WebGLRenderer\` para cada efeito, alteração de dimensão ou frame.
+Não criar uma nova instância de `WebGLRenderer` para cada efeito, alteração de dimensão ou frame.
 
 ## 9. Algoritmo G-06 — modos, atalhos, qualidade e tela cheia
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO solicitarModo(mode):
     VALIDAR mode ∈ {NONE,ENERGY,PORTAL,AURA}
     VALIDAR que Stage é proprietário OU Control autorizado pelo servidor
@@ -304,11 +304,11 @@ FUNÇÃO alterarQualidade(profile):
     EXIGIR que efeito futuro respeite particleBudget
     VERIFICAR que conexão RTC, srcObject e negociação não mudaram
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 10. Algoritmo G-07 — diagnóstico geométrico sem fingir rastreamento
 
-\`\`\`pseudocode
+```pseudocode
 COMPONENTE DiagnosticOverlay():
     SOMENTE visível com diagnóstico ligado
     LABEL obrigatório "Alvos sintéticos de geometria — sem MediaPipe"
@@ -328,11 +328,11 @@ COMPONENTE DiagnosticOverlay():
         estado RTC recebido da #3
     NÃO usar overlay sintético como comprovação de rastreamento real
 FIM_COMPONENTE
-\`\`\`
+```
 
 ## 11. Máquina de estados e concorrência
 
-\`\`\`text
+```text
 Stage.NO_VIDEO -> Stage.HAS_VIDEO -> Stage.FULLSCREEN/NORMAL
       |                |
       |                +-- toggle mirror -> reproject landmarks
@@ -344,10 +344,10 @@ Stage.INTERRUPTED -> NO_VIDEO (srcObject removido quando stream encerra)
 Renderer.READY -> Renderer.CONTEXT_LOST -> RESTORING -> READY
                           |
                           +-> UNAVAILABLE (vídeo permanece visível)
-\`\`\`
+```
 
-- \`ResizeObserver\`, \`fullscreenchange\`, \`loadedmetadata\` e \`video.resize\` podem acontecer na mesma sequência: agrupar leituras e aplicar uma atualização de geometria por animation frame, com \`geometryVersion\`.
-- Alterar modo e qualidade durante conexão WebRTC não deve tocar no \`RTCPeerConnection\`.
+- `ResizeObserver`, `fullscreenchange`, `loadedmetadata` e `video.resize` podem acontecer na mesma sequência: agrupar leituras e aplicar uma atualização de geometria por animation frame, com `geometryVersion`.
+- Alterar modo e qualidade durante conexão WebRTC não deve tocar no `RTCPeerConnection`.
 - React StrictMode pode montar duas vezes; toda inscrição possui cleanup idempotente.
 - Configuração de espelhamento é estado de projeção, não mutação dos landmarks brutos da #5.
 
@@ -355,8 +355,8 @@ Renderer.READY -> Renderer.CONTEXT_LOST -> RESTORING -> READY
 
 | Condição | Tratamento |
 | --- | --- |
-| Stream nula | mostrar \`Aguardando vídeo\`, não renderizar efeito |
-| Dimensões 0/NaN | retornar \`INVALID_GEOMETRY\`, aguardar metadados |
+| Stream nula | mostrar `Aguardando vídeo`, não renderizar efeito |
+| Dimensões 0/NaN | retornar `INVALID_GEOMETRY`, aguardar metadados |
 | Portrait → landscape | reavaliar retângulo e projeção sem reiniciar RTC |
 | DPR ou tela cheia muda | recalcular framebuffer e rect CSS, sem dupla escala |
 | WebGL2 ausente | mostrar vídeo normal + aviso, não tela branca |
@@ -368,7 +368,7 @@ Renderer.READY -> Renderer.CONTEXT_LOST -> RESTORING -> READY
 
 ## 13. Pseudocódigo de testes determinísticos
 
-\`\`\`pseudocode
+```pseudocode
 SUITE VideoGeometry:
     ASSERT fitContain(1280,720,1024,768) == {x:0,y:96,w:1024,h:576}
     ASSERT map((0.5,0.5)) == (512,384)
@@ -411,12 +411,12 @@ SUITE Física (pendente até execução):
     Validar que overlay coincide com pontos conhecidos visualmente
     Registrar se foi executado, nunca simular aprovação
 FIM_SUITE
-\`\`\`
+```
 
 ## 14. Critérios de aceite, rastreabilidade e negative prompt
 
-**Evidências obrigatórias:** vídeo em \`/stage\` mantém proporção e reage ao stream real; transformações com casos numéricos; tela cheia; mudança de qualidade que realmente reduz renderScale; diagnóstico com pontos **explicitamente sintéticos**; WebGL2 ou fallback honesto; sem alteração de track/RTC ao trocar controles. Registrar os arquivos e suas relações no grafo JSON conforme \`AGENTS.md\`.
+**Evidências obrigatórias:** vídeo em `/stage` mantém proporção e reage ao stream real; transformações com casos numéricos; tela cheia; mudança de qualidade que realmente reduz renderScale; diagnóstico com pontos **explicitamente sintéticos**; WebGL2 ou fallback honesto; sem alteração de track/RTC ao trocar controles. Registrar os arquivos e suas relações no grafo JSON conforme `AGENTS.md`.
 
 **Não entregar:** rotação dupla, posicionamento com constantes mágicas de pixel, canvas substituindo stream de vídeo, mock se dizendo MediaPipe, vídeos exemplo, renderer criado por frame, fullscreen que só altera CSS sem utilizar API, controles de qualidade decorativos ou claims de FPS sem medição.
 
-**Handoff para #5:** publicar API \`videoNormalizedToStage\` pura e versão de geometria coerente para que inferência MediaPipe use as mesmas coordenadas da projeção.
+**Handoff para #5:** publicar API `videoNormalizedToStage` pura e versão de geometria coerente para que inferência MediaPipe use as mesmas coordenadas da projeção.

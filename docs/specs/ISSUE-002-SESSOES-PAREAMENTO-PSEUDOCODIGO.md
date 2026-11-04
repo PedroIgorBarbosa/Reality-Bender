@@ -1,18 +1,18 @@
 # REALITY BENDER — Issue #2: sessões, QR Code e sinalização segura
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/2  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependência:** #1  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependência:** #1  
 **RF:** RF-01, RF-02, RF-03, RF-06, RF-09 · **RNF:** RNF-08, RNF-09, RNF-10.
 
 ## 1. Resultado esperado e fronteira
 
-Ao entrar em \`/stage\`, o operador cria uma sessão isolada, recebe um convite criptográfico temporário, exibe QR Code válido e permite que **um** celular entre em \`/control\`. O servidor conhece papel, posse e expiração de cada sessão; só transmite eventos de sinalização a um par autorizado. O vídeo ainda não é transmitido nesta issue (#3).
+Ao entrar em `/stage`, o operador cria uma sessão isolada, recebe um convite criptográfico temporário, exibe QR Code válido e permite que **um** celular entre em `/control`. O servidor conhece papel, posse e expiração de cada sessão; só transmite eventos de sinalização a um par autorizado. O vídeo ainda não é transmitido nesta issue (#3).
 
-**Invariantes:** (I1) \`sessionId\` não é credencial; (I2) nenhum evento enviado por socket pode indicar ou alterar arbitrariamente outra sessão; (I3) convite não pode ser previsível, reutilizado nem aparecer em logs; (I4) segundo celular não desconecta o primeiro; (I5) fechar sessão revoga credenciais; (I6) QR é exibido somente com URL móvel HTTPS confiável; (I7) \`rtc:*\` nesta issue é **roteado e validado**, não afirma transmitir vídeo.
+**Invariantes:** (I1) `sessionId` não é credencial; (I2) nenhum evento enviado por socket pode indicar ou alterar arbitrariamente outra sessão; (I3) convite não pode ser previsível, reutilizado nem aparecer em logs; (I4) segundo celular não desconecta o primeiro; (I5) fechar sessão revoga credenciais; (I6) QR é exibido somente com URL móvel HTTPS confiável; (I7) `rtc:*` nesta issue é **roteado e validado**, não afirma transmitir vídeo.
 
 ## 2. Arquivos e responsabilidades
 
-\`\`\`text
+```text
 src/shared/contracts/session-events.ts   # DTOs, versões, payloads e erros
 src/shared/contracts/session-states.ts   # enums, transições permitidas
 src/server/session/session-store.ts      # armazenamento somente em memória
@@ -28,13 +28,13 @@ tests/unit/session-store.test.ts
 tests/unit/invite-service.test.ts
 tests/integration/session-signaling.test.ts
 tests/ui/session-routes.test.tsx
-\`\`\`
+```
 
-Reusar configurações, Socket.IO, React e \`AGENTS.md\` da #1; não substituir módulos existentes sem necessidade. Antes de editar, consultar grafo de contexto por caminho/relação e verificar o código real.
+Reusar configurações, Socket.IO, React e `AGENTS.md` da #1; não substituir módulos existentes sem necessidade. Antes de editar, consultar grafo de contexto por caminho/relação e verificar o código real.
 
 ## 3. Contrato de dados, estados e eventos
 
-\`\`\`pseudocode
+```pseudocode
 ENUM Role = STAGE | CONTROL
 ENUM SessionPhase = CREATED | WAITING_FOR_PHONE | PAIRED | CONNECTING | LIVE
                     | INTERRUPTED | CLOSED
@@ -95,13 +95,13 @@ CONTRATO DE NOMES:
     Não duplicar como rtc:ice ou control:mode sem camada explícita de compatibilidade.
     sessionId fornecido no payload NÃO concede autorização.
 FIM
-\`\`\`
+```
 
-Para #3, \`CONNECTING/LIVE/INTERRUPTED\` serão ativados **após eventos reais de mídia**. Nesta issue, estado máximo observável no front-end é \`PAIRED\`.
+Para #3, `CONNECTING/LIVE/INTERRUPTED` serão ativados **após eventos reais de mídia**. Nesta issue, estado máximo observável no front-end é `PAIRED`.
 
 ## 4. Algoritmo S-01 — criar sessão com propriedade exclusiva
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO criarSessao(stageSocket, solicitação, clock):
     VALIDAR socket conectado e origem previamente autorizada
     VALIDAR solicitação com schema estrito (sem campos extras)
@@ -137,13 +137,13 @@ FUNÇÃO criarSessao(stageSocket, solicitação, clock):
     RETORNAR SessionCreated com inviteUrl, expiração e segredo de retomada
     EMITIR session:status à STAGE autorizada
 FIM_FUNÇÃO
-\`\`\`
+```
 
-O segredo de retomada do STAGE vive apenas na memória da aba (não em querystring nem logs); reload completo cria outra sessão. Se usado \`sessionStorage\`, explicitar riscos e invalidação — não é obrigatório persistir nada.
+O segredo de retomada do STAGE vive apenas na memória da aba (não em querystring nem logs); reload completo cria outra sessão. Se usado `sessionStorage`, explicitar riscos e invalidação — não é obrigatório persistir nada.
 
 ## 5. Algoritmo S-02 — construir URL e QR de convite
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO construirInviteUrl(publicBaseUrl, token):
     VERIFICAR URL absoluta HTTPS, hostname real, sem userinfo nem fragmento
     VALIDAR que URL pública chega ao mesmo aplicativo que recebeu o convite
@@ -173,11 +173,11 @@ FUNÇÃO regenerarConvite(stageSocket, sessionId):
     ATUALIZAR memória
     RETORNAR novo inviteUrl
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 6. Algoritmo S-03 — validação e entrada atômica do celular
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO entrarComoControl(controlSocket, inviteToken, clock):
     VALIDAR origem do socket (handshake) e estrutura do payload
     VALIDAR inviteToken é string base64url de tamanho esperado
@@ -199,13 +199,13 @@ FUNÇÃO entrarComoControl(controlSocket, inviteToken, clock):
     RESPONDER SessionJoined(sessionId, role, controlResumeSecret)
     NOTIFICAR STAGE da entrada com session:status
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Node.js pode intercalar handlers ao atingir um \`await\`. Por isso, toda verificação/reserva deve ser indivisível do ponto de vista do event loop; se a persistência futura mudar, usar compare-and-set ou lock por sessão. Nunca remover o emissor existente por uma nova tentativa.
+Node.js pode intercalar handlers ao atingir um `await`. Por isso, toda verificação/reserva deve ser indivisível do ponto de vista do event loop; se a persistência futura mudar, usar compare-and-set ou lock por sessão. Nunca remover o emissor existente por uma nova tentativa.
 
 ## 7. Algoritmo S-04 — retomada autorizada e descontinuidade de sockets
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO retomarParticipante(socketNovo, sessionId, role, resumeSecret):
     VALIDAR tamanho, forma e expiração de credenciais
     LOCALIZAR sessão em memória por sessionId
@@ -243,13 +243,13 @@ INVARIANTE:
     Os segredos de retomada nunca devem ser enviados como query URL.
     Fechar sessão revoga convite, controle e retomadas.
 FIM
-\`\`\`
+```
 
-A retomada por \`session:resume\` deve ser vinculada a uma desconexão anterior ou revogação explícita. O protocolo de WebRTC reconstruído pertence à #3.
+A retomada por `session:resume` deve ser vinculada a uma desconexão anterior ou revogação explícita. O protocolo de WebRTC reconstruído pertence à #3.
 
 ## 8. Algoritmo S-05 — autorização e encaminhamento de eventos
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO autorizarEvento(socket, sessionIdIgnoravel, papelPermitido):
     vínculo <- reverseSocketIndex.get(socket.id)
     SE vínculo inexistente: NEGAR UNAUTHORIZED
@@ -292,13 +292,13 @@ FUNÇÃO definirModo(socket, solicitado):
     EMITIR stage:set-mode aos dois participantes autorizados
     NÃO alterar RTCPeerConnection nem reconhecer gesto nesta issue
 FIM_FUNÇÃO
-\`\`\`
+```
 
-A mensagem \`stage:set-mode\` apenas sincroniza o **estado de seleção**; os efeitos ainda não existem. A implementação da UI não pode declarar que o efeito está sendo renderizado.
+A mensagem `stage:set-mode` apenas sincroniza o **estado de seleção**; os efeitos ainda não existem. A implementação da UI não pode declarar que o efeito está sendo renderizado.
 
 ## 9. Algoritmo S-06 — encerrar sessão, expirar e limpar
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO encerrarSessao(socket, sessionId):
     VALIDAR papel STAGE proprietário
     SE sessão já CLOSED: responder idempotente "já encerrada"
@@ -325,11 +325,11 @@ QUANDO servidor encerrar:
     FIM
     liberar serviço de socket e HTTP pela rotina da #1
 FIM
-\`\`\`
+```
 
 ## 10. Estados, concorrência e fluxos alternativos
 
-\`\`\`text
+```text
 CREATED -> WAITING_FOR_PHONE -> PAIRED -> (CONNECTING -> LIVE na #3)
              |                    |
              | convite expira     | queda de CONTROL
@@ -337,7 +337,7 @@ CREATED -> WAITING_FOR_PHONE -> PAIRED -> (CONNECTING -> LIVE na #3)
         WAITING_FOR_PHONE     PAIRED sem emissor (janela de retomada)
              |                    |
              +--------> CLOSED <--+
-\`\`\`
+```
 
 | Condição | Estado/erro | Comportamento observável |
 | --- | --- | --- |
@@ -354,7 +354,7 @@ CREATED -> WAITING_FOR_PHONE -> PAIRED -> (CONNECTING -> LIVE na #3)
 
 ## 11. Pseudocódigo dos testes obrigatórios
 
-\`\`\`pseudocode
+```pseudocode
 SUITE CriptografiaEConvites:
     GERAR 1000 convites; todos com tamanho/entropia esperados e sem duplicação
     TESTAR token adulterado -> INVITE_INVALID
@@ -398,12 +398,12 @@ FINAL:
     REGISTRAR resultados reais no PR
     SE teste com celular não executado: marcar validação física como pendente
 FIM
-\`\`\`
+```
 
 ## 12. Critérios de aceite e negative prompt
 
 **Aceite verificável:** criação de sessão isolada; QR verdadeiro quando há HTTPS; um único emissor; tokens de 256 bits aleatórios (superam mínimo de 128 bits); expiração e rotação; controle de papéis; roteamento restrito de RTC; retomada protegida; encerramento revoga credenciais; testes de corrida, CORS/origem e segurança passam.
 
-**Não entregar:** WebRTC funcionando sem mídia real, vídeo em Socket.IO, QR fictício, sockets de sessão pública, broadcast entre sessões, token somente UUID sequencial, credenciais em log ou URL de retomada, base de dados, login, terceiros pagos, frontend exibindo “Ao vivo” antes de receber quadros, alterações sem registro no grafo JSON exigido por \`AGENTS.md\`.
+**Não entregar:** WebRTC funcionando sem mídia real, vídeo em Socket.IO, QR fictício, sockets de sessão pública, broadcast entre sessões, token somente UUID sequencial, credenciais em log ou URL de retomada, base de dados, login, terceiros pagos, frontend exibindo “Ao vivo” antes de receber quadros, alterações sem registro no grafo JSON exigido por `AGENTS.md`.
 
-**Handoff para #3:** contrato estável de signaling com \`negotiationEpoch\`, papéis e eventos. A próxima issue poderá abrir \`RTCPeerConnection\` sem reimplementar controle de sessão.
+**Handoff para #3:** contrato estável de signaling com `negotiationEpoch`, papéis e eventos. A próxima issue poderá abrir `RTCPeerConnection` sem reimplementar controle de sessão.
