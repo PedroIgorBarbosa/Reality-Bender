@@ -1,7 +1,7 @@
 # REALITY BENDER — Issue #10: homologação integral e roteiro de apresentação
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/10  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependências:** #1 a #9.  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependências:** #1 a #9.  
 **Rastreabilidade:** CT-01 a CT-18, RF P0 (todos), RNF-01 a RNF-20.
 
 ## 1. Resultado e definição de responsabilidade
@@ -12,7 +12,7 @@ Comprovar objetivamente se o produto inteiro funciona **com celular físico, PC,
 
 ## 2. Arquivos e artefatos de evidência
 
-\`\`\`text
+```text
 docs/qa/TEST-PLAN.md                  # plano e pré-condições
 docs/qa/TEST-RESULTS.md               # resultados observados, sem preenchimento fictício
 docs/qa/TEST-MATRIX.json              # CT-01..18, status e evidência
@@ -24,13 +24,13 @@ scripts/qa/verify-contracts.mjs        # valida cobertura e requisitos essenciai
 tests/e2e/                            # testes de navegador automatizados possíveis
 .github/workflows/ci.yml              # build/lint/typecheck/test/smoke
 README.md                             # comandos efetivamente verificados
-\`\`\`
+```
 
 Evidências como screenshots ou gravações não substituem os resultados funcionais. Nunca versionar vídeo bruto da câmera, credenciais, SDP/ICE, IPs privados desnecessários ou dados de terceiros; redigir/limpar antes de registrar.
 
 ## 3. Contrato de matriz e evidências
 
-\`\`\`pseudocode
+```pseudocode
 ENUM TestStatus = NOT_RUN | PASS | FAIL | BLOCKED
 TIPO TestEvidence:
     id: "CT-01" ... "CT-18"
@@ -69,13 +69,13 @@ FUNÇÃO registrarExecucao(testCase, observations):
         real tiver sido utilizado
     SALVAR resultado sem segredos ou dados corporais
 FIM_FUNÇÃO
-\`\`\`
+```
 
 A matriz deve guardar **qual ambiente** comprovou o resultado. Um teste unitário pode passar e seu correspondente físico continuar NOT_RUN.
 
 ## 4. Algoritmo Q-01 — pré-validação de repositório e dependências
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO verificarFundacao():
     LER AGENTS.md, ERS, index do grafo e subgrafo relevante
     CONFIRMAR existência dos módulos das issues #1–#9 no Git atual
@@ -102,13 +102,13 @@ FUNÇÃO verificarFundacao():
         GET /rota-inexistente -> SPA 404 visível após executar JS
     ENCERRAR processo de forma limpa
 FIM_FUNÇÃO
-\`\`\`
+```
 
 CI não substitui a homologação física, mas uma aplicação que não compila não pode ser homologada. Usar versões concretas do lockfile; nunca desabilitar lint/typecheck para forçar verde.
 
 ## 5. Algoritmo Q-02 — disponibilizar HTTPS/WSS confiável
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO prepararAcessoMovel():
     VALIDAR servidor está acessível localmente e rotas funcionam
     ESCOLHER um mecanismo com certificado TLS público confiável:
@@ -136,13 +136,13 @@ FUNÇÃO prepararAcessoMovel():
     NÃO instruir usuário a desabilitar safe browsing ou aceitar TLS inválido
     NÃO inserir credenciais TURN em frontend se não houver serviço planejado
 FIM_FUNÇÃO
-\`\`\`
+```
 
 A conexão HTTPS transporta o **sinalizador e a interface**, não converte automaticamente a mídia em relay. WebRTC deve estabelecer canal de mídia direto na LAN quando possível. Redes com isolamento entre clientes/NAT restrito podem exigir TURN e não devem ser declaradas compatíveis sem teste.
 
 ## 6. Algoritmo Q-03 — inventário e preparo do cenário físico
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO prepararApresentacao():
     COLETAR:
         telefone.modelo, OS, versão Chrome
@@ -162,11 +162,11 @@ FUNÇÃO prepararApresentacao():
         NÃO preencher métricas por estimativa
     FIM_SE
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 7. Algoritmo Q-04 — matriz funcional CT-01 a CT-06
 
-\`\`\`pseudocode
+```pseudocode
 TESTE CT-01 "pareamento e vídeo":
     abrir /stage, gerar QR, entrar /control, clicar Iniciar câmera
     ESPERADO: sessão válida, câmera real no PC, estado live só com frame
@@ -203,13 +203,13 @@ TESTE CT-06 "portal real":
     ESPERADO: anel acompanha palma, orientação e abertura
     REQUISITOS: RF-12,RF-19
 FIM_TESTE
-\`\`\`
+```
 
 Todos exigem anotar **observado** antes de decidir PASS/FAIL. CT-01, CT-04–06 não podem ser concluídos apenas com webcam mockada.
 
 ## 8. Algoritmo Q-05 — matriz CT-07 a CT-12
 
-\`\`\`pseudocode
+```pseudocode
 TESTE CT-07 "aura unilateral e bilateral":
     ativar AURA, levantar braço esquerdo apenas, depois direito
     abrir ambos braços e mover tronco para lado
@@ -248,11 +248,11 @@ TESTE CT-12 "qualidade real":
     ESPERADO: custo gráfico reduzido, três efeitos mantêm reação
     REQUISITOS: RF-22
 FIM_TESTE
-\`\`\`
+```
 
 ## 9. Algoritmo Q-06 — matriz CT-13 a CT-18
 
-\`\`\`pseudocode
+```pseudocode
 TESTE CT-13 "FPS por modo":
     executar 120s em ENERGY, 120s PORTAL, 120s AURA
     registrar FPS real em janelas de 1s, por modo e qualidade
@@ -293,13 +293,13 @@ TESTE CT-18 "privacidade e tráfego":
               WSS/HTTPS e WebRTC, tokens não vazam em logs
     REQUISITOS: RNF-07,RNF-08
 FIM_TESTE
-\`\`\`
+```
 
-Além dos CT físicos, executar suites unitárias e de integração de cálculo, controle de sessão e reconexão. Teste automatizado de browser pode usar \`getUserMedia\` falso **somente** como verificação de UI/fluxo automatizado, com evidência marcada como simulada.
+Além dos CT físicos, executar suites unitárias e de integração de cálculo, controle de sessão e reconexão. Teste automatizado de browser pode usar `getUserMedia` falso **somente** como verificação de UI/fluxo automatizado, com evidência marcada como simulada.
 
 ## 10. Algoritmo Q-07 — cálculo verdadeiro de FPS
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO avaliarFPS(frameTimestamps,modeStart,modeEnd):
     VALIDAR duração >=120000ms (pelo menos 2min)
     DEFINIR janelas consecutivas de 1000ms
@@ -320,13 +320,13 @@ REGRA:
     Browser aba oculta/oclusão não representa projeção ativa;
     documentar se foi minimizado/pausado durante teste.
 FIM
-\`\`\`
+```
 
 O teste precisa usar o modo e perfil realmente habilitados no data-show. Se forem feitos ensaios de qualidade COMPAT, HIGH deve ter relatório separado.
 
 ## 11. Algoritmo Q-08 — latência física motion-to-photon
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO medirLatenciaFisica(videoExterno,framerateExterno,marcacoes):
     PRECONDICAO:
         cameraExterna capturou movimento real e data-show no MESMO vídeo
@@ -355,13 +355,13 @@ SE vídeo externo ou quadros suficientes não disponíveis:
     latenciaFisica <- "NÃO VALIDADA FISICAMENTE"
     NÃO substituir por RTCPeerConnection.getStats().roundTripTime
 FIM
-\`\`\`
+```
 
-Registrar definição da marcação e incerteza de um quadro de câmera (\`1000/framerateExterno\` ms). Não usar \`Date.now\` entre celular/PC como se os relógios estivessem sincronizados.
+Registrar definição da marcação e incerteza de um quadro de câmera (`1000/framerateExterno` ms). Não usar `Date.now` entre celular/PC como se os relógios estivessem sincronizados.
 
 ## 12. Algoritmo Q-09 — avaliar segurança e privacidade
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO auditoriaPrivacidadeOperacional():
     INSPECIONAR:
         getUserMedia solicita video=true,audio=false
@@ -378,13 +378,13 @@ FUNÇÃO auditoriaPrivacidadeOperacional():
     SE qualquer requisito de privacidade falhar:
         MARCAR CT-18 FAIL e bloquear aprovação final
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Uma dependência de estáticos/modelos via CDN pode ser aceitável conforme ERS e licenças, mas não deve receber dados de câmera/pose. Preferir servir modelos localmente quando autorizado.
 
 ## 13. Algoritmo Q-10 — relatório e decisão de conclusão
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO consolidarHomologacao(matriz,rnfs,unitTests,build,hardware):
     VALIDAR existem exatamente CT-01..CT-18
     PARA cada CT:
@@ -413,13 +413,13 @@ FUNÇÃO consolidarHomologacao(matriz,rnfs,unitTests,build,hardware):
     REGISTRAR limitações de rede, iluminação e compatibilidade
     RETORNAR relatório final verificável
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Para respeitar a conclusão formal da ERS, a latência deve ser **avaliada quando mensurável**, mas a ausência de medição física deve constar expressamente no relatório — não se torna um número inventado nem aprovação do RNF-01. Se o critério de aceite de latência for imposto como bloqueante pelo avaliador, classificar o resultado como PENDENTE, não como aprovado.
 
 ## 14. Algoritmo Q-11 — roteiro de operação e contingência
 
-\`\`\`pseudocode
+```pseudocode
 PROCEDIMENTO apresentarRealityBender():
     1. CONFIRMAR HTTPS/WSS, Wi-Fi e computador no data-show
     2. ABRIR /stage, criar sessão e mostrar QR real
@@ -447,11 +447,11 @@ SE WebGL falha:
 SE problema irrecuperável:
     declarar falha e usar demonstração de vídeo ao vivo simples, sem fingir VFX
 FIM_CONTINGENCIA
-\`\`\`
+```
 
 ## 15. CI, regressão, segurança e critérios de bloqueio
 
-\`\`\`pseudocode
+```pseudocode
 WORKFLOW CI:
     checkout
     setup Node version compatível com package.json
@@ -477,11 +477,11 @@ FUNÇÃO revisarRegressao():
         permissões, CSP, origens e dependências
     NÃO alterar assert ou remover teste para criar CI verde
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 16. Pseudocódigo de smoke e testes de relatório
 
-\`\`\`pseudocode
+```pseudocode
 SUITE ResultadoDeTeste:
     matriz inicialmente contém 18 status NOT_RUN
     PASS sem observedResult ou executedAt -> erro de validação
@@ -512,12 +512,12 @@ SUITE BrowserSmoke:
     verificar mensagens e comandos sem vídeo fictício
     marcar flows físicos separados do smoke automatizado
 FIM_SUITE
-\`\`\`
+```
 
 ## 17. Critérios finais e negative prompt
 
-**Entrega obrigatória:** matriz completa CT-01–18 com \`PASS/FAIL/NOT_RUN/BLOCKED\`, logs reais de \`npm ci\`, lint, typecheck, tests, build e smoke; manual HTTPS/WSS reproduzível; inventário de hardware; avaliação FPS por modo; avaliação de latência física quando possível (ou não mensurada declarada); privacidade/encerramento; roteiro de apresentação e relatório com bloqueadores. Atualizar README somente com comandos executados e registrar arquivos/relações no grafo JSON.
+**Entrega obrigatória:** matriz completa CT-01–18 com `PASS/FAIL/NOT_RUN/BLOCKED`, logs reais de `npm ci`, lint, typecheck, tests, build e smoke; manual HTTPS/WSS reproduzível; inventário de hardware; avaliação FPS por modo; avaliação de latência física quando possível (ou não mensurada declarada); privacidade/encerramento; roteiro de apresentação e relatório com bloqueadores. Atualizar README somente com comandos executados e registrar arquivos/relações no grafo JSON.
 
-**Não entregar:** relatório com “todos aprovados” por omissão, vídeo pré-gravado como evidência, imagens de mockup como prova de câmera, medição de latência por \`Date.now\` entre dispositivos, estatísticas inventadas, sugestão de desativar TLS/certificado, ocultação de testes falhos, ignorar bugs de pareamento, quebrar CI para aparentar sucesso, baixar requisitos sem decisão do usuário.
+**Não entregar:** relatório com “todos aprovados” por omissão, vídeo pré-gravado como evidência, imagens de mockup como prova de câmera, medição de latência por `Date.now` entre dispositivos, estatísticas inventadas, sugestão de desativar TLS/certificado, ocultação de testes falhos, ignorar bugs de pareamento, quebrar CI para aparentar sucesso, baixar requisitos sem decisão do usuário.
 
 **Produto concluído somente após código final + testes + homologação física.** Este documento é especificação de como verificar e concluir; sua publicação não prova que a aplicação já funciona.

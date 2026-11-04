@@ -1,7 +1,7 @@
 # REALITY BENDER — Issue #9: operação, recuperação, diagnóstico e qualidade
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/9  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependências:** #3, #4, #5, #6, #7, #8.  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependências:** #3, #4, #5, #6, #7, #8.  
 **RF:** RF-06, RF-09, RF-16, RF-21, RF-22, RF-23, RF-24, RF-25, RF-26.  
 **RNF:** RNF-10, RNF-12, RNF-15, RNF-17, RNF-20.
 
@@ -13,7 +13,7 @@ Transformar a implementação técnica em uma aplicação operável durante apre
 
 ## 2. Arquivos e responsabilidades previstas
 
-\`\`\`text
+```text
 src/shared/contracts/operation-events.ts       # comando/ACK/revisão
 src/shared/contracts/diagnostic-types.ts
 src/client/operations/OperationController.ts   # orquestra estados
@@ -35,13 +35,13 @@ tests/unit/metrics-collector.test.ts
 tests/integration/command-authorization.test.ts
 tests/integration/recovery.test.ts
 tests/ui/operation-controls.test.tsx
-\`\`\`
+```
 
-Respeitar \`AGENTS.md\`: consultar subgrafo relevante por arquivo antes de editar e registrar relações reais no JSON após executar; não inventar resultado de teste.
+Respeitar `AGENTS.md`: consultar subgrafo relevante por arquivo antes de editar e registrar relações reais no JSON após executar; não inventar resultado de teste.
 
 ## 3. Contratos de estados, erros e comandos
 
-\`\`\`pseudocode
+```pseudocode
 ENUM OperationPhase =
     BOOTING | WAITING_SESSION | WAITING_PHONE | PAIRED
     | CAMERA_REQUESTING | RTC_NEGOTIATING | VIDEO_LIVE
@@ -86,13 +86,13 @@ TIPO CommandResult:
     commandId, accepted:boolean, revision:inteiro,
     errorCode?:ErrorCode, appliedState?:OperationSnapshotSubset
 FIM_TIPO
-\`\`\`
+```
 
-A autorização por papel de \`SET_MODE\` já existe na #2. Qualidade e calibração podem ser locais ao STAGE se tecnicamente não precisarem de comando móvel; caso sejam expostas no celular, roteá-las como comandos validados sem compartilhar acesso irrestrito ao navegador do PC.
+A autorização por papel de `SET_MODE` já existe na #2. Qualidade e calibração podem ser locais ao STAGE se tecnicamente não precisarem de comando móvel; caso sejam expostas no celular, roteá-las como comandos validados sem compartilhar acesso irrestrito ao navegador do PC.
 
 ## 4. Algoritmo O-01 — derivar estado a partir de fontes reais
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO deriveOperationPhase(sources):
     SE shutdown: RETORNAR CLOSED
     SE erro fatal: RETORNAR FATAL
@@ -123,13 +123,13 @@ FUNÇÃO applyOperationTransition(previous,next,clock):
     FIM_SE
     NUNCA definir LIVE apenas porque Socket.IO conectou
 FIM_FUNÇÃO
-\`\`\`
+```
 
-O modo selecionado (por exemplo PORTAL) não é prova de que o efeito esteja visível; \`PRESENTING\` requer entrada real suficiente.
+O modo selecionado (por exemplo PORTAL) não é prova de que o efeito esteja visível; `PRESENTING` requer entrada real suficiente.
 
 ## 5. Algoritmo O-02 — sincronizar comandos móveis e do PC
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO enviarComando(command):
     VALIDAR role permitido na UI e no servidor
     VALIDAR payload estritamente por schema
@@ -163,13 +163,13 @@ QUANDO STAGE receber stage:set-mode confirmado:
     NÃO fechar getUserMedia/RTCPeerConnection/MediaPipe
     ATUALIZAR controles do STAGE e CONTROL em sincronia
 FIM_QUANDO
-\`\`\`
+```
 
-Dois comandos concorrentes são serializados pelo servidor; vence a maior \`revision\` confirmada, não a ordem de chegada dos pacotes no navegador.
+Dois comandos concorrentes são serializados pelo servidor; vence a maior `revision` confirmada, não a ordem de chegada dos pacotes no navegador.
 
 ## 6. Algoritmo O-03 — atalhos e interface de palco
 
-\`\`\`pseudocode
+```pseudocode
 COMPONENTE StageControls():
     EXIBIR seleção NONE/ENERGY/PORTAL/AURA, qualidade, mirror, calibração
     EXIBIR tela cheia, diagnósticos, encerrar sessão
@@ -198,11 +198,11 @@ COMPONENTE MobileControls():
     GARANTIR textos acessíveis, aria-live adequado
     PERMITIR rolagem vertical sem bloquear interação de toque
 FIM_COMPONENTE
-\`\`\`
+```
 
 ## 7. Algoritmo O-04 — catálogo de erro e política de recuperação
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO resolverErro(code,context):
     SWITCH code:
         CAMERA_DENIED:
@@ -251,13 +251,13 @@ FUNÇÃO resolverErro(code,context):
     FIM_SWITCH
     RETORNAR {title,text,actionLabel,retryPolicy,severity}
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Nunca expor \`SDP\`, tokens, endereços privados de rede, vídeo ou stacks internos em mensagens de erro ao público.
+Nunca expor `SDP`, tokens, endereços privados de rede, vídeo ou stacks internos em mensagens de erro ao público.
 
 ## 8. Algoritmo O-05 — coordenar reconexão sem corrida
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO RecoveryCoordinator.recover(reason):
     SE phase=RECOVERING:
         RETORNAR promiseDeRecuperacaoExistente
@@ -307,13 +307,13 @@ QUANDO ocorrer stop/close/unmount durante recover():
     descartar callbacks e peers da recoveryGeneration anterior
     executar cleanup de idempotente, não reabrir câmera
 FIM
-\`\`\`
+```
 
 Reconstituir conexão sem fechar ambas abas somente quando a sessão de autorização ainda for válida. Em caso de token expirado/revogado, exigir novo pareamento.
 
 ## 9. Algoritmo O-06 — vigiar quadros e estados em até 3 segundos
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO verificarDisponibilidadeDeVideo():
     agora <- performance.now()
     SE pc.connectionState = failed/closed OU videoTrack.readyState != live:
@@ -328,13 +328,13 @@ FUNÇÃO verificarDisponibilidadeDeVideo():
         manter acesso ao botão de reconexão
     FIM
 FIM_FUNÇÃO
-\`\`\`
+```
 
-Essa rotina depende do \`MediaHealth\` real da #3 e não pode inferir fluxo apenas de \`iceConnectionState=connected\`.
+Essa rotina depende do `MediaHealth` real da #3 e não pode inferir fluxo apenas de `iceConnectionState=connected`.
 
 ## 10. Algoritmo O-07 — instrumentação e qualidade das métricas
 
-\`\`\`pseudocode
+```pseudocode
 TIPO DiagnosticSample:
     timestamp: monotonic_ms
     renderFps: real|null
@@ -376,13 +376,13 @@ FUNÇÃO medirRede():
     ROTULAR "RTT de sinalização"; não chamar de latência física
     NÃO inferir atraso mão→data-show de relógios JS não sincronizados
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Métricas aparecem no painel de diagnóstico, nunca se tornam uma telemetria remota com vídeo ou biometria. Limitar histórico em memória e limpar no encerramento.
 
 ## 11. Algoritmo O-08 — liberar recursos e detectar vazamento
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO ResourceLedger.register(resource,owner,disposeFn):
     VALIDAR disposeFn executável
     ARMAZENAR {resource,owner,disposeFn,disposed:false}
@@ -408,7 +408,7 @@ FUNÇÃO fecharExperiencia():
     encerrar sessão via servidor autorizado e limpar tokens
     manter UI em CLOSED, sem reabrir recursos no cleanup
 FIM_FUNÇÃO
-\`\`\`
+```
 
 O ledger também serve aos testes. Após aquecimento, executar 10 trocas de efeito e 3 reconexões; verificar contagem de objetos/handlers por proprietário retorna ao baseline. Métrica de memória do navegador é auxiliar e sujeita a GC, não prova isolada de vazamento.
 
@@ -431,7 +431,7 @@ O ledger também serve aos testes. Após aquecimento, executar 10 trocas de efei
 
 ## 13. Pseudocódigo dos testes
 
-\`\`\`pseudocode
+```pseudocode
 SUITE CommandAuth:
     STAGE autorizado SET_MODE -> revision incrementa e ACK
     CONTROL autorizado SET_MODE -> STAGE/CONTROL sincronizam
@@ -484,7 +484,7 @@ SUITE Física:
     medir gráficos/CPU/FPS realmente com diagnóstico
     registrar hardware e resultados reais ou PENDENTE
 FIM_SUITE
-\`\`\`
+```
 
 ## 14. Critérios de aceite e negative prompt
 

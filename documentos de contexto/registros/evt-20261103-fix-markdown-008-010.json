@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-fix-markdown-008-010",
+  "recordedAt": "2026-11-04T00:08:47.243Z",
+  "agent": "ChatGPT",
+  "intent": "Corrigir formatação Markdown das issues #8 a #10",
+  "summary": "Remove escaping residual em code fences, corrigindo apresentação do pseudocódigo no GitHub.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+      "change": "modified",
+      "summary": "Corrige backticks de pseudocódigo e spans Markdown sem mudança lógica.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "Preserva contrato de requisitos superior."
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+      "change": "modified",
+      "summary": "Corrige backticks de pseudocódigo e spans Markdown sem mudança lógica.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "Preserva contrato de requisitos superior."
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+      "change": "modified",
+      "summary": "Corrige backticks de pseudocódigo e spans Markdown sem mudança lógica.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "Preserva contrato de requisitos superior."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "inspeção estática de code fences",
+      "status": "passed",
+      "notes": "Ao menos cinco blocos válidos detectados por arquivo."
+    },
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Alteração apenas documental."
+    }
+  ]
+}

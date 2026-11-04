@@ -1,18 +1,18 @@
 # REALITY BENDER — Issue #8: aura elétrica reativa ao corpo e aos braços
 
 **Versão:** 1.0 · **Issue:** https://github.com/PedroIgorBarbosa/Reality-Bender/issues/8  
-**Contrato superior:** \`docs/REALITY_BENDER_ERS_v1.0.md\` · **Dependências:** #4, #5 e \`EffectPlugin\` de #6.  
+**Contrato superior:** `docs/REALITY_BENDER_ERS_v1.0.md` · **Dependências:** #4, #5 e `EffectPlugin` de #6.  
 **RF:** RF-13, RF-17, RF-20, RF-22 · **RNF:** RNF-02, RNF-05, RNF-15.
 
 ## 1. Resultado e garantias
 
-Construir o modo \`AURA\` com traços elétricos, glow, ramificações e partículas que acompanham tronco, ombros e **cada braço independentemente**. A imagem da pessoa continua ao vivo. A amplitude de abertura e a velocidade normalizada dos braços controlam a intensidade de forma contínua. Se um braço levantar, sua energia muda sem obrigar o outro a fazer o mesmo.
+Construir o modo `AURA` com traços elétricos, glow, ramificações e partículas que acompanham tronco, ombros e **cada braço independentemente**. A imagem da pessoa continua ao vivo. A amplitude de abertura e a velocidade normalizada dos braços controlam a intensidade de forma contínua. Se um braço levantar, sua energia muda sem obrigar o outro a fazer o mesmo.
 
 **Invariantes:** nenhum contorno fixo em viewport, nenhum vídeo de relâmpago pronto, todos os segmentos precisam de pelo menos um ponto de pose válido recente; perda de pose deve levar a fade; espelhamento respeita #4; pose real vem de #5; GPU usa buffers compartilháveis sem alocação por frame; não exigir segmentação ou reconstrução corporal 3D perfeita.
 
 ## 2. Responsabilidade e arquivos
 
-\`\`\`text
+```text
 src/client/render/effects/AuraEffect.ts
 src/client/render/effects/aura-skeleton.ts
 src/client/render/effects/aura-geometry.ts
@@ -24,13 +24,13 @@ tests/unit/aura-skeleton.test.ts
 tests/unit/aura-intensity.test.ts
 tests/unit/aura-lines.test.ts
 tests/integration/aura-stage.test.ts
-\`\`\`
+```
 
-Reusar \`ResourceRegistry\`, \`RendererLifecycle\`, \`QualityProfiles\` e \`trackingStateMachine\`. Não criar componentes concorrentes de captura/MediaPipe.
+Reusar `ResourceRegistry`, `RendererLifecycle`, `QualityProfiles` e `trackingStateMachine`. Não criar componentes concorrentes de captura/MediaPipe.
 
 ## 3. Contratos de articulações e parâmetros
 
-\`\`\`pseudocode
+```pseudocode
 TIPO BodyJoints:
     leftShoulder: PointWithValidity
     rightShoulder: PointWithValidity
@@ -73,13 +73,13 @@ CONFIG:
     particleBudgets: HIGH=2200,MEDIUM=1100,COMPAT=250
     armSampleBudget: HIGH=32,MEDIUM=16,COMPAT=8
 FIM
-\`\`\`
+```
 
-Se MediaPipe não fornecer \`visibility\` para uma articulação, usar geometria plausível e resultados reais sem inventar \`0.99\`. Um score desconhecido é \`unknown\`, não \`high\`.
+Se MediaPipe não fornecer `visibility` para uma articulação, usar geometria plausível e resultados reais sem inventar `0.99`. Um score desconhecido é `unknown`, não `high`.
 
 ## 4. Algoritmo A-01 — extrair esqueleto real e pontos válidos
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO extrairJuntasPose(snapshot,geometry):
     SE snapshot.pose=null OU snapshot stale:
         RETORNAR {valid:false,reason:POSE_MISSING}
@@ -110,13 +110,13 @@ FUNÇÃO extrairJuntasPose(snapshot,geometry):
     NÃO invalidar braço direito só porque esquerdo faltou
     RETORNAR joints + flags sem misturar espelhamento nos rótulos
 FIM_FUNÇÃO
-\`\`\`
+```
 
-A distinção esquerda/direita anatômica pertence ao Pose Landmarker; o movimento na tela é determinado pelo mesmo mapeador de vídeo da #4. Não inverter \`LEFT\` e \`RIGHT\` duas vezes.
+A distinção esquerda/direita anatômica pertence ao Pose Landmarker; o movimento na tela é determinado pelo mesmo mapeador de vídeo da #4. Não inverter `LEFT` e `RIGHT` duas vezes.
 
 ## 5. Algoritmo A-02 — escala corporal e tronco
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO calcularBaseCorporal(joints):
     VALIDAR leftShoulder e rightShoulder
     shoulderWidth <- DIST(joints.leftShoulder,joints.rightShoulder)
@@ -136,13 +136,13 @@ FUNÇÃO calcularBaseCorporal(joints):
     RETORNAR {shoulderWidth,shoulderCenter,hipCenter,torsoCenter,
               torsoPath,torsoQuality}
 FIM_FUNÇÃO
-\`\`\`
+```
 
 Todas as medidas de movimento devem ser normalizadas pela largura do ombro (com piso de segurança), para pessoas distantes/próximas terem parâmetros coerentes.
 
 ## 6. Algoritmo A-03 — intensidade independente de cada braço
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO calcularIntensidadeBraco(side,joints,previous,now,scale):
     points <- shoulder,elbow,wrist do lado correspondente
     SE algum ponto inválido:
@@ -176,13 +176,13 @@ FUNÇÃO atualizarIntensidades(joints):
              MIN(left.intensity,right.intensity)*0.4
     RETORNAR {left,right,total:CLAMP(total,0,1)}
 FIM_FUNÇÃO
-\`\`\`
+```
 
-\`spreadAtRest\`, \`spreadAtMax\` e velocidade de referência são parâmetros de calibração (definidos por medições reais). O braço parado deve continuar com brilho mínimo, mas o movimento deve aumentar de forma observável.
+`spreadAtRest`, `spreadAtMax` e velocidade de referência são parâmetros de calibração (definidos por medições reais). O braço parado deve continuar com brilho mínimo, mas o movimento deve aumentar de forma observável.
 
 ## 7. Algoritmo A-04 — criar linhas elétricas ancoradas no esqueleto
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO gerarPolylineBraco(shoulder,elbow,wrist,nSamples):
     SE pontos inválidos: RETORNAR lista vazia
     interpolar trecho shoulder->elbow com nSamples/2 amostras
@@ -210,13 +210,13 @@ FUNÇÃO gerarTroncoEletrico(joints,scale):
     se hip inválido, somente traço de ombros/parte superior
     NUNCA renderizar contorno estático de corpo sem landmarks
 FIM_FUNÇÃO
-\`\`\`
+```
 
-A geometria pode ser construída como \`LineSegments\`, ribbons de triângulos ou shader. Prefira ribbons para controlar espessura na projeção; CPU pode atualizar buffer tipado pequeno, não milhares de objetos JS por quadro.
+A geometria pode ser construída como `LineSegments`, ribbons de triângulos ou shader. Prefira ribbons para controlar espessura na projeção; CPU pode atualizar buffer tipado pequeno, não milhares de objetos JS por quadro.
 
 ## 8. Algoritmo A-05 — ramificações, partículas e glow
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO criarRamosEletricos(side,polyline,intensity,quality):
     maxBranches <- config de perfil
     PARA branchId até maxBranches:
@@ -248,11 +248,11 @@ FUNÇÃO aplicarGlow():
     reduzir pós-processamento no perfil Compatibilidade
     não usar flash fullscreen repetitivo que comprometa leitura corporal
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 9. Algoritmo A-06 — update por frame e ausência parcial
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO AuraEffect.update(now,dt,snapshot):
     SE modo != AURA OU plugin desativado: ocultar e retornar
     joints <- extrairJuntasPose(snapshot,geometry)
@@ -284,13 +284,13 @@ FUNÇÃO AuraEffect.update(now,dt,snapshot):
     compor intensidade total para halo secundário
     escrever uniformes/buffers sem criar novos THREE objetos por frame
 FIM_FUNÇÃO
-\`\`\`
+```
 
 O usuário pode perder um punho do quadro: a aura desse braço desaparece, mas a outra parte continua funcional se tiver landmarks suficientes.
 
 ## 10. Algoritmo A-07 — presets e descarte
 
-\`\`\`pseudocode
+```pseudocode
 FUNÇÃO AuraEffect.applyQuality(profile):
     selecionar tamanho do pool:
         HIGH=2200; MEDIUM=1100; COMPAT=250 partículas
@@ -306,17 +306,17 @@ FUNÇÃO AuraEffect.dispose():
     liberar buffers/materiais/texturas exclusivos de AURA
     NÃO destruir renderer global, MediaPipe nem RTCPeerConnection
 FIM_FUNÇÃO
-\`\`\`
+```
 
 ## 11. Estados, falhas e concorrência
 
-\`\`\`text
+```text
 Pose real -> shoulder/arm joints -> transformação geométrica
      -> Torso: OFF/ACQUIRING/ACTIVE/LOST_GRACE/FADING
      -> LeftArm: OFF/ACQUIRING/ACTIVE/LOST_GRACE/FADING
      -> RightArm: OFF/ACQUIRING/ACTIVE/LOST_GRACE/FADING
      -> composição transparente em um único RendererLifecycle
-\`\`\`
+```
 
 | Condição | Comportamento |
 | --- | --- |
@@ -335,7 +335,7 @@ Pose real -> shoulder/arm joints -> transformação geométrica
 
 ## 12. Pseudocódigo de testes
 
-\`\`\`pseudocode
+```pseudocode
 SUITE AuraSkeleton:
     extrair índices 11,12,13,14,15,16,23,24 corretamente
     visibility < threshold invalida só junta afetada
@@ -381,7 +381,7 @@ SUITE Física (não simular aprovação):
     operar por 2 minutos, medir FPS real
     registrar hardware, iluminação e evidências ou marcar pendente
 FIM_SUITE
-\`\`\`
+```
 
 ## 13. Aceite e negative prompt
 
