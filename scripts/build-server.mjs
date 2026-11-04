@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
+import ts from 'typescript';
 import { dirname, extname, join, relative, resolve } from 'node:path';
 
-const require = createRequire(import.meta.url);
-const babel = require('/usr/share/nodejs/@babel/core');
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), '..');
 
 function rewriteImports(code, fileDir) {
@@ -48,18 +46,15 @@ export function compileTree(srcRoot, outRoot) {
         const dest = join(outRoot, rel);
         mkdirSync(dirname(dest), { recursive: true });
         const raw = readFileSync(full, 'utf8');
-        const presets = [
-          ['/usr/share/nodejs/@babel/preset-typescript', { isTSX: full.endsWith('.tsx'), allExtensions: true }],
-        ];
-        if (full.endsWith('.tsx')) {
-          presets.push(['/usr/share/nodejs/@babel/preset-react', { runtime: 'automatic' }]);
-        }
-        const transformed = babel.transformSync(raw, {
-          filename: full,
-          presets,
-          sourceMaps: false,
+        const transformed = ts.transpileModule(raw, {
+          fileName: full,
+          compilerOptions: {
+            target: ts.ScriptTarget.ES2022,
+            module: ts.ModuleKind.ESNext,
+            jsx: ts.JsxEmit.ReactJSX,
+          },
         });
-        const finalCode = rewriteImports(transformed.code || '', dirname(full));
+        const finalCode = rewriteImports(transformed.outputText || '', dirname(full));
         writeFileSync(dest, finalCode, 'utf8');
       }
     }

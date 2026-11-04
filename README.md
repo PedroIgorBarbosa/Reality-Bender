@@ -36,8 +36,8 @@ src/
 ## Comandos Principais
 
 ```bash
-# Instalar dependências inicialmente (o pacote ainda não inclui lockfile)
-npm install
+# Instalar dependências
+npm ci
 
 # Validar tipos TypeScript e imports
 npm run typecheck

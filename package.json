@@ -7,17 +7,17 @@
     "node": ">=18.18.0"
   },
   "scripts": {
-    "dev": "node scripts/dev.mjs",
+    "dev": "concurrently --kill-others -n server,web \"npm run dev:server\" \"npm run dev:web\"",
     "dev:web": "vite --host 127.0.0.1",
     "dev:server": "tsx watch src/server/index.ts",
     "build": "npm run build:web && npm run build:server",
-    "build:web": "node scripts/build-web.mjs",
+    "build:web": "vite build",
     "build:server": "node scripts/build-server.mjs",
     "start": "node dist/server/server/index.js",
     "typecheck": "node scripts/typecheck.mjs",
     "lint": "node scripts/lint.mjs",
-    "test": "node scripts/run-tests.mjs",
-    "test:watch": "node scripts/run-tests.mjs --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "smoke:server": "node scripts/smoke-server.mjs",
     "homologate": "node scripts/homologation-runner.mjs",
     "https:setup": "node scripts/setup-https-dev.mjs"

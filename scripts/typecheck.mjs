@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { createRequire } from 'node:module';
+import ts from 'typescript';
 import { dirname, extname, join, resolve } from 'node:path';
 
-const require = createRequire(import.meta.url);
-const parser = require('/usr/share/nodejs/@babel/parser');
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), '..');
 
 function collectFiles(dir, out = []) {
@@ -50,16 +48,20 @@ for (const file of files) {
   const code = readFileSync(file, 'utf8');
   const isTsx = file.endsWith('.tsx');
   try {
-    const ast = parser.parse(code, {
-      sourceType: 'module',
-      plugins: isTsx ? ['typescript', 'jsx'] : ['typescript'],
-    });
-    for (const node of ast.program.body) {
-      if (node.type === 'ImportDeclaration' || (node.type === 'ExportNamedDeclaration' && node.source) || node.type === 'ExportAllDeclaration') {
-        const spec = node.source?.value;
-        if (typeof spec === 'string' && !resolveImportPath(file, spec)) {
-          errors.push(`${file}: import não resolvido "${spec}"`);
-        }
+    const ast = ts.createSourceFile(
+      file, code, ts.ScriptTarget.Latest, true,
+      isTsx ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
+    );
+    if (ast.parseDiagnostics.length > 0) {
+      throw new Error(ast.parseDiagnostics.map((diagnostic) =>
+        ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')).join('; '));
+    }
+    for (const node of ast.statements) {
+      const declaration = ts.isImportDeclaration(node) || ts.isExportDeclaration(node);
+      if (!declaration || !node.moduleSpecifier || !ts.isStringLiteral(node.moduleSpecifier)) continue;
+      const spec = node.moduleSpecifier.text;
+      if (typeof spec === 'string' && !resolveImportPath(file, spec)) {
+        errors.push(`${file}: import não resolvido "${spec}"`);
       }
     }
   } catch (err) {
