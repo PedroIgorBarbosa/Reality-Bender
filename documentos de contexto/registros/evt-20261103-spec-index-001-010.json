@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-index-001-010",
+  "recordedAt": "2026-11-04T00:06:45.556Z",
+  "agent": "ChatGPT",
+  "intent": "Indexar especificações das issues #1 a #10",
+  "summary": "Criação de índice técnico das especificações de todas as issues e link na visão inicial do repositório.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/INDEX.md",
+      "change": "created",
+      "summary": "Indexa 10 especificações, dependências e contratos compartilhados para descoberta seletiva.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "governed_by",
+          "reason": "ERS define requisitos de produto superiores às especificações."
+        },
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #1."
+        },
+        {
+          "to": "docs/specs/ISSUE-002-SESSOES-PAREAMENTO-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #2."
+        },
+        {
+          "to": "docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #3."
+        },
+        {
+          "to": "docs/specs/ISSUE-004-PROJECAO-GEOMETRIA-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #4."
+        },
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #5."
+        },
+        {
+          "to": "docs/specs/ISSUE-006-ESFERA-ENERGIA-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #6."
+        },
+        {
+          "to": "docs/specs/ISSUE-007-PORTAL-DIMENSIONAL-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #7."
+        },
+        {
+          "to": "docs/specs/ISSUE-008-AURA-ELETRICA-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #8."
+        },
+        {
+          "to": "docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #9."
+        },
+        {
+          "to": "docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Consulta técnica da issue #10."
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "summary": "Adiciona acesso ao índice das especificações completas.",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Expõe ponto de entrada único às especificações em pseudocódigo."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Alteração documental; a aplicação não foi executada."
+    }
+  ]
+}

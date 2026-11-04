@@ -14,6 +14,7 @@ Este repositório contém a **especificação de requisitos** e a infraestrutura
 
 - [`docs/REALITY_BENDER_ERS_v1.0.md`](docs/REALITY_BENDER_ERS_v1.0.md) — requisitos funcionais, não funcionais, contratos, estados, cenários de teste, plano de dois dias e condições de aceite.
 - [`AGENTS.md`](AGENTS.md) — instruções para agentes de desenvolvimento e protocolo obrigatório de memória.
+- [`docs/specs/INDEX.md`](docs/specs/INDEX.md) — índice das 10 especificações detalhadas em pseudocódigo, dependências e contratos compartilhados.
 - [`docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md`](docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md) — contrato de implementação da fundação do projeto (issue #1).
 - [`documentos de contexto/graph-record.schema.json`](documentos%20de%20contexto/graph-record.schema.json) — contrato JSON dos eventos de conhecimento.
 
