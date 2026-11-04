@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-009-010-resilience-homologation",
+  "recordedAt": "2026-11-04T01:51:31.053Z",
+  "agent": "Gemini-Argon",
+  "intent": "ISSUE-009, ISSUE-010 / RF-21 a RF-26, CT-010-1 a CT-010-7",
+  "summary": "Implementados diagnósticos em tempo real, detecção de congelamento de vídeo, integração completa em /stage e /control, matriz de homologação e roteiro HTTPS",
+  "status": "done",
+  "files": [
+    {
+      "path": "src/shared/diagnostics/metrics.ts",
+      "change": "created",
+      "summary": "Cálculo de FPS de render/vídeo, percentis P50/P95 de inferência e detecção de vídeo congelado em 3s",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-24 e RF-25"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/homologation/homologation-matrix.ts",
+      "change": "created",
+      "summary": "Matriz de homologação CT-010-1..CT-010-7, evidências e análise estatística de regressão",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa CT-010-1 a CT-010-7"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/DiagnosticsHud.tsx",
+      "change": "created",
+      "summary": "Overlay HUD de diagnóstico operacional em tempo real na /stage",
+      "links": [
+        {
+          "to": "src/shared/diagnostics/metrics.ts",
+          "type": "uses",
+          "reason": "Exibe métricas em tempo real"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/StagePage.tsx",
+      "change": "created",
+      "summary": "Tela /stage integrada com QR Code, receptor WebRTC, MediaPipe, efeitos 3D, atalhos e HUD",
+      "links": [
+        {
+          "to": "src/client/effects/effect-plugin.ts",
+          "type": "uses",
+          "reason": "Integra recepção WebRTC, MediaPipe e efeitos 3D no palco"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/ControlPage.tsx",
+      "change": "created",
+      "summary": "Tela /control integrada com pareamento PIN/QR, captura de câmera, emissor WebRTC e comandos com ACK",
+      "links": [
+        {
+          "to": "src/client/services/camera-capture.ts",
+          "type": "uses",
+          "reason": "Integra câmera móvel, WebRTC e comandos remotos com ACK"
+        }
+      ]
+    },
+    {
+      "path": "scripts/smoke-server.mjs",
+      "change": "created",
+      "summary": "Smoke test automatizado do servidor de produção compilado",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "tests",
+          "reason": "Homologa build de produção em execução real"
+        }
+      ]
+    },
+    {
+      "path": "scripts/setup-https-dev.mjs",
+      "change": "created",
+      "summary": "Gerador de instruções e estrutura HTTPS/WSS para câmera móvel",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Prepara setup HTTPS móvel"
+        }
+      ]
+    },
+    {
+      "path": "scripts/homologation-runner.mjs",
+      "change": "created",
+      "summary": "Executor da matriz de homologação e gerador de docs/HOMOLOGATION_REPORT.json",
+      "links": [
+        {
+          "to": "src/shared/homologation/homologation-matrix.ts",
+          "type": "uses",
+          "reason": "Gera relatório de homologação verificável"
+        }
+      ]
+    },
+    {
+      "path": "docs/OPERACAO_E_HOMOLOGACAO.md",
+      "change": "created",
+      "summary": "Manual completo de operação, configuração HTTPS e matriz de homologação",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "documents",
+          "reason": "Documenta operação e resultados CT-010-1..CT-010-7"
+        }
+      ]
+    },
+    {
+      "path": "docs/HOMOLOGATION_REPORT.json",
+      "change": "created",
+      "summary": "Relatório JSON estruturado de homologação dos casos de teste",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-010-HOMOLOGACAO-PSEUDOCODIGO.md",
+          "type": "references",
+          "reason": "Registra status PASS/BLOCKED reais"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "summary": "Atualizado com arquitetura completa, scripts e instruções de operação",
+      "links": [
+        {
+          "to": "docs/OPERACAO_E_HOMOLOGACAO.md",
+          "type": "documents",
+          "reason": "Apresenta guia rápido e referência ao manual operacional"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/diagnostics-resilience.test.ts",
+      "change": "created",
+      "summary": "Testes unitários de métricas de diagnóstico, detecção de congelamento e matriz de homologação",
+      "links": [
+        {
+          "to": "src/shared/diagnostics/metrics.ts",
+          "type": "tests",
+          "reason": "Comprova cálculo de FPS, P50/P95 e freeze detection"
+        }
+      ]
+    },
+    {
+      "path": "tests/ui/routes.test.tsx",
+      "change": "created",
+      "summary": "Testes de renderização de StagePage, ControlPage, NotFoundPage, ConnectionStatus e DiagnosticsHud",
+      "links": [
+        {
+          "to": "src/client/routes/StagePage.tsx",
+          "type": "tests",
+          "reason": "Comprova renderização das telas sem estados falsos"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "status": "passed",
+      "notes": "43 arquivos verificados sem erros"
+    },
+    {
+      "command": "npm run lint",
+      "status": "passed",
+      "notes": "54 arquivos inspecionados sem violações"
+    },
+    {
+      "command": "npm test",
+      "status": "passed",
+      "notes": "34 testes aprovados em 11 suítes"
+    },
+    {
+      "command": "npm run build",
+      "status": "passed",
+      "notes": "Builds dist/client e dist/server gerados com sucesso"
+    },
+    {
+      "command": "npm run smoke:server",
+      "status": "passed",
+      "notes": "Smoke test HTTP + Socket.IO em produção aprovado"
+    }
+  ]
+}

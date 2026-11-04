@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-001-foundation",
+  "recordedAt": "2026-11-04T01:51:30.434Z",
+  "agent": "Gemini-Argon",
+  "intent": "ISSUE-001 / RF-01, RF-23, RF-24",
+  "summary": "Implementada fundação executável cliente/servidor, validação de ambiente parseServerConfig, rota /api/health e handshake Socket.IO",
+  "status": "done",
+  "files": [
+    {
+      "path": "package.json",
+      "change": "created",
+      "summary": "Scripts reproduzíveis de dev, build, test, lint, typecheck, smoke e homologate",
+      "links": [
+        {
+          "to": "src/server/index.ts",
+          "type": "configures",
+          "reason": "Define scripts de build e inicialização"
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.json",
+      "change": "created",
+      "summary": "Configuração TypeScript em modo estrito",
+      "links": [
+        {
+          "to": "src/shared/contracts/system-events.ts",
+          "type": "configures",
+          "reason": "Habilita strict mode"
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.app.json",
+      "change": "created",
+      "summary": "Configuração TypeScript do cliente React",
+      "links": [
+        {
+          "to": "src/client/App.tsx",
+          "type": "configures",
+          "reason": "Configura compilação do cliente"
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.node.json",
+      "change": "created",
+      "summary": "Configuração TypeScript do servidor Node",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "configures",
+          "reason": "Configura compilação do servidor"
+        }
+      ]
+    },
+    {
+      "path": "vite.config.ts",
+      "change": "created",
+      "summary": "Configuração do Vite para /stage e /control",
+      "links": [
+        {
+          "to": "src/client/main.tsx",
+          "type": "configures",
+          "reason": "Configura bundle do cliente"
+        }
+      ]
+    },
+    {
+      "path": "vitest.config.ts",
+      "change": "created",
+      "summary": "Configuração de testes Vitest",
+      "links": [
+        {
+          "to": "tests/unit/env.test.ts",
+          "type": "configures",
+          "reason": "Configura runner de testes"
+        }
+      ]
+    },
+    {
+      "path": "eslint.config.js",
+      "change": "created",
+      "summary": "Configuração de lint estático",
+      "links": [
+        {
+          "to": "scripts/lint.mjs",
+          "type": "configures",
+          "reason": "Define escopo de lint"
+        }
+      ]
+    },
+    {
+      "path": "index.html",
+      "change": "created",
+      "summary": "Entrada HTML da aplicação SPA",
+      "links": [
+        {
+          "to": "src/client/main.tsx",
+          "type": "renders",
+          "reason": "Carrega ponto de entrada React"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "created",
+      "summary": "Pipeline de integração contínua",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "invokes",
+          "reason": "Executa scripts de CI"
+        }
+      ]
+    },
+    {
+      "path": "scripts/typecheck.mjs",
+      "change": "created",
+      "summary": "Verificador de sintaxe e tipos TypeScript e resolução de imports",
+      "links": [
+        {
+          "to": "tsconfig.json",
+          "type": "tests",
+          "reason": "Valida todos os módulos TS/TSX"
+        }
+      ]
+    },
+    {
+      "path": "scripts/lint.mjs",
+      "change": "created",
+      "summary": "Verificador de lint estático do projeto",
+      "links": [
+        {
+          "to": "eslint.config.js",
+          "type": "tests",
+          "reason": "Executa inspeção estática"
+        }
+      ]
+    },
+    {
+      "path": "scripts/build-server.mjs",
+      "change": "created",
+      "summary": "Compilador do servidor TypeScript para dist/server",
+      "links": [
+        {
+          "to": "src/server/index.ts",
+          "type": "uses",
+          "reason": "Compila servidor para produção"
+        }
+      ]
+    },
+    {
+      "path": "scripts/build-web.mjs",
+      "change": "created",
+      "summary": "Compilador do cliente React para dist/client",
+      "links": [
+        {
+          "to": "src/client/main.tsx",
+          "type": "uses",
+          "reason": "Compila frontend para produção"
+        }
+      ]
+    },
+    {
+      "path": "scripts/run-tests.mjs",
+      "change": "created",
+      "summary": "Executor de suíte de testes unitários, integração e UI",
+      "links": [
+        {
+          "to": "tests/unit/env.test.ts",
+          "type": "invokes",
+          "reason": "Executa suíte automatizada"
+        }
+      ]
+    },
+    {
+      "path": "scripts/dev.mjs",
+      "change": "created",
+      "summary": "Script de execução em modo desenvolvimento",
+      "links": [
+        {
+          "to": "src/server/index.ts",
+          "type": "invokes",
+          "reason": "Inicia ambiente de desenvolvimento"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/contracts/system-events.ts",
+      "change": "created",
+      "summary": "Contratos tipados de eventos Socket.IO e estados de sessão",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Define eventos canônicos de sinalização"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/types/connection-state.ts",
+      "change": "created",
+      "summary": "Máquina de estados de conexão cliente-servidor",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa máquina de estados de conexão"
+        }
+      ]
+    },
+    {
+      "path": "src/server/config/env.ts",
+      "change": "created",
+      "summary": "Módulo parseServerConfig com validação estrita de HOST, PORT, CLIENT_ORIGINS e PUBLIC_BASE_URL",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Valida variáveis de ambiente do servidor"
+        }
+      ]
+    },
+    {
+      "path": "src/server/routes/health.ts",
+      "change": "created",
+      "summary": "Endpoint GET /api/health",
+      "links": [
+        {
+          "to": "src/shared/contracts/system-events.ts",
+          "type": "uses",
+          "reason": "Retorna versão de protocolo em /api/health"
+        }
+      ]
+    },
+    {
+      "path": "src/server/app.ts",
+      "change": "created",
+      "summary": "Aplicação HTTP Express com cabeçalhos de segurança e fallback SPA",
+      "links": [
+        {
+          "to": "src/server/routes/health.ts",
+          "type": "uses",
+          "reason": "Registra rota de saúde e cabeçalhos seguros"
+        }
+      ]
+    },
+    {
+      "path": "src/server/index.ts",
+      "change": "created",
+      "summary": "Inicialização do servidor HTTP/Socket.IO e graceful shutdown",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "uses",
+          "reason": "Inicializa servidor HTTP e sinais de encerramento"
+        }
+      ]
+    },
+    {
+      "path": "src/client/realtime/create-system-client.ts",
+      "change": "created",
+      "summary": "Fábrica tipada do cliente Socket.IO",
+      "links": [
+        {
+          "to": "src/shared/contracts/system-events.ts",
+          "type": "uses",
+          "reason": "Instancia cliente Socket.IO tipado"
+        }
+      ]
+    },
+    {
+      "path": "src/client/hooks/use-system-connection.ts",
+      "change": "created",
+      "summary": "Hook React de conexão com verificação de handshake e medição RTT",
+      "links": [
+        {
+          "to": "src/shared/types/connection-state.ts",
+          "type": "uses",
+          "reason": "Gerencia ciclo de vida do handshake"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/AppErrorBoundary.tsx",
+      "change": "created",
+      "summary": "ErrorBoundary global da interface React",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Trata falhas de renderização na UI"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/ConnectionStatus.tsx",
+      "change": "created",
+      "summary": "Indicador visual de estado da conexão",
+      "links": [
+        {
+          "to": "src/shared/types/connection-state.ts",
+          "type": "uses",
+          "reason": "Exibe fase atual da conexão"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/NotFoundPage.tsx",
+      "change": "created",
+      "summary": "Página 404 com links para /stage e /control",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Exibe rota 404 amigável"
+        }
+      ]
+    },
+    {
+      "path": "src/client/App.tsx",
+      "change": "created",
+      "summary": "Roteador principal para /stage e /control",
+      "links": [
+        {
+          "to": "src/client/components/AppErrorBoundary.tsx",
+          "type": "uses",
+          "reason": "Envolve rotas /stage e /control"
+        }
+      ]
+    },
+    {
+      "path": "src/client/main.tsx",
+      "change": "created",
+      "summary": "Ponto de entrada React no DOM",
+      "links": [
+        {
+          "to": "src/client/App.tsx",
+          "type": "uses",
+          "reason": "Monta aplicação React"
+        }
+      ]
+    },
+    {
+      "path": "src/client/styles/global.css",
+      "change": "created",
+      "summary": "Estilos globais do palco e controle móvel",
+      "links": [
+        {
+          "to": "src/client/App.tsx",
+          "type": "renders",
+          "reason": "Define layout visual"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/env.test.ts",
+      "change": "created",
+      "summary": "Testes unitários de parseServerConfig e ConfigurationError",
+      "links": [
+        {
+          "to": "src/server/config/env.ts",
+          "type": "tests",
+          "reason": "Verifica entradas válidas e inválidas de ambiente"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/connection-state.test.ts",
+      "change": "created",
+      "summary": "Testes unitários de reduceConnectionState",
+      "links": [
+        {
+          "to": "src/shared/types/connection-state.ts",
+          "type": "tests",
+          "reason": "Verifica transições de estado"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/health.test.ts",
+      "change": "created",
+      "summary": "Testes de integração de /api/health e segurança HTTP",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "tests",
+          "reason": "Verifica HTTP 200 /api/health e 404"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "status": "passed",
+      "notes": "43 arquivos verificados sem erros"
+    },
+    {
+      "command": "npm test",
+      "status": "passed",
+      "notes": "Testes unitários e de integração da Issue #1 aprovados"
+    }
+  ]
+}

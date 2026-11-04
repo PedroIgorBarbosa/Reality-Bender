@@ -1,0 +1,885 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261104-import-drive-complete",
+  "recordedAt": "2026-11-04T17:11:21.854Z",
+  "agent": "ChatGPT",
+  "intent": "Integrar pacote de implementação do Google Drive ao Reality-Bender preservando documentos existentes e abrindo PR para main",
+  "summary": "Pacote ZIP e bundle Git originais preservados e código, testes, documentação e grafo consolidado importados; arquivos de especificação anteriores foram mantidos; testes físicos e CI ainda não verificados. O registro de importação não indexa arquivos do próprio diretório de eventos, conforme contrato da ferramenta.",
+  "status": "partial",
+  "files": [
+    {
+      "path": ".env.example",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": ".nvmrc",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "summary": "Atualizado README com operação do código e preservadas orientações do grafo",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "docs/HOMOLOGATION_REPORT.json",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "docs/OPERACAO_E_HOMOLOGACAO.md",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "eslint.config.js",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "index.html",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "package.json",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/build-server.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/build-web.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/dev.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/homologation-runner.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/lint.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/run-tests.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/setup-https-dev.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/smoke-server.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "scripts/typecheck.mjs",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/App.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/AppErrorBoundary.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/ConnectionStatus.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/components/DiagnosticsHud.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/effects/dimensional-portal.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/effects/effect-plugin.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/effects/electric-aura.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/effects/energy-sphere.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/hooks/use-system-connection.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/main.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/realtime/create-system-client.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/realtime/webrtc-peer.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/ControlPage.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/NotFoundPage.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/routes/StagePage.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/services/camera-capture.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/styles/global.css",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/client/tracking/mediapipe-tracker.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/server/app.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/server/config/env.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/server/index.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/server/realtime/session-manager.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/server/realtime/system-socket.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/server/routes/health.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/contracts/system-events.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/diagnostics/metrics.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/geometry/projection-geometry.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/homologation/homologation-matrix.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/pairing/qr-matrix.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/tracking/calibration-state.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/tracking/gesture-engine.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/tracking/smoothing-filter.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/types/connection-state.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/health.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/socket.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/ui/routes.test.tsx",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/connection-state.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/diagnostics-resilience.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/effects-3d.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/env.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/gesture-engine.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/projection-geometry.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/session-manager.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/webrtc-peer.test.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/specs/INDEX.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.app.json",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.json",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.node.json",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "vite.config.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "vitest.config.ts",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "documentos de contexto/CONSOLIDATED_CONTEXT_GRAPH.json",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "documentos de contexto/graph-record.schema.json",
+          "type": "references",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "artifacts/drive-2026-11-04/ORIGEM.md",
+      "change": "created",
+      "summary": "Importado conteúdo do pacote de implementação recebido do Google Drive",
+      "links": [
+        {
+          "to": "README.md",
+          "type": "documents",
+          "reason": "Mantém rastreabilidade entre a importação, as especificações e a estrutura já existente do repositório"
+        }
+      ]
+    },
+    {
+      "path": "artifacts/drive-2026-11-04/reality-bender-complete-repo.zip",
+      "change": "created",
+      "summary": "Preservado o arquivo ZIP original do Google Drive",
+      "links": [
+        {
+          "to": "README.md",
+          "type": "documents",
+          "reason": "Mantém a versão original do pacote que fundamentou a importação"
+        }
+      ]
+    },
+    {
+      "path": "artifacts/drive-2026-11-04/reality-bender-complete.bundle",
+      "change": "created",
+      "summary": "Importado bundle Git original do Drive, com bytes preservados",
+      "links": [
+        {
+          "to": "artifacts/drive-2026-11-04/reality-bender-complete-repo.zip",
+          "type": "relates_to",
+          "reason": "Ambos representam a versão-fonte do projeto entregue no Drive"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "Descompactação e conferência estrutural do pacote ZIP",
+      "status": "passed",
+      "notes": "93 arquivos completos, totalizando 313686 bytes descompactados"
+    },
+    {
+      "command": "node scripts/context-graph.mjs validate (sobre pacote ZIP isolado)",
+      "status": "passed",
+      "notes": "8 registros válidos no pacote-fonte; importação em branch ainda requer CI"
+    },
+    {
+      "command": "node --test tests/context-graph.test.mjs (sobre pacote ZIP isolado)",
+      "status": "passed",
+      "notes": "5 testes aprovados no pacote-fonte, antes da integração com main"
+    },
+    {
+      "command": "npm ci; npm test; npm run build; teste físico smartphone/data-show",
+      "status": "not_run",
+      "notes": "A fonte não contém package-lock.json; testes de instalação, build e hardware pendentes"
+    }
+  ]
+}

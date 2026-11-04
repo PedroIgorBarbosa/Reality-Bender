@@ -1,0 +1,228 @@
+{
+  "generatedAt": "2026-11-04T01:49:32.125Z",
+  "regressionPassed": true,
+  "simulatedPipelineMetrics": {
+    "note": "Métricas de pipeline em ambiente de teste automatizado (latência física mão-projeção = NOT_MEASURED)",
+    "fpsStats": {
+      "mean": 59.23,
+      "min": 57.9,
+      "max": 60,
+      "p50": 59.8
+    },
+    "inferenceLatencyMsStats": {
+      "mean": 10.18,
+      "p50": 9.8,
+      "p95": 12.1,
+      "max": 12.1
+    }
+  },
+  "matrix": [
+    {
+      "id": "CT-010-1",
+      "requirementIds": [
+        "RF-01",
+        "RF-02",
+        "RF-03",
+        "RF-06",
+        "RNF-08",
+        "RNF-09"
+      ],
+      "title": "Isolamento de Sessão, Token de 128+ bits e Proteção contra Intrusão",
+      "requiresPhysicalHardware": false,
+      "status": "PASS",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm test"
+      ],
+      "observedResult": "Sessões efêmeras, token de 192 bits, expiração TTL de 5 min e rejeição de intruso sem expulsar celular ativo verificados em suíte automatizada.",
+      "expectedResult": "Tokens inválidos, expirados ou segundo celular concorrente são recusados sem desconectar o emissor ativo.",
+      "artifacts": [
+        "tests/unit/session-manager.test.ts",
+        "tests/integration/socket.test.ts"
+      ],
+      "blockerReason": null,
+      "notes": ""
+    },
+    {
+      "id": "CT-010-2",
+      "requirementIds": [
+        "RF-04",
+        "RF-05",
+        "RF-08",
+        "RF-09",
+        "RNF-07"
+      ],
+      "title": "Transporte WebRTC P2P, Fila de Candidatos ICE e Reconexão",
+      "requiresPhysicalHardware": false,
+      "status": "PASS",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm test"
+      ],
+      "observedResult": "Negociação SDP offer/answer, fila de candidatos ICE antes de remoteDescription e reconexão ICE restart verificados em suíte automatizada.",
+      "expectedResult": "Oferta/Resposta SDP e candidatos ICE enfileirados antes de remoteDescription são aplicados na ordem correta; reconexão ICE restart opera sem fechar abas.",
+      "artifacts": [
+        "tests/unit/webrtc-peer.test.ts"
+      ],
+      "blockerReason": null,
+      "notes": ""
+    },
+    {
+      "id": "CT-010-3",
+      "requirementIds": [
+        "RF-10",
+        "RF-11",
+        "RF-22",
+        "RF-23"
+      ],
+      "title": "Mapeamento Geométrico Retrato/Paisagem e Espelhamento (videoNormalizedToStage)",
+      "requiresPhysicalHardware": false,
+      "status": "PASS",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm test"
+      ],
+      "observedResult": "Transformação canônica videoNormalizedToStage testada para retrato (720x1280), paisagem (1280x720), contain/cover e espelhamento.",
+      "expectedResult": "Transformação 0..1 -> CSS/NDC preserva letterbox/pillarbox em contain/cover e espelha eixo X corretamente.",
+      "artifacts": [
+        "tests/unit/projection-geometry.test.ts"
+      ],
+      "blockerReason": null,
+      "notes": ""
+    },
+    {
+      "id": "CT-010-4",
+      "requirementIds": [
+        "RF-12",
+        "RF-14",
+        "RF-15",
+        "RF-16",
+        "RNF-04"
+      ],
+      "title": "Fila de Inferência MediaPipe, Backpressure e Suavização OneEuroFilter",
+      "requiresPhysicalHardware": false,
+      "status": "PASS",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm test"
+      ],
+      "observedResult": "Backpressure de 1 quadro em voo no MediaPipe Hands/Pose, suavização OneEuroFilter e máquina de estados de calibração aprovados.",
+      "expectedResult": "Quadros concorrentes ou fora de ordem são descartados por backpressure sem acumular fila; gestos e calibração convergem deterministicamente.",
+      "artifacts": [
+        "tests/unit/gesture-engine.test.ts"
+      ],
+      "blockerReason": null,
+      "notes": ""
+    },
+    {
+      "id": "CT-010-5",
+      "requirementIds": [
+        "RF-17",
+        "RF-18",
+        "RF-19",
+        "RF-20"
+      ],
+      "title": "Reatividade e Fidelidade dos Efeitos 3D (Esfera, Portal e Aura Elétrica)",
+      "requiresPhysicalHardware": false,
+      "status": "PASS",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm test"
+      ],
+      "observedResult": "Plugins Three.js ENERGY (duas mãos), PORTAL (abertura/orientação/círculo) e AURA (raios fractais no tronco/braços) validados.",
+      "expectedResult": "Esfera responde à distância entre duas mãos, Portal responde à abertura/orientação/círculo e Aura gera raios procedurais ancorados à silhueta.",
+      "artifacts": [
+        "tests/unit/effects-3d.test.ts"
+      ],
+      "blockerReason": null,
+      "notes": ""
+    },
+    {
+      "id": "CT-010-6",
+      "requirementIds": [
+        "RF-24",
+        "RF-25",
+        "RNF-15"
+      ],
+      "title": "Detecção de Congelamento de Vídeo (< 3s) e Métricas de Diagnóstico P50/P95",
+      "requiresPhysicalHardware": false,
+      "status": "PASS",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm test"
+      ],
+      "observedResult": "Detecção de congelamento de vídeo em 3000ms e cálculo exato de FPS e P50/P95 sem confundir RTT com latência física aprovados.",
+      "expectedResult": "Ausência de quadros por >= 3000ms sinaliza congelamento; P50/P95 e FPS são calculados sem confundir RTT com latência física.",
+      "artifacts": [
+        "tests/unit/diagnostics-resilience.test.ts"
+      ],
+      "blockerReason": null,
+      "notes": ""
+    },
+    {
+      "id": "CT-010-7",
+      "requirementIds": [
+        "RF-26",
+        "RNF-12",
+        "RNF-20"
+      ],
+      "title": "Encerramento Limpo e Desalocação de Recursos (Tracks, Peers, Sockets e GPU)",
+      "requiresPhysicalHardware": false,
+      "status": "PASS",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm test"
+      ],
+      "observedResult": "Descarte determinístico de MediaStreamTrack, RTCPeerConnection, Socket.IO e geometria/materiais WebGL validado.",
+      "expectedResult": "MediaStreamTrack.stop(), RTCPeerConnection.close() e BufferGeometry/Material.dispose() executam integralmente no teardown.",
+      "artifacts": [
+        "tests/unit/effects-3d.test.ts",
+        "tests/unit/webrtc-peer.test.ts"
+      ],
+      "blockerReason": null,
+      "notes": ""
+    },
+    {
+      "id": "CT-018-PHYSICAL",
+      "requirementIds": [
+        "RF-04",
+        "RF-08",
+        "RF-10",
+        "RNF-01",
+        "RNF-02"
+      ],
+      "title": "Homologação Física em Campo (Smartphone Real + Wi-Fi + Projetor/Data-Show)",
+      "requiresPhysicalHardware": true,
+      "status": "BLOCKED",
+      "environment": "Node v18.20.4 (linux/x64)",
+      "executedAt": "2026-11-04T01:49:32.125Z",
+      "operator": "Gemini-Argon",
+      "commands": [
+        "npm run https:setup",
+        "npm run build",
+        "npm start"
+      ],
+      "observedResult": "Testes automatizados e servidor de produção homologados; validação física com câmera de smartphone real e projetor externo requer execução presencial em campo.",
+      "expectedResult": "Câmera física do celular transmitindo a >= 24 FPS para o projetor com latência mão-projeção medida em hardware.",
+      "artifacts": [
+        "docs/OPERACAO_E_HOMOLOGACAO.md"
+      ],
+      "blockerReason": "Ambiente de execução automatizado sem smartphone físico e projetor conectados fisicamente.",
+      "notes": "Roteiro operacional completo disponível em docs/OPERACAO_E_HOMOLOGACAO.md."
+    }
+  ]
+}

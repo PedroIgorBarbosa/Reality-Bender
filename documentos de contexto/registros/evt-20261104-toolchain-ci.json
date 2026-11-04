@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261104-toolchain-ci",
+  "recordedAt": "2026-11-04T17:22:31.061Z",
+  "agent": "ChatGPT",
+  "intent": "Corrigir execução reproduzível do código recebido do Drive em GitHub Actions",
+  "summary": "Gerado package-lock.json a partir de npm install no GitHub Actions, removido acoplamento a bibliotecas Babel do host e integrados runner Vitest e build Vite existentes",
+  "status": "partial",
+  "files": [
+    {
+      "path": "package-lock.json",
+      "change": "created",
+      "summary": "Lockfile v3 para npm ci baseado nas dependências originais do pacote",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "configures",
+          "reason": "Define resoluções exatas das dependências declaradas"
+        }
+      ]
+    },
+    {
+      "path": "package.json",
+      "change": "modified",
+      "summary": "Usa npm scripts de desenvolvimento conjunto, vitest e vite",
+      "links": [
+        {
+          "to": "vite.config.ts",
+          "type": "uses",
+          "reason": "Usa Vite para build do frontend"
+        }
+      ]
+    },
+    {
+      "path": "scripts/build-server.mjs",
+      "change": "modified",
+      "summary": "Compila TypeScript usando dependência instalada localmente, sem diretórios absolutos do runner",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "uses",
+          "reason": "Consome dependência typescript declarada no projeto"
+        }
+      ]
+    },
+    {
+      "path": "scripts/typecheck.mjs",
+      "change": "modified",
+      "summary": "Análise sintática e verificação de imports via parser TypeScript local",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "uses",
+          "reason": "Consome typescript já instalado no projeto"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "modified",
+      "summary": "Retorna para npm ci agora com lockfile presente",
+      "links": [
+        {
+          "to": "package-lock.json",
+          "type": "uses",
+          "reason": "Instala dependências de forma reproduzível"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "summary": "Comando de instalação npm ci ajustado",
+      "links": [
+        {
+          "to": "package-lock.json",
+          "type": "references",
+          "reason": "A instalação reproduzível agora dispõe de lockfile"
+        }
+      ]
+    },
+    {
+      "path": "index.html",
+      "change": "modified",
+      "summary": "Remove link CSS avulso incompatível com fluxo de build Vite",
+      "links": [
+        {
+          "to": "src/client/main.tsx",
+          "type": "references",
+          "reason": "O frontend carrega estilos importados pelo entrypoint"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm install no GitHub Actions para gerar lockfile",
+      "status": "passed",
+      "notes": "Lockfile de 464 packages registrado na execução intermediária"
+    },
+    {
+      "command": "npm ci, vitest, build e smoke no commit corrigido",
+      "status": "not_run",
+      "notes": "Serão verificados pela CI após publicar esta alteração"
+    }
+  ]
+}

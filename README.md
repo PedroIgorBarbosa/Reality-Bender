@@ -1,31 +1,69 @@
-# REALITY BENDER
+# Reality Bender
 
-Experiência audiovisual interativa **em tempo real**: a câmera do celular transmite vídeo via WebRTC para o navegador do computador conectado a um data-show. O PC executa rastreamento de mãos e corpo com MediaPipe e renderiza, sobre o vídeo ao vivo, três efeitos em Three.js/WebGL:
+Sistema web interativo em tempo real para apresentações ao vivo que transmite o vídeo da câmera de um smartphone (`/control`) via WebRTC P2P até o navegador de palco/projetor (`/stage`), executa rastreamento de mãos e pose corporal (MediaPipe Hands & Pose) e renderiza três efeitos visuais 3D interativos em WebGL2/Three.js:
 
-- **Esfera de energia:** acompanha duas mãos e reage à distância entre elas.
-- **Portal dimensional:** acompanha a posição e orientação da mão.
-- **Aura elétrica:** acompanha a silhueta e os movimentos corporais.
+- **Esfera de Energia (`ENERGY`)**: controlada pela distância e aproximação entre as duas mãos, com acúmulo progressivo de carga, núcleo luminoso, partículas orbitais e arcos elétricos.
+- **Portal Dimensional (`PORTAL`)**: ancorado na palma aberta ou ativado por gesto circular do indicador, rotacionando em 3D conforme a orientação da mão e escalando com a abertura da palma.
+- **Aura Elétrica (`AURA`)**: descargas elétricas fractais procedurais ancoradas ao tronco, ombros, cotovelos, punhos e mãos, moduladas pela velocidade de movimento corporal.
 
-## Estado atual
+## Arquitetura do Projeto
 
-Este repositório contém a **especificação de requisitos** e a infraestrutura de memória em grafo para agentes. **Ainda não contém a aplicação executável.** Não confundir documentação com produto implementado.
+```text
+src/
+├── client/
+│   ├── components/       # AppErrorBoundary, ConnectionStatus, DiagnosticsHud
+│   ├── effects/          # EffectPlugin, EnergySphere (#6), DimensionalPortal (#7), ElectricAura (#8)
+│   ├── hooks/            # useSystemConnection (handshake Socket.IO + medição RTT)
+│   ├── realtime/         # createSystemClient, WebRtcPeerController (#3, #9)
+│   ├── routes/           # StagePage (/stage), ControlPage (/control), NotFoundPage
+│   ├── services/         # CameraCaptureService (getUserMedia, troca de câmera, HTTPS check)
+│   └── tracking/         # MediaPipe Hands/Pose tracker com controle de backpressure (#5)
+├── server/
+│   ├── config/           # parseServerConfig & ConfigurationError (#1)
+│   ├── realtime/         # SessionManager (#2) & attachSystemSocket (Socket.IO signaling & ACK)
+│   ├── routes/           # /api/health (#1)
+│   ├── app.ts            # Aplicação HTTP Express + cabeçalhos de segurança + SPA estático
+│   └── index.ts          # Inicialização e graceful shutdown
+└── shared/
+    ├── contracts/        # Eventos tipados Socket.IO, estados de sessão e comandos (#1-#9)
+    ├── diagnostics/      # Cálculo de FPS, P50/P95 de inferência e detecção de vídeo congelado (#9)
+    ├── geometry/         # computeContentRect, videoNormalizedToStage, QUALITY_PROFILES (#4)
+    ├── homologation/     # Matriz de homologação CT-010-1..CT-010-7 e regressão (#10)
+    ├── pairing/          # Gerador QR Code SVG determinístico e parser de URL/PIN (#2)
+    └── tracking/         # OneEuroFilter, CalibrationStateMachine e classificador de gestos (#5)
+```
 
-## Documento de referência
+## Comandos Principais
 
-- [`docs/REALITY_BENDER_ERS_v1.0.md`](docs/REALITY_BENDER_ERS_v1.0.md) — requisitos funcionais, não funcionais, contratos, estados, cenários de teste, plano de dois dias e condições de aceite.
-- [`AGENTS.md`](AGENTS.md) — instruções para agentes de desenvolvimento e protocolo obrigatório de memória.
-- [`docs/specs/INDEX.md`](docs/specs/INDEX.md) — índice das 10 especificações detalhadas em pseudocódigo, dependências e contratos compartilhados.
-- [`docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md`](docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md) — contrato de implementação da fundação do projeto (issue #1).
-- [`documentos de contexto/graph-record.schema.json`](documentos%20de%20contexto/graph-record.schema.json) — contrato JSON dos eventos de conhecimento.
+```bash
+# Instalar dependências
+npm ci
 
-## Arquitetura alvo
+# Validar tipos TypeScript e imports
+npm run typecheck
 
-1. `/stage` no PC: cria sessão, exibe QR Code, recebe vídeo WebRTC e renderiza o resultado em tela cheia.
-2. `/control` no celular: recebe convite, solicita permissão para a câmera, exibe prévia e envia o vídeo.
-3. Servidor de sinalização: sessões efêmeras, WebSocket e negociação SDP/ICE. Não processa mídia.
-4. Processamento local no PC: MediaPipe Hand/Pose Landmarker, Three.js, shaders, partículas e efeitos.
+# Executar lint estático
+npm run lint
 
-**Restrições:** sem vídeo pré-gravado simulando transmissão; não exigir microfone nem APIs pagas; câmera do celular somente sob HTTPS; priorizar o fluxo completo antes de refinamentos visuais.
+# Executar suíte completa de testes (unitários, integração, UI e grafo de contexto)
+npm test
+
+# Compilar build de produção (dist/client e dist/server)
+npm run build
+
+# Executar smoke test automatizado do servidor de produção
+npm run smoke:server
+
+# Gerar instruções de HTTPS para celular e relatório de homologação
+npm run https:setup
+npm run homologate
+
+# Iniciar em desenvolvimento ou produção
+npm run dev
+npm start
+```
+
+Consulte [`docs/OPERACAO_E_HOMOLOGACAO.md`](docs/OPERACAO_E_HOMOLOGACAO.md) e [`docs/REALITY_BENDER_ERS_v1.0.md`](docs/REALITY_BENDER_ERS_v1.0.md) para o roteiro completo de operação no celular e no computador.
 
 ## Memória de contexto em grafo
 
@@ -52,10 +90,6 @@ node scripts/context-graph.mjs help
 ```
 
 Os comandos, as regras de preenchimento e o fluxo obrigatório antes/depois de cada tarefa estão no `AGENTS.md`. A ausência de um item no grafo não prova ausência de código; confira os arquivos reais e o Git. Os registros documentam trabalho, mas não substituem os testes da aplicação.
-
-## Como desenvolver
-
-Leia a especificação integralmente e siga os requisitos P0. A implementação será considerada pronta somente após teste real com celular, Wi-Fi, PC e data-show. FPS e latência são metas de medição, não resultados presumidos.
 
 ## Licença
 

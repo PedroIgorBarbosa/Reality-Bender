@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261104-fix-ui-and-webgl-tests",
+  "recordedAt": "2026-11-04T18:10:44.794Z",
+  "agent": "ChatGPT",
+  "intent": "Corrigir falhas de CI de React e WebGL na importação",
+  "summary": "Renderização SSR de componentes React com hooks e injeção de renderer WebGL em testes sem GPU. Sem alterar efeitos em produção.",
+  "status": "partial",
+  "files": [
+    {
+      "path": "src/client/effects/effect-plugin.ts",
+      "change": "modified",
+      "summary": "Permite injeção explícita de renderer para testes sem contexto gráfico",
+      "links": [
+        {
+          "to": "tests/unit/effects-3d.test.ts",
+          "type": "tests",
+          "reason": "Permite testar chamadas de render e descarte sem navegador"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/effects-3d.test.ts",
+      "change": "modified",
+      "summary": "Renderizador simulado valida renderização e liberação sem GPU",
+      "links": [
+        {
+          "to": "src/client/effects/effect-plugin.ts",
+          "type": "tests",
+          "reason": "Verifica o orquestrador real"
+        }
+      ]
+    },
+    {
+      "path": "tests/ui/routes.test.tsx",
+      "change": "modified",
+      "summary": "Renderiza rotas com reconciliador React e MemoryRouter, preservando hooks reais",
+      "links": [
+        {
+          "to": "src/client/routes/StagePage.tsx",
+          "type": "tests",
+          "reason": "Testa conteúdo de interface sem violar regras de hooks"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "GitHub Actions CI",
+      "status": "not_run",
+      "notes": "Verificação ocorrerá no PR após commit"
+    }
+  ]
+}

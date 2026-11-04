@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-005-mediapipe-gestures",
+  "recordedAt": "2026-11-04T01:51:30.842Z",
+  "agent": "Gemini-Argon",
+  "intent": "ISSUE-005 / RF-12, RF-13, RF-14, RF-15, RF-16",
+  "summary": "Implementado motor de gestos MediaPipe Hands/Pose, filtro OneEuroFilter, máquina de calibração e controle de backpressure",
+  "status": "done",
+  "files": [
+    {
+      "path": "src/shared/tracking/smoothing-filter.ts",
+      "change": "created",
+      "summary": "Filtro exponencial adaptativo OneEuroFilter e LandmarkBankSmoother",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-14 suavização de landmarks"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/tracking/calibration-state.ts",
+      "change": "created",
+      "summary": "Máquina de estados de calibração UNINITIALIZED, CALIBRATING, CALIBRATED e LOST",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-16 máquina de calibração"
+        }
+      ]
+    },
+    {
+      "path": "src/shared/tracking/gesture-engine.ts",
+      "change": "created",
+      "summary": "Classificação determinística de gestos, abertura/orientação de palma, distância de pinch e suavização temporal",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "implements",
+          "reason": "Implementa RF-15 motor de gestos testável"
+        }
+      ]
+    },
+    {
+      "path": "src/client/tracking/mediapipe-tracker.ts",
+      "change": "created",
+      "summary": "Pipeline iniciarMediaPipeHands com bloqueio de concorrência (backpressure de 1 quadro em voo)",
+      "links": [
+        {
+          "to": "src/shared/tracking/gesture-engine.ts",
+          "type": "uses",
+          "reason": "Executa inferência sem bloquear o loop de renderização"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/gesture-engine.test.ts",
+      "change": "created",
+      "summary": "Testes unitários de classificação dos 5 gestos, OneEuroFilter, calibração e backpressure",
+      "links": [
+        {
+          "to": "src/client/tracking/mediapipe-tracker.ts",
+          "type": "tests",
+          "reason": "Comprova classificação de gestos e descarte por backpressure"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm test",
+      "status": "passed",
+      "notes": "Testes de MediaPipe, gestos, calibração e backpressure aprovados"
+    }
+  ]
+}
