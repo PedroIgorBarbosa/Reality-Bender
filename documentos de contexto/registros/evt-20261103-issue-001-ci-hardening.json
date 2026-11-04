@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-001-ci-hardening",
+  "recordedAt": "2026-11-04T00:05:17.190Z",
+  "agent": "GPT-6",
+  "intent": "Simplificar CI após bootstrap do lockfile e remover permissões elevadas",
+  "summary": "Removida rotina única de criação de lockfile e permissão de escrita do CI permanente; README reflete que dependências estão versionadas; 20 testes e smoke anteriores aprovados, novo CI pendente",
+  "status": "partial",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "modified",
+      "summary": "Workflow permanente restrito a leitura, cache npm, instalação limpa, checagens, build e smoke",
+      "links": [
+        {
+          "to": "package-lock.json",
+          "type": "uses",
+          "reason": "Lockfile versionado é exigido pelo CI para npm ci"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "modified",
+      "summary": "Instruções atualizadas para lockfile já gerado e CI determinístico",
+      "links": [
+        {
+          "to": ".github/workflows/ci.yml",
+          "type": "documents",
+          "reason": "A documentação descreve os comandos e pré-condições do pipeline atual"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "CI anterior: npm ci, lint, typecheck, test, build, smoke, validate grafo",
+      "status": "passed",
+      "notes": "Execução GitHub Actions #41743876776: 20 testes, 6 arquivos de teste, smoke de rotas de produção e validacao do grafo aprovados"
+    },
+    {
+      "command": "CI após hardening",
+      "status": "not_run",
+      "notes": "Alteração do workflow aguarda novo GitHub Actions"
+    }
+  ]
+}

@@ -46,7 +46,7 @@ npm run start
 
 Em produção, configure antes NODE_ENV=production, HOST, PORT e CLIENT_ORIGINS com **origem HTTPS real**. O Express serve dist/client e fornece fallback de navegação para /stage e /control. O endpoint GET /api/health responde com status ok, serviço reality-bender-signaling e protocolVersion 1, sem variáveis internas.
 
-O CI em .github/workflows/ci.yml executa instalação limpa, lint, typecheck, testes, build e smoke HTTP. No primeiro push da branch da fundação, há uma etapa única de geração de package-lock.json pelo npm, com registro de contexto em grafo. Depois, o lockfile versionado é obrigatório em todos os builds.
+O CI em .github/workflows/ci.yml executa instalação limpa, lint, typecheck, testes, build e smoke HTTP. O package-lock.json foi gerado pelo npm em Node.js 22 e está versionado com registro de contexto em grafo. O CI exige o lockfile e usa apenas npm ci, sem instalações não reproduzíveis.
 
 ## HTTPS no celular
 
