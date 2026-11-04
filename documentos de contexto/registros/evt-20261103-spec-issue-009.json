@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-spec-issue-009",
+  "recordedAt": "2026-11-04T00:02:49.880Z",
+  "agent": "ChatGPT",
+  "intent": "Especificar issue #9 em pseudocódigo",
+  "summary": "Orquestração de operação, comandos autorizados, diagnóstico real, reconexão e limpeza de recursos.",
+  "status": "done",
+  "files": [
+    {
+      "path": "docs/specs/ISSUE-009-OPERACAO-RESILIENCIA-PSEUDOCODIGO.md",
+      "change": "created",
+      "summary": "Algoritmos de controle móvel/PC, estados, error catalog, métricas, recuperação e testes.",
+      "links": [
+        {
+          "to": "docs/REALITY_BENDER_ERS_v1.0.md",
+          "type": "implements",
+          "reason": "Cobre RF de operação/diagnóstico e RNF de robustez."
+        },
+        {
+          "to": "docs/specs/ISSUE-003-CAMERA-WEBRTC-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Usa estados reais de vídeo e reconstrução RTC."
+        },
+        {
+          "to": "docs/specs/ISSUE-005-MEDIAPIPE-GESTOS-PSEUDOCODIGO.md",
+          "type": "depends_on",
+          "reason": "Usa estados de rastreamento, modelos e calibração."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "status": "not_run",
+      "notes": "Somente especificação; sem validação de código executável."
+    }
+  ]
+}
