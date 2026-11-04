@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261104000052-54f72d9d",
+  "recordedAt": "2026-11-04T00:00:52.320Z",
+  "agent": "GitHub Actions",
+  "intent": "Issue #1: lockfile reproduzível",
+  "summary": "Gerado package-lock.json via npm install --package-lock-only em Node.js 22",
+  "status": "done",
+  "files": [
+    {
+      "path": "package-lock.json",
+      "change": "created",
+      "summary": "Dependências transitivas resolvidas pelo npm",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "configures",
+          "reason": "Versões travadas para o manifesto de dependências"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm install --package-lock-only",
+      "status": "passed",
+      "notes": "Executado no GitHub Actions com Node.js 22"
+    }
+  ]
+}
