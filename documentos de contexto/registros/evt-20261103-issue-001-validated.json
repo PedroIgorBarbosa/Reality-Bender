@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "id": "evt-20261103-issue-001-validated",
+  "recordedAt": "2026-11-04T00:11:54.774Z",
+  "agent": "GPT-6",
+  "intent": "Registrar evidências finais da issue #1 após execução completa no GitHub Actions",
+  "summary": "Fundação executável validada no CI #41744746246: 20 testes em 6 arquivos, build, lint, typecheck, npm ci, audit produção sem vulnerabilidades, smoke dev/prod, pronto para PR; avisos em dependências de desenvolvimento permanecem registrados",
+  "status": "done",
+  "files": [
+    {
+      "path": "package-lock.json",
+      "change": "tested",
+      "summary": "Instalação limpa reproduzível e auditoria de produção executadas",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "configures",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "change": "tested",
+      "summary": "CI comprovou instalação limpa, audit, lint, typecheck, testes, build, smoke e grafo",
+      "links": [
+        {
+          "to": "package.json",
+          "type": "invokes",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/server/app.ts",
+      "change": "tested",
+      "summary": "Servidor de produção iniciado; /api/health e fallback SPA aprovados",
+      "links": [
+        {
+          "to": "src/server/routes/health.ts",
+          "type": "uses",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/server/realtime/system-socket.ts",
+      "change": "tested",
+      "summary": "Pronto, ping ack e disconnect reais no proxy Vite aprovados",
+      "links": [
+        {
+          "to": "src/shared/contracts/system-events.ts",
+          "type": "implements",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "src/client/App.tsx",
+      "change": "tested",
+      "summary": "Rotas /stage, /control e 404 verificadas em testes de UI e smoke HTML",
+      "links": [
+        {
+          "to": "src/client/routes/StagePage.tsx",
+          "type": "renders",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/env.test.ts",
+      "change": "tested",
+      "summary": "7 testes de configuração passaram",
+      "links": [
+        {
+          "to": "src/server/config/env.ts",
+          "type": "tests",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/unit/connection-state.test.ts",
+      "change": "tested",
+      "summary": "3 testes de estados passaram",
+      "links": [
+        {
+          "to": "src/shared/types/connection-state.ts",
+          "type": "tests",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/socket.test.ts",
+      "change": "tested",
+      "summary": "2 testes de integração socket passaram",
+      "links": [
+        {
+          "to": "src/server/realtime/system-socket.ts",
+          "type": "tests",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/integration/health.test.ts",
+      "change": "tested",
+      "summary": "1 teste HTTP passou",
+      "links": [
+        {
+          "to": "src/server/app.ts",
+          "type": "tests",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/ui/connection-hook.test.tsx",
+      "change": "tested",
+      "summary": "2 testes de lifecycle e reconexão passaram",
+      "links": [
+        {
+          "to": "src/client/hooks/use-system-connection.ts",
+          "type": "tests",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/ui/routes.test.tsx",
+      "change": "tested",
+      "summary": "5 testes de interface e rotas passaram",
+      "links": [
+        {
+          "to": "src/client/App.tsx",
+          "type": "tests",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "tests/context-graph.test.mjs",
+      "change": "tested",
+      "summary": "5 testes de infraestrutura de grafo passaram",
+      "links": [
+        {
+          "to": "scripts/context-graph.mjs",
+          "type": "tests",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "change": "reviewed",
+      "summary": "Instruções de setup, HTTPS e fronteira da issue conferidas com as verificações executadas",
+      "links": [
+        {
+          "to": "docs/specs/ISSUE-001-FUNDACAO-PSEUDOCODIGO.md",
+          "type": "documents",
+          "reason": "Evidência de validação e relação de implementação da issue #1"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "GitHub Actions #41744746246: npm ci",
+      "status": "passed",
+      "notes": "Instalação limpa do package-lock.json no Node.js 22"
+    },
+    {
+      "command": "GitHub Actions #41744746246: npm audit --omit=dev --audit-level=high",
+      "status": "passed",
+      "notes": "Encontradas 0 vulnerabilidades nas dependências de produção; npm ci sinalizou 15 alertas no conjunto completo incluindo dev (1 low, 12 moderate, 2 critical)"
+    },
+    {
+      "command": "GitHub Actions #41744746246: npm run lint",
+      "status": "passed",
+      "notes": "ESLint finalizado sem erro"
+    },
+    {
+      "command": "GitHub Actions #41744746246: npm run typecheck",
+      "status": "passed",
+      "notes": "TypeScript strict finalizado sem erro"
+    },
+    {
+      "command": "GitHub Actions #41744746246: npm run test",
+      "status": "passed",
+      "notes": "20 testes aprovados em 6 arquivos"
+    },
+    {
+      "command": "GitHub Actions #41744746246: npm run build",
+      "status": "passed",
+      "notes": "Vite compilou dist/client e tsup compilou dist/server/index.js"
+    },
+    {
+      "command": "GitHub Actions #41744746246: smoke production",
+      "status": "passed",
+      "notes": "Iniciou npm run start, testou /stage, /control, /api/health e 404 da API"
+    },
+    {
+      "command": "GitHub Actions #41744746246: smoke development",
+      "status": "passed",
+      "notes": "Iniciou npm run dev; Vite proxy respondeu /stage /control /api/health e handshake/ack/disconnect Socket.IO real"
+    },
+    {
+      "command": "GitHub Actions #41744746246: validate context graph",
+      "status": "passed",
+      "notes": "Validador do grafo e 5 testes em node --test concluídos"
+    },
+    {
+      "command": "Teste físico com Android e projetor",
+      "status": "not_run",
+      "notes": "Câmera, WebRTC e projeção não fazem parte do escopo da issue #1"
+    }
+  ]
+}
